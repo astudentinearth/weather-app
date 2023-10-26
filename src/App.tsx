@@ -5,7 +5,7 @@ function App() {
   const [options, dispatch] = useReducer(optionsReducer, defaultOptions);
   return (
     <OptionsContext.Provider value={{dispatch, options}}>
-
+      <h1>hello world</h1>
     </OptionsContext.Provider>
   )
 }
