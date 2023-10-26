@@ -1,7 +1,12 @@
+import { useReducer } from "react"
+import { OptionsContext, defaultOptions, optionsReducer } from "./context/OptionsReducer"
+
 function App() {
+  const [options, dispatch] = useReducer(optionsReducer, defaultOptions);
   return (
-    <div>
-    </div>
+    <OptionsContext.Provider value={{dispatch, options}}>
+
+    </OptionsContext.Provider>
   )
 }
 
