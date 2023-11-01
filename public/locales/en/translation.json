@@ -1,0 +1,32 @@
+{
+    "weather": {
+        "clear": "Clear",
+        "cloudy": "Cloudy",
+        "dense_drizzle": "Dense drizzle",
+        "dense_freezing_drizzle": "Dense freezing drizzle",
+        "fog": "Foggy",
+        "freezing_drizzle": "Freezing drizzle",
+        "freezing_rain": "Freezing rain",
+        "heavy_freezing_rain": "Heavy freezing rain",
+        "heavy_rain": "Heavy rain",
+        "heavy_snow_showers": "Heavy snow showers",
+        "heavy_snowfall": "Heavy snowfall",
+        "light_drizzle": "Light drizzle",
+        "mainly_clear": "Mainly clear",
+        "moderate_drizzle": "Drizzle",
+        "partly_cloudy": "Partly cloudy",
+        "rain": "Rainy",
+        "rime": "Rime fog",
+        "showers": "Showers",
+        "slight_rain": "Slight rain",
+        "slight_showers": "Slight showers",
+        "slight_snowfall": "Slight snowfall",
+        "snow_grains": "Snow grains",
+        "snow_showers": "Snow showers",
+        "snowfall": "Snowfall",
+        "thunderstorm": "Thunderstorm",
+        "thunderstorm_heavy_hail": "Thunderstorm with heavy hail",
+        "thunderstorm_light_hail": "Thunderstorm with light hail",
+        "violent_showers": "Violent showers"
+    }
+}

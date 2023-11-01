@@ -1,0 +1,32 @@
+{
+    "weather": {
+        "clear": "Açık",
+        "cloudy": "Bulutlu",
+        "dense_drizzle": "Yoğun çisenti",
+        "dense_freezing_drizzle": "Yoğun donan çisenti",
+        "fog": "Sisli",
+        "freezing_drizzle": "Donan çisenti",
+        "freezing_rain": "Donan yağmur",
+        "heavy_freezing_rain": "Yoğun donan yağmur",
+        "heavy_rain": "Yoğun yağmurlu",
+        "heavy_snow_showers": "Yoğun kar sağanağı",
+        "heavy_snowfall": "Yoğun karlı",
+        "light_drizzle": "Hafif çisenti",
+        "mainly_clear": "Çoğunlukla açık",
+        "moderate_drizzle": "Çisenti",
+        "partly_cloudy": "Parçalı bulutlu",
+        "rain": "Yağmurlu",
+        "rime": "Kırağı",
+        "showers": "Sağanak yağışlı",
+        "slight_rain": "Hafif yağmurlu",
+        "slight_showers": "Hafif sağanak yağışlı",
+        "slight_snowfall": "Hafif karlı",
+        "snow_grains": "İnce kar yağışı",
+        "snow_showers": "Sağanak kar yağışı",
+        "snowfall": "Karlı",
+        "thunderstorm": "Gökgürültülü fırtına",
+        "thunderstorm_heavy_hail": "Fırtına ve yoğun dolu yağışı",
+        "thunderstorm_light_hail": "Fırtına ve hafif dolu yağışı",
+        "violent_showers": "Şiddetli sağanak yağışlı"
+    }
+}
