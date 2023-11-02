@@ -1,4 +1,9 @@
 {
+    "navigation":{
+        "home":"Home",
+        "locations":"Locations",
+        "settings":"Settings"
+    },
     "weather": {
         "clear": "Clear",
         "cloudy": "Cloudy",

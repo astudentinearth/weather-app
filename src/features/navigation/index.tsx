@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { IconClassnames } from "./types";
+import { useTranslation } from "react-i18next";
 export default function Navigation(){
+    const {t} = useTranslation();
     return <div className={`fixed bg-slate-1 bottom-2 left-[50%] translate-x-[-50%] rounded-2xl flex justify-center gap-2 p-2
                             sm:static sm:w-60 sm:translate-x-0 sm:flex-col`}>
-        <NavigationButton href="/" icon={IconClassnames.HOME_INACTIVE} activeIcon={IconClassnames.HOME_ACTIVE} name="Home"></NavigationButton>
-        <NavigationButton href="/locations" icon={IconClassnames.LOCATIONS_INACTIVE} activeIcon={IconClassnames.LOCATIONS_ACTIVE} name="Locations"></NavigationButton>
-        <NavigationButton href="/settings" icon={IconClassnames.SETTINGS_INACTIVE} activeIcon={IconClassnames.SETTINGS_ACTIVE} name="Settings"></NavigationButton>
+        <NavigationButton href="/" icon={IconClassnames.HOME_INACTIVE} activeIcon={IconClassnames.HOME_ACTIVE} name={t("navigation.home")}></NavigationButton>
+        <NavigationButton href="/locations" icon={IconClassnames.LOCATIONS_INACTIVE} activeIcon={IconClassnames.LOCATIONS_ACTIVE} name={t("navigation.locations")}></NavigationButton>
+        <NavigationButton href="/settings" icon={IconClassnames.SETTINGS_INACTIVE} activeIcon={IconClassnames.SETTINGS_ACTIVE} name={t("navigation.settings")}></NavigationButton>
     </div>
 }
 

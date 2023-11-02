@@ -1,4 +1,9 @@
 {
+    "navigation":{
+        "home":"Ana Sayfa",
+        "locations":"Konumlar",
+        "settings":"Ayarlar"
+    },
     "weather": {
         "clear": "Açık",
         "cloudy": "Bulutlu",
