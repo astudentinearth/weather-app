@@ -81,6 +81,7 @@ export function getIconSourceFromWeatherCode(code: number){
     if(hours > 18 || hours < 6){
         if (code === 0 || code === 1) return `${prefix}/clear_night.svg`;
         else if (code === 2) return `${prefix}/partly_cloudy_night.svg`;
+        else return WeatherIcons.get(code);
     }
     else return WeatherIcons.get(code);
 }
