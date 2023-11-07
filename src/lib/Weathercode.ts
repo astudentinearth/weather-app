@@ -1,6 +1,6 @@
 /** Mappings for WMO interpretation codes to receive from Open-Meteo API. */
 
-/** The prefix for icon files. */
+/** The prefix for icon files. Refers to a directory in public/ */
 const prefix = "icons";
 
 /**
@@ -78,10 +78,10 @@ export const WeatherIcons = new Map<number,string>([
  */
 export function getIconSourceFromWeatherCode(code: number){
     const hours = new Date().getHours();
-    if(hours > 18 || hours < 6){
+    if(hours > 18 || hours < 6){ // check if its evening
         if (code === 0 || code === 1) return `${prefix}/clear_night.svg`;
         else if (code === 2) return `${prefix}/partly_cloudy_night.svg`;
         else return WeatherIcons.get(code);
     }
-    else return WeatherIcons.get(code);
+    else return WeatherIcons.get(code); // return default name if morning
 }

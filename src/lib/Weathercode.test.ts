@@ -1,7 +1,7 @@
 import { getIconSourceFromWeatherCode } from "./Weathercode";
 
 const prefix = "icons";
-
+/** Tests for the weather icons displayed at different times of day. Moon variants should be used between 6PM-6AM */
 it("check if correct time variant of icons are returned",()=>{
     vi.useFakeTimers();
     vi.setSystemTime(new Date(2023,0,1,20,0,0)); // January 1st, 2023, 8PM

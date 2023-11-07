@@ -9,31 +9,37 @@ export enum PrefActions{
     REMOVE_LOCATION="REMOVE_LOCATION"
 }
 
+/** Change default temperature unit */
 export type SetTemperatureUnitAction = {
     type: typeof PrefActions.SET_TEMP_UNIT,
     value: "C" | "F"
 }
 
+/** Change default speed unit */
 export type SetSpeedUnitAction = {
     type: typeof PrefActions.SET_SPEED_UNIT,
     value: "km" | "mph"
 }
 
+/** Change default time format */
 export type SetTimeFormatAction = {
     type: typeof PrefActions.SET_TIME_FORMAT,
     value: "12" | "24"
 }
 
+/** Change default location */
 export type SetDefaultLocationAction = {
     type: typeof PrefActions.SET_DEFAULT_LOCATION,
     value: string
 }
 
+/** Add a new location */
 export type AddLocationAction = {
     type: typeof PrefActions.ADD_LOCATION,
     value: string
 }
 
+/** Remove a location */
 export type RemoveLocationAction = {
     type: typeof PrefActions.REMOVE_LOCATION,
     value: string
