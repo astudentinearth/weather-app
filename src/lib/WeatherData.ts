@@ -46,3 +46,11 @@ export interface DailyWeatherData extends WeatherData{
     minTemperature: number,
     maxTemperature: number,
 }
+
+export interface WeatherState{
+    lastFetch: number,
+    current: CurrentWeatherData,
+    today: DailyWeatherData,
+    fiveDay: DailyWeatherData[],
+    hourly: HourlyWeatherData[]
+}

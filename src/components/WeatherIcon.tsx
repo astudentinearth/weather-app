@@ -1,4 +1,4 @@
-import { getIconSourceFromWeatherCode } from "../lib"
+import { getIconSourceFromWeatherCode } from "@/lib"
 
 interface WeatherIconProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src">{
     /** A WMO interpretation code */
