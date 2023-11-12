@@ -54,3 +54,4 @@ export interface WeatherState{
     fiveDay: DailyWeatherData[],
     hourly: HourlyWeatherData[]
 }
+
