@@ -33,5 +33,6 @@
         "thunderstorm_heavy_hail": "Thunderstorm with heavy hail",
         "thunderstorm_light_hail": "Thunderstorm with light hail",
         "violent_showers": "Violent showers"
-    }
+    },
+    "percentage":"{{percent}}%"
 }

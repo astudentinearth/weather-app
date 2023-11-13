@@ -33,5 +33,6 @@
         "thunderstorm_heavy_hail": "Fırtına ve yoğun dolu yağışı",
         "thunderstorm_light_hail": "Fırtına ve hafif dolu yağışı",
         "violent_showers": "Şiddetli sağanak yağışlı"
-    }
+    },
+    "percentage":"%{{percent}}"
 }
