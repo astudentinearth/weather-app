@@ -85,3 +85,5 @@ export function getIconSourceFromWeatherCode(code: number){
     }
     else return WeatherIcons.get(code); // return default name if morning
 }
+
+export const getWeatherTranslationKey = (code: number) => (WeatherNames.get(code) ?? "weather.clear");
