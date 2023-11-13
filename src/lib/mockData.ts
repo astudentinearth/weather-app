@@ -2,7 +2,7 @@ import { Location, WeatherState } from "./weatherData";
 
 /** Location of İstanbul */
 const _ist: Location = {
-    name: "İstanbul",
+    name: "Istanbul",
     country: "Türkiye",
     latitude: 41.01384,
     longtitude: 28.94966
