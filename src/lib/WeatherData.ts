@@ -10,6 +10,17 @@ export interface Location{
 
 export type Direction = "N" | "NE" | "E" | "SE" | "S" | "SW" | "W" | "NW"
 
+export const DirectionIcons = new Map<string, string>([
+    ["N","bi-arrow-up"],
+    ["NE","bi-arrow-up-left"],
+    ["E","bi-arrow-right"],
+    ["SE","bi-arrow-down-right"],
+    ["S","bi-arrow-down"],
+    ["SW","bi-arrow-down-left"],
+    ["W","bi-arrow-left"],
+    ["NW","bi-arrow-up-left"],
+]);
+
 /**
  * Base weather data which will be used everywhere.
  */
