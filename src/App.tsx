@@ -2,10 +2,11 @@ import { useReducer, useState } from "react"
 import { OptionsContext, WeatherContext, defaultOptions, optionsReducer } from "@/context"
 import Layout from "./Layout";
 import { WeatherState } from "@/lib";
+import { MockWeatherState } from "./lib/mockData";
 
 function App() {
   const [options, dispatch] = useReducer(optionsReducer, defaultOptions);
-  const [weatherState, setWeatherState] = useState<WeatherState>({} as WeatherState);
+  const [weatherState, setWeatherState] = useState<WeatherState>(MockWeatherState);
   return (
     <OptionsContext.Provider value={{dispatch, options}}>
       <WeatherContext.Provider value={{weatherState, setWeatherState}}>

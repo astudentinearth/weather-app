@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .current-weather-widget{
+        grid-column: 2;
+        @apply w-full flex flex-col gap-6 p-4 sm:bg-slate-1 rounded-2xl sm:static h-fit;
+    }
+    .current-weather-grid{
+        grid-template-columns: auto auto;
+        grid-template-rows: 100px 32px;
+        column-gap: 8px;
+        @apply grid place-items-center;
+    }
+    .current-temperature{
+        font-size: 72px;
+        @apply hsm:justify-self-end;
+    }
+    /* edge case for iphone 5 */
+    @media screen and (max-width: 330px) {
+        .current-temperature{
+            @apply text-[52px];
+        }
+        .todays-min-max, .current-condition, .inline-status-mobile{
+            @apply text-xl;
+        }
+    }
+    .inline-status-mobile{
+        @apply flex justify-evenly hsm:justify-self-start hsm:justify-normal hsm:gap-4;
+    }
+    .inline-status-mobile span *{
+        margin: 4px;
+    }
+}
