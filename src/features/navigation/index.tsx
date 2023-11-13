@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 /** Navigation/sidebar of the main UI. Converts to a floating side pane in large screens and an icon navigation bar in small screens. */
 export default function Navigation(){
     const {t} = useTranslation();
-    return <div className={`fixed bg-slate-1 bottom-2 left-[50%] translate-x-[-50%] rounded-2xl flex justify-center gap-2 p-2
-                            sm:static sm:w-60 sm:translate-x-0 sm:flex-col`}>
+    return <div className={`fixed drop-shadow-lg bg-slate-1 bottom-2 left-[50%] translate-x-[-50%] rounded-2xl flex justify-start gap-2 p-2
+                            sm:fixed sm:w-60 sm:translate-x-0 sm:flex-col sm:bottom-auto sm:left-3`}>
         <NavigationButton href="/" icon={IconClassnames.HOME_INACTIVE} activeIcon={IconClassnames.HOME_ACTIVE} name={t("navigation.home")}></NavigationButton>
         <NavigationButton href="/locations" icon={IconClassnames.LOCATIONS_INACTIVE} activeIcon={IconClassnames.LOCATIONS_ACTIVE} name={t("navigation.locations")}></NavigationButton>
         <NavigationButton href="/settings" icon={IconClassnames.SETTINGS_INACTIVE} activeIcon={IconClassnames.SETTINGS_ACTIVE} name={t("navigation.settings")}></NavigationButton>
