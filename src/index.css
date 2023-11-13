@@ -21,6 +21,8 @@ body{
   background-image: linear-gradient(to top,black, transparent);
 }
 
-.page{
-  @apply absolute w-full h-full sm:grid-cols-[200px_auto] sm:gap-3 p-3;
+@layer components{
+  .page{
+    @apply absolute w-full h-full sm:grid sm:grid-cols-[240px_auto] sm:gap-3 p-3;
+  }
 }
