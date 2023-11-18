@@ -10,6 +10,14 @@ export interface Location{
 
 export type Direction = "N" | "NE" | "E" | "SE" | "S" | "SW" | "W" | "NW"
 
+export function degToDirection(deg: number) : Direction{
+    const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+    if(deg<0) deg += 360;
+    let i = Math.round(deg/45);
+    while(i>=8) i-=8;
+    return directions[i] as Direction;
+}
+
 export const DirectionIcons = new Map<string, string>([
     ["N","bi-arrow-up"],
     ["NE","bi-arrow-up-left"],
