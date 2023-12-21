@@ -1,7 +1,7 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import Navigation from "./features/navigation";
 import WeatherPage from "./features/pages/weather/WeatherPage";
-const router = createBrowserRouter([{
+const router = createHashRouter([{
   path: '/',
   element: <WeatherPage></WeatherPage>
 },

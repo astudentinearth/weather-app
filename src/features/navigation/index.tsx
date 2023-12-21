@@ -17,7 +17,7 @@ export default function Navigation(){
 function NavigationButton(props:{name: string, icon: string, href: string, activeIcon: string}){
     const location = window.location;
     const {href, name, icon, activeIcon} = props;
-    const active = location.pathname === href; // check for the route. if the button is for this route, change style
+    const active = location.hash === `#${href}`; // check for the route. if the button is for this route, change style
     return <Link data-testid="nav-link" to={href} className={`rounded-lg place-items-center grid transition-[background,filter]
     text-2xl w-12 h-12 sm:w-auto ${active ? "bg-slate-2" : "bg-transparent"} ${active ? "hover:brightness-110" : "hover:bg-slate-2/50"}
     sm:grid-cols-[24px_auto] gap-4 sm:pl-3`}>
