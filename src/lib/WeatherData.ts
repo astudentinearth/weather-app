@@ -1,11 +1,11 @@
 /**
- * An object which holds a name, country and a mathematical location. Latitude and longtitude are used to request weather data.
+ * An object which holds a name, country and a mathematical location. Latitude and longitude are used to request weather data.
  */
 export interface Location{
-    name: string,
-    country: string,
+    name?: string,
+    country?: string,
     latitude: number,
-    longtitude: number
+    longitude: number
 }
 
 export type Direction = "N" | "NE" | "E" | "SE" | "S" | "SW" | "W" | "NW"
@@ -29,48 +29,57 @@ export const DirectionIcons = new Map<string, string>([
     ["NW","bi-arrow-up-left"],
 ]);
 
-/**
- * Base weather data which will be used everywhere.
- */
-export interface WeatherData{
-    date: Date, /** Date and time corresponding to this data */
-    location: Location, /** Location corresponding to this data */
-    weathercode: number, /** A code indicating the current weather, e.g. showers */
-}
 
 /**
- * Weather data to be displayed at the topmost widget, which will show current data.
+ * Weather data to be displayed at the topmost widget, which will show current data. Valid for 15 minutes
  */
-export interface CurrentWeatherData extends WeatherData{
-    currentTemperature: number,
-    wind: number,
-    humidity: number,
-    windDirection: Direction
+export class CurrentWeatherData{
+    constructor(
+        public location: Location,
+        public currentTemperature: number,
+        public wind: number,
+        public humidity: number,
+        public windDirection: Direction,
+        public weathercode: number
+    ){}
 }
 
 /**
  * Data for an hour period
  */
-export interface HourlyWeatherData extends WeatherData{
+export class HourlyWeatherData{
+    public hours: HourlyForecast[]=[];
+    constructor(
+        public location: Location
+    ){}
+}
+
+export interface HourlyForecast{
+    date: Date,
     precipitationChance: number,
     temperature: number,
     windSpeed: number,
-    windDirection: Direction
+    windDirection: Direction,
+    weathercode: number,
+    precipitation: number,
+    humidity: number,
 }
 
 /**
  * Data about an entire day
  */
-export interface DailyWeatherData extends WeatherData{
+export class DailyWeatherData{
+    public days: DailyForecast[] = [];
+    constructor(
+        public location: Location,
+    ){}
+}
+
+export interface DailyForecast{
+    date: Date;
     minTemperature: number,
     maxTemperature: number,
+    weathercode: number,
+    precipitation: number,
+    precipitationChance: number
 }
-
-export interface WeatherState{
-    lastFetch: number,
-    current: CurrentWeatherData,
-    today: DailyWeatherData,
-    fiveDay: DailyWeatherData[],
-    hourly: HourlyWeatherData[]
-}
-

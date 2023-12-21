@@ -1,4 +1,4 @@
-import { getCurrentWeather } from "./open-meteo";
+import { getCurrentWeather, getDailyWeather, getHourlyWeather } from "./open-meteo";
 import { Location } from "@/lib";
 // let remoteAccessible=false;
 
@@ -7,7 +7,7 @@ const _ist: Location = {
     name: "Istanbul",
     country: "Türkiye",
     latitude: 41.01384,
-    longtitude: 28.94966
+    longitude: 28.94966
 };
 
 async function isAPIAccessible(){
@@ -28,8 +28,18 @@ async function isAPIAccessible(){
 }
 
 describe.skipIf(!(await isAPIAccessible()))("open meteo",async ()=>{
-    it("api: check if weather data is correctly received",async ()=>{
+    it("api: check if current weather data is correctly received",async ()=>{
         const data = await getCurrentWeather(_ist);
         assert.isNotNull(data, "data should not be null");
+    })
+    it("api: check if hourly weather data is currectly received", async ()=>{
+        const data = await getHourlyWeather(_ist);
+        assert.isNotNull(data, "data should not be null")
+        console.log(data);
+    })
+    it("api: check if daily weather data is currectly received", async ()=>{
+        const data = await getDailyWeather(_ist);
+        assert.isNotNull(data, "data should not be null")
+        console.log(data);
     })
 })
