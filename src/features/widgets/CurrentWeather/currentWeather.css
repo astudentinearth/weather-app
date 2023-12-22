@@ -4,7 +4,6 @@
 
 @layer components{
     .current-weather-widget{
-        grid-column: 2;
         @apply w-full flex flex-col gap-6 p-4 sm:bg-slate-1 rounded-2xl sm:static h-fit;
     }
     .current-weather-grid{

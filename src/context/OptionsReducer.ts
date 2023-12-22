@@ -1,4 +1,14 @@
+import { Location } from "@/lib"
 import React from "react"
+
+/** Location of İstanbul */
+const _ist: Location = {
+    name: "Istanbul",
+    country: "Türkiye",
+    latitude: 41.01384,
+    longitude: 28.94966
+};
+
 
 export enum PrefActions{
     SET_TEMP_UNIT="SET_TEMP_UNIT",
@@ -6,7 +16,9 @@ export enum PrefActions{
     SET_TIME_FORMAT="SET_TIME_FORMAT",
     SET_DEFAULT_LOCATION="SET_DEFAULT_LOCATION",
     ADD_LOCATION="ADD_LOCATION",
-    REMOVE_LOCATION="REMOVE_LOCATION"
+    REMOVE_LOCATION="REMOVE_LOCATION",
+    SET_PRECIPITATION_UNIT="SET_PRECIPITATION_UNIT",
+    SET_OPTIONS="SET_OPTIONS"
 }
 
 /** Change default temperature unit */
@@ -21,6 +33,12 @@ export type SetSpeedUnitAction = {
     value: "km" | "mph"
 }
 
+/** Change default speed unit */
+export type SetPrecipitationUnitAction = {
+    type: typeof PrefActions.SET_PRECIPITATION_UNIT,
+    value: "mm" | "inch"
+}
+
 /** Change default time format */
 export type SetTimeFormatAction = {
     type: typeof PrefActions.SET_TIME_FORMAT,
@@ -30,22 +48,27 @@ export type SetTimeFormatAction = {
 /** Change default location */
 export type SetDefaultLocationAction = {
     type: typeof PrefActions.SET_DEFAULT_LOCATION,
-    value: string
+    value: Location
 }
 
 /** Add a new location */
 export type AddLocationAction = {
     type: typeof PrefActions.ADD_LOCATION,
-    value: string
+    value: Location
 }
 
 /** Remove a location */
 export type RemoveLocationAction = {
     type: typeof PrefActions.REMOVE_LOCATION,
-    value: string
+    value: Location
 }
 
-export type OptActions = SetDefaultLocationAction | SetSpeedUnitAction | SetTemperatureUnitAction | SetTimeFormatAction | AddLocationAction | RemoveLocationAction
+export type SetOptionsAction = {
+    type: typeof PrefActions.SET_OPTIONS,
+    value: Options
+}
+
+export type OptActions = SetDefaultLocationAction | SetSpeedUnitAction | SetTemperatureUnitAction | SetTimeFormatAction | AddLocationAction | RemoveLocationAction | SetPrecipitationUnitAction | SetOptionsAction
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface OptionsContextType{
@@ -57,20 +80,22 @@ export interface Options{
     temperatureUnit: "C" | "F",
     speedUnit: "km" | "mph",
     timeFormat: "24" | "12",
-    defaultLocation: string,
-    locations: string[]
+    precipitationUnit: "mm" | "inch"
+    defaultLocation: Location,
+    locations: Location[]
 }
 
 export const defaultOptions: Options = {
     temperatureUnit: "C",
     speedUnit: "km",
     timeFormat: "24",
-    defaultLocation: "Istanbul",
-    locations: ["Ankara", "London", "Paris"]
+    defaultLocation: _ist,
+    precipitationUnit: "mm",
+    locations: []
 }
 
 export function optionsReducer(state: Options, action: OptActions){
-    const newState = {...state};
+    let newState = {...state};
     switch(action.type){
         case PrefActions.SET_TEMP_UNIT:
             newState.temperatureUnit = action.value;
@@ -88,6 +113,10 @@ export function optionsReducer(state: Options, action: OptActions){
             newState.speedUnit = action.value;
             break;
 
+        case PrefActions.SET_PRECIPITATION_UNIT:
+            newState.precipitationUnit = action.value;
+            break;
+            
         case PrefActions.ADD_LOCATION: {
             if(!newState.locations.includes(action.value)) newState.locations.push(action.value);
             break
@@ -95,9 +124,15 @@ export function optionsReducer(state: Options, action: OptActions){
 
         case PrefActions.REMOVE_LOCATION: {
             if(newState.locations.includes(action.value)) newState.locations.filter((val)=>val!==action.value);
-            break
+            break;
+        }
+
+        case PrefActions.SET_OPTIONS:{
+            newState = action.value;
+            break;
         }
     }
+    localStorage.setItem("options", JSON.stringify(newState));
     return newState;
 }
 

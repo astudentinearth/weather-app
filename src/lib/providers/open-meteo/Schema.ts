@@ -37,19 +37,27 @@ interface CurrentData{
 
 export interface OpenMeteoCurrentAPIResponse extends OpenMeteoAPIResponse{
     current_units: CurrentUnits,
-    current: CurrentData
+    current: CurrentData,
+    daily_units: {time: string, temperature_2m_min: string, temperature_2m_max: string},
+    daily: {time: string[], temperature_2m_min: number[], temperature_2m_max: number[]},
+    hourly_units: {time:string, precipitation_probability: string},
+    hourly: {time: string[], precipitation_probability: number[]}
 }
 
 export function convertCurrentResponse(response: OpenMeteoCurrentAPIResponse){
     if(response.latitude==null || response.longitude==null || response.current==null) return null;
     const location: Location = {latitude: response.latitude, longitude: response.longitude};
+    const minTemperature = response.daily.temperature_2m_min[1];
+    const maxTemperature = response.daily.temperature_2m_max[0];
     const data = new CurrentWeatherData(
         location,
         response.current.temperature_2m,
         response.current.wind_speed_10m,
         response.current.relative_humidity_2m,
         degToDirection(response.current.wind_direction_10m),
-        response.current.weather_code);
+        response.current.weather_code,
+        minTemperature, maxTemperature,
+        response.hourly.precipitation_probability[0]);
     return data;
 }
 
@@ -81,11 +89,7 @@ export interface OpenMeteoHourlyAPIResponse extends OpenMeteoAPIResponse{
 }
 
 export function convertHourlyResponse(response: OpenMeteoHourlyAPIResponse){
-    console.log(response.latitude)
-    console.log(response.longitude)
-    console.log(response.hourly)
     if(response.latitude==null || response.longitude==null || response.hourly==null) return null;
-    console.log("here");
     const location: Location = {latitude: response.latitude, longitude: response.longitude};
     const hours: HourlyForecast[] = [];
     for(let i=0;i<response.hourly.time.length;i++){

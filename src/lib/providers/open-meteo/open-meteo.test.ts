@@ -1,7 +1,8 @@
-import { getCurrentWeather, getDailyWeather, getHourlyWeather } from "./open-meteo";
+import OpenMeteoAPI from "./open-meteo";
 import { Location } from "@/lib";
 // let remoteAccessible=false;
 
+const { getCurrentWeather, getDailyWeather, getHourlyWeather } = OpenMeteoAPI;
 /** Location of İstanbul */
 const _ist: Location = {
     name: "Istanbul",

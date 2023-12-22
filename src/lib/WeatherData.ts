@@ -40,7 +40,10 @@ export class CurrentWeatherData{
         public wind: number,
         public humidity: number,
         public windDirection: Direction,
-        public weathercode: number
+        public weathercode: number,
+        public minTemperature: number,
+        public maxTemperature: number,
+        public precipitationChance: number
     ){}
 }
 

@@ -1,20 +1,23 @@
 import {Location} from "@/lib"
 import { OpenMeteoCurrentAPIResponse, OpenMeteoDailyAPIResponse, OpenMeteoHourlyAPIResponse, convertCurrentResponse, convertDailyResponse, convertHourlyResponse } from "./Schema";
 
-export interface UnitOpts{
+export interface OpenMeteoUnitOpts{
     temperature: "celsius" | "fahrenheit",
     speed: "kmh" | "mph",
     precipitation: "inch" | "mm"
 }
 
-const _fallbackUnits: UnitOpts = {temperature: "celsius", speed: "kmh", precipitation: "mm"}
+const _fallbackUnits: OpenMeteoUnitOpts = {temperature: "celsius", speed: "kmh", precipitation: "mm"}
 
-export async function getCurrentWeather(location: Location, units?: UnitOpts){
+async function getCurrentWeather(location: Location, units?: OpenMeteoUnitOpts){
     try {
         if(units == null) units = _fallbackUnits;
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}`
         +`&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m`
-        +`&temperature_unit=${units.temperature}&wind_speed_unit=${units.speed}&precipitation_unit=${units.precipitation}`;
+        +`&hourly=precipitation_probability`
+        +`&temperature_unit=${units.temperature}&wind_speed_unit=${units.speed}&precipitation_unit=${units.precipitation}`
+        +`&forecast_days=2&forecast_hours=1`
+        +`&daily=temperature_2m_max,temperature_2m_min`;
         const response = await fetch(url,{headers: {
             "Content-Type":"application/json"
         }});
@@ -38,7 +41,7 @@ export async function getCurrentWeather(location: Location, units?: UnitOpts){
  * @param units 
  * @returns 
  */
-export async function getHourlyWeather(location: Location, units?: UnitOpts) {
+async function getHourlyWeather(location: Location, units?: OpenMeteoUnitOpts) {
     try {
         if(units == null) units = _fallbackUnits;
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}`
@@ -62,7 +65,7 @@ export async function getHourlyWeather(location: Location, units?: UnitOpts) {
     }
 }
 
-export async function getDailyWeather(location: Location, units?: UnitOpts){
+async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
     try {
         if(units == null) units = _fallbackUnits;
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}`
@@ -84,3 +87,6 @@ export async function getDailyWeather(location: Location, units?: UnitOpts){
         return null;
     }
 }
+
+const OpenMeteoAPI = {getCurrentWeather, getDailyWeather, getHourlyWeather}
+export default OpenMeteoAPI;
