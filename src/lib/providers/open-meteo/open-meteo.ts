@@ -1,5 +1,5 @@
 import {Location} from "@/lib"
-import { OpenMeteoCurrentAPIResponse, OpenMeteoDailyAPIResponse, OpenMeteoHourlyAPIResponse, convertCurrentResponse, convertDailyResponse, convertHourlyResponse } from "./Schema";
+import { OpenMeteoCurrentAPIResponse, OpenMeteoDailyAPIResponse, OpenMeteoGeocodingAPIResponse, OpenMeteoHourlyAPIResponse, convertCurrentResponse, convertDailyResponse, convertHourlyResponse } from "./Schema";
 
 export interface OpenMeteoUnitOpts{
     temperature: "celsius" | "fahrenheit",
@@ -80,7 +80,7 @@ async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
         else throw new Error("Data wasn't received in correct format or no data was received.");
     }
     catch (error){
-        let msg = "Unknown error fetching hourly weather data."
+        let msg = "Unknown error fetching daily weather data."
         if(error instanceof Error) msg = error.message;
         console.error(msg);
         window.alert(msg);
@@ -88,5 +88,25 @@ async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
     }
 }
 
-const OpenMeteoAPI = {getCurrentWeather, getDailyWeather, getHourlyWeather}
+async function locationSearch(query: string){
+    try {
+        const q = query.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi,'');        
+        if(q.length <= 1 || q.trim()=="") return [];
+        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${q}&count=10&language=en&format=json`;
+        const response = await fetch(url, {headers: {"Content-Type":"application/json"}});
+        const result = await response.json() as OpenMeteoGeocodingAPIResponse;
+        if(result==null) throw new Error();
+        const data = [] as Location[]
+        result.results.map((n)=>{data.push({latitude: n.latitude, longitude: n.longitude, name: n.name, country: n.country} as Location)})
+        return data
+    } catch (error) {
+        let msg = "Unknown error fetching locations."
+        if(error instanceof Error) msg = error.message;
+        console.error(msg);
+        window.alert(msg);
+        return null;
+    }
+}
+
+const OpenMeteoAPI = {getCurrentWeather, getDailyWeather, getHourlyWeather, locationSearch}
 export default OpenMeteoAPI;

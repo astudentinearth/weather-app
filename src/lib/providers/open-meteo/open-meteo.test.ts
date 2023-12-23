@@ -2,7 +2,7 @@ import OpenMeteoAPI from "./open-meteo";
 import { Location } from "@/lib";
 // let remoteAccessible=false;
 
-const { getCurrentWeather, getDailyWeather, getHourlyWeather } = OpenMeteoAPI;
+const { getCurrentWeather, getDailyWeather, getHourlyWeather, locationSearch } = OpenMeteoAPI;
 /** Location of İstanbul */
 const _ist: Location = {
     name: "Istanbul",
@@ -36,11 +36,14 @@ describe.skipIf(!(await isAPIAccessible()))("open meteo",async ()=>{
     it("api: check if hourly weather data is currectly received", async ()=>{
         const data = await getHourlyWeather(_ist);
         assert.isNotNull(data, "data should not be null")
-        console.log(data);
     })
     it("api: check if daily weather data is currectly received", async ()=>{
         const data = await getDailyWeather(_ist);
         assert.isNotNull(data, "data should not be null")
+    })
+    it("api: check if locations can be searched", async ()=>{
+        const data = await locationSearch("istanbul");
+        expect(data?.length).toBeGreaterThan(0);
         console.log(data);
     })
 })

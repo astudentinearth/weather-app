@@ -11,3 +11,7 @@ export async function getCurrentWeather(location: Location, opts: Options){
     }
     return await OpenMeteoAPI.getCurrentWeather(location, units);
 }
+
+export async function geocode(query: string){
+    return await OpenMeteoAPI.locationSearch(query);
+}

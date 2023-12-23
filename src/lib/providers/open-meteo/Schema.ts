@@ -151,3 +151,18 @@ export function convertDailyResponse(response: OpenMeteoDailyAPIResponse){
     const data: DailyWeatherData = {location, days};
     return data;
 }
+
+// Geocoding
+export interface OpenMeteoGeocodingAPIResponse{
+    results: OpenMeteoLocation[]
+}
+
+interface OpenMeteoLocation{
+    id: number,
+    name: string,
+    latitude: number,
+    longitude: number,
+    country_code: number,
+    country: string,
+    timezone: string
+}
