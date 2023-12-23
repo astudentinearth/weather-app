@@ -1,6 +1,7 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Navigation from "./features/navigation";
 import WeatherPage from "./features/pages/weather/WeatherPage";
+import { LocationsPage } from "./features/pages/locations";
 const router = createHashRouter([{
   path: '/',
   element: <WeatherPage></WeatherPage>
@@ -11,7 +12,7 @@ const router = createHashRouter([{
 },
 {
     path: '/locations',
-    element: <Navigation></Navigation>
+    element: <LocationsPage></LocationsPage>
 }])
 
 

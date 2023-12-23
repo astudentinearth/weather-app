@@ -22,6 +22,7 @@ export function CurrentWeatherWidget(){
             let loc = options.defaultLocation;
             if(latitude_str != null && longitude_str != null && !isNaN(latitude) && !isNaN(longitude)) loc = {latitude, longitude};
             const data = await getCurrentWeather(loc,options)
+            if (data) data.location = loc;
             setState(data);
         }
         load();
