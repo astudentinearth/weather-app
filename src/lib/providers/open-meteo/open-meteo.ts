@@ -88,12 +88,13 @@ async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
     }
 }
 
+
 async function locationSearch(query: string){
     try {
         const q = query.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi,'');        
         if(q.length <= 1 || q.trim()=="") return [];
         const url = `https://geocoding-api.open-meteo.com/v1/search?name=${q}&count=10&language=en&format=json`;
-        const response = await fetch(url, {headers: {"Content-Type":"application/json"}});
+        const response = await fetch(url);
         const result = await response.json() as OpenMeteoGeocodingAPIResponse;
         if(result==null) throw new Error();
         const data = [] as Location[]
