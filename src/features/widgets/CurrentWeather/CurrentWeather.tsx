@@ -13,6 +13,7 @@ export function CurrentWeatherWidget(){
     const {temperatureUnit, speedUnit} = options;
     const [state, setState] = useState<CurrentWeatherData | null>(null);
     const [searchParams,] = useSearchParams();
+    const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
     useEffect(()=>{
         const load = async()=>{
             const latitude_str = searchParams.get("latitude");
@@ -34,9 +35,9 @@ export function CurrentWeatherWidget(){
         </span>
         <div className="current-weather-grid">
             <WeatherIcon className="hsm:justify-self-start" width={100} height={100} weathercode={state?.weathercode ?? 1}></WeatherIcon>
-            <span className="current-temperature">{state?.currentTemperature}º{temperatureUnit}</span>
+            <span className="current-temperature">{r(state?.currentTemperature)}º{temperatureUnit}</span>
             <span className="current-condition hsm:justify-self-start hsm:text-left inline-block text-center whitespace-pre-line text-ellipsis w-full overflow-hidden">{t(getWeatherTranslationKey(state?.weathercode ?? 1))}</span>
-            <span className="todays-min-max whitespace-nowrap hsm:justify-self-end">{state?.minTemperature}º{temperatureUnit} / {state?.maxTemperature}º{temperatureUnit}</span>
+            <span className="todays-min-max whitespace-nowrap hsm:justify-self-end">{r(state?.minTemperature)}º{temperatureUnit} / {r(state?.maxTemperature)}º{temperatureUnit}</span>
         </div>
         <div className="inline-status-mobile">
             <span>
