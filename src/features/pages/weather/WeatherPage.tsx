@@ -1,5 +1,6 @@
 import Navigation from "@/features/navigation";
 import { CurrentWeatherWidget } from "@/features/widgets";
+import { cn } from "@/lib/utils";
 
 export default function WeatherPage(){
     return <div className="page">

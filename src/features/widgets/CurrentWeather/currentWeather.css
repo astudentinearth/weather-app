@@ -4,7 +4,7 @@
 
 @layer components{
     .current-weather-widget{
-        @apply w-full flex flex-col gap-6 p-4 sm:bg-slate-1 rounded-2xl sm:static h-fit;
+        @apply w-full flex flex-col gap-6 p-4 sm:bg-background border-border border-2 rounded-2xl sm:static h-fit;
     }
     .current-weather-grid{
         grid-template-columns: auto auto;
@@ -14,7 +14,7 @@
     }
     .current-temperature{
         font-size: 72px;
-        @apply hsm:justify-self-end;
+        @apply sm:justify-self-end;
     }
     /* edge case for iphone 5 */
     @media screen and (max-width: 330px) {
@@ -26,7 +26,7 @@
         }
     }
     .inline-status-mobile{
-        @apply flex justify-evenly hsm:justify-self-start hsm:justify-normal hsm:gap-4;
+        @apply flex justify-evenly sm:justify-self-start sm:justify-normal sm:gap-4;
     }
     .inline-status-mobile span *{
         margin: 4px;
