@@ -13,8 +13,7 @@
         @apply grid place-items-center;
     }
     .current-temperature{
-        font-size: 72px;
-        @apply sm:justify-self-end;
+        @apply hsm:justify-self-end sm:text-[144px] text-[72px];
     }
     /* edge case for iphone 5 */
     @media screen and (max-width: 330px) {

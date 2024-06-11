@@ -27,7 +27,7 @@ export function CurrentWeatherWidget(){
         }
         load();
     },[])
-    return <div className="current-weather-widget text-2xl">
+    return <div className="current-weather-widget transition-[font-size] duration-100 text-2xl sm:text-4xl">
         <span className="text-center hsm:self-start">
             <span>{`${state?.location.name}`}</span> &nbsp;
             <span className="text-zinc-500">{`${new Date().toLocaleDateString()}`}</span>
