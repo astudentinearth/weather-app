@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { CurrentWeatherData, DirectionIcons, getWeatherTranslationKey } from "@/lib";
 import { getCurrentWeather } from "@/lib/weatherAPI";
 import { useSearchParams } from "react-router-dom";
+import CurrentWeatherTabView from "./CurrentweatherTabView";
 
 export function CurrentWeatherWidget(){
     const {t} = useTranslation();
@@ -16,6 +17,7 @@ export function CurrentWeatherWidget(){
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
     useEffect(()=>{
         const load = async()=>{
+            // TODO: this part can be a hook
             const latitude_str = searchParams.get("latitude");
             const longitude_str = searchParams.get("longitude");
             const latitude = Number(latitude_str);
@@ -53,6 +55,7 @@ export function CurrentWeatherWidget(){
                 <span>{`${state?.wind}${speedUnit}`}</span>
             </span>
         </div>
+        <CurrentWeatherTabView></CurrentWeatherTabView>
     </div>
     return <></>
 }

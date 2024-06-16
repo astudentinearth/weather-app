@@ -38,6 +38,7 @@ module.exports = {
         muted: {
           DEFAULT: "rgb(var(--muted))",
           foreground: "rgb(var(--muted-foreground))",
+          "foreground-hover": "rgb(var(--muted-foreground-hover))"
         },
         accent: {
           DEFAULT: "rgb(var(--accent))",

@@ -13,6 +13,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@radix-ui/react-tabs": "^1.0.4",
     "@testing-library/jest-dom": "^6.1.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
