@@ -64,7 +64,7 @@ export function convertCurrentResponse(response: OpenMeteoCurrentAPIResponse){
 // Hourly weather data
 
 interface HourlyData{
-    time: string[],
+    time: number[],
     temperature_2m: number[],
     relative_humidity_2m: number[],
     precipitation_probability: number[],
@@ -93,8 +93,9 @@ export function convertHourlyResponse(response: OpenMeteoHourlyAPIResponse){
     const location: Location = {latitude: response.latitude, longitude: response.longitude};
     const hours: HourlyForecast[] = [];
     for(let i=0;i<response.hourly.time.length;i++){
+        console.log(response.hourly.time[i] * 1000);
         const forecast:HourlyForecast = {
-            date: new Date(response.hourly.time[i]),
+            date: new Date(response.hourly.time[i] * 1000),
             temperature: response.hourly.temperature_2m[i],
             humidity: response.hourly.relative_humidity_2m[i],
             precipitationChance: response.hourly.precipitation_probability[i],
@@ -112,7 +113,7 @@ export function convertHourlyResponse(response: OpenMeteoHourlyAPIResponse){
 // Daily weather data
 
 interface DailyData{
-    time: string[],
+    time: number[],
     weather_code: number[],
     temperature_2m_max: number[],
     temperature_2m_min: number[],
@@ -139,7 +140,7 @@ export function convertDailyResponse(response: OpenMeteoDailyAPIResponse){
     const days: DailyForecast[] = [];
     for(let i=0;i<response.daily.time.length;i++){
         const forecast:DailyForecast = {
-            date: new Date(response.daily.time[i]),
+            date: new Date(response.daily.time[i] * 1000),
             maxTemperature: response.daily.temperature_2m_max[i],
             minTemperature: response.daily.temperature_2m_min[i],
             precipitationChance: response.daily.precipitation_probability_max[i],
