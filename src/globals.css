@@ -62,7 +62,7 @@
 
 @layer components{
   .page{
-    @apply absolute w-full h-full sm:grid sm:grid-cols-[240px_auto] sm:gap-3 p-3;
+    @apply absolute w-full h-full sm:grid sm:grid-cols-[240px_auto] sm:gap-3 sm:p-3;
   }
 }
 
@@ -70,8 +70,13 @@
 body{
   height: 100vh;
   overflow: hidden;
+  background: radial-gradient(circle at center top, rgba(63, 74, 181, 0.5) 0%, rgba(32, 61, 181, 0) 75%), rgb(var(--background));
 }
 
 .glow{
   background: radial-gradient(circle, rgba(63, 74, 181, 1) 0%, rgba(32, 61, 181, 0) 100%);
+}
+
+#root{
+  overflow-x: hidden;
 }

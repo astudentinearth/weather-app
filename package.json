@@ -13,8 +13,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-tabs": "^1.0.4",
     "@testing-library/jest-dom": "^6.1.4",
+    "axios": "^1.7.2",
+    "axios-cache-interceptor": "^1.5.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "i18next": "^23.6.0",
@@ -36,7 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
-    "@vitest/coverage-v8": "^0.34.6",
+    "@vitest/coverage-v8": "^1.6.0",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -46,7 +49,7 @@
     "tailwindcss": "^3.3.5",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
-    "vitest": "^0.34.6"
+    "vitest": "^1.6.0"
   },
   "homepage": "https://github.com/astudentinearth/weather-app/"
 }

@@ -1,6 +1,7 @@
 import { useLayoutEffect, useReducer } from "react"
 import { Options, OptionsContext, PrefActions, defaultOptions, optionsReducer } from "@/context"
 import Layout from "./Layout";
+import { cn } from "./lib/utils";
 
 function App() {
   const [options, dispatch] = useReducer(optionsReducer, defaultOptions);
@@ -14,7 +15,7 @@ function App() {
   },[])
   return (
     <OptionsContext.Provider value={{dispatch, options}}>
-        <Layout></Layout>
+      <Layout></Layout>
     </OptionsContext.Provider>
   )
 }

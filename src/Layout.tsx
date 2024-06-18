@@ -18,8 +18,7 @@ const router = createHashRouter([{
 
 
 export default function Layout(){
-    return <div className="text-white ">
-        <div className={cn("absolute rounded-[50%] blur-[128px] opacity-25 left-[50%] translate-x-[-50%] top-[-768px] sm:top-[-512px] w-[1266px] h-[1266px] glow")}>sd</div>
+    return <div className="text-white overflow-x-hidden">
         <RouterProvider router={router}></RouterProvider>
     </div>
 }
