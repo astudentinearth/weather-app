@@ -6,11 +6,13 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Location } from "@/lib";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 export default function LocationSearchDialog(){
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<Location[]>([]);
     const navigate = useNavigate();
+    const {t} = useTranslation();
     useEffect(()=>{
         const search = setTimeout(async ()=>{
             const res = await geocode(query);
@@ -43,7 +45,7 @@ export default function LocationSearchDialog(){
             </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-lg w-full p-0 fixed top-[200px] rounded-xl bg-background backdrop-blur-md">
-            <Input onChange={(e)=>{setQuery(e.target.value)}} placeholder="Search location" className="rounded-lg border-none bg-transparent"></Input>
+            <Input onChange={(e)=>{setQuery(e.target.value)}} placeholder={t("ui.search_location_placeholder")} className="rounded-lg border-none bg-transparent"></Input>
             <div className="absolute flex backdrop-blur-md flex-col max-h-[512px] top-[120%] bg-background w-full rounded-xl border-border border empty:border-none">
                 {query.trim()=="" ? 
                 <></> :

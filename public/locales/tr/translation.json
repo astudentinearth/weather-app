@@ -1,8 +1,26 @@
 {
-    "navigation":{
-        "home":"Ana Sayfa",
-        "locations":"Konumlar",
-        "settings":"Ayarlar"
+    "navigation": {
+        "home": "Ana Sayfa",
+        "locations": "Konumlar",
+        "settings": "Ayarlar"
+    },
+    "percentage": "%{{percent}}",
+    "ui": {
+        "attribution_text": "Hava durumu Open-Meteo.com tarafından sağlanmaktadır",
+        "daily_tab": "Günlük",
+        "hourly_tab": "Saatlik",
+        "imperial_units": "°F | mil/saat | inç",
+        "metric_units": "°C | km/saat | milimetre",
+        "precipitation_tab": "Yağış",
+        "units_label": "Birimler",
+        "wind_tab": "Rüzgar",
+        "set_default_button": "Varsayılan konum olarak ayarla",
+        "search_location_placeholder": "Şehir ara",
+        "hourly_title": "Saatlik hava durumu",
+        "wind_title": "Saatlik rüzgar",
+        "precipitation_title": "Saatlik yağış",
+        "daily_title": "Günlük hava durumu"
+
     },
     "weather": {
         "clear": "Açık",
@@ -34,5 +52,5 @@
         "thunderstorm_light_hail": "Fırtına ve hafif dolu yağışı",
         "violent_showers": "Şiddetli sağanak yağışlı"
     },
-    "percentage":"%{{percent}}"
+    "loading": "Yükleniyor"
 }

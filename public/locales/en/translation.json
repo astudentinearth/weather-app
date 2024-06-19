@@ -34,5 +34,22 @@
         "thunderstorm_light_hail": "Thunderstorm with light hail",
         "violent_showers": "Violent showers"
     },
-    "percentage":"{{percent}}%"
+    "percentage":"{{percent}}%",
+    "ui": {
+        "attribution_text": "Weather data by Open-Meteo.com",
+        "daily_tab": "Daily",
+        "hourly_tab": "Hourly",
+        "imperial_units": "°F | mph | inches",
+        "metric_units": "°C | km/h | milimeters",
+        "precipitation_tab": "Precipitaiton",
+        "units_label": "Units",
+        "wind_tab": "Wind",
+        "set_default_button": "Set as default location",
+        "search_location_placeholder": "Search location",
+        "hourly_title": "Hourly forecast",
+        "wind_title": "Hourly wind",
+        "precipitation_title": "Hourly precipitation",
+        "daily_title": "Daily forecast"
+    },
+    "loading": "Loading"
 }

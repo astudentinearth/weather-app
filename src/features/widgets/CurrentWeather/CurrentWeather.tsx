@@ -25,7 +25,7 @@ export function CurrentWeatherWidget(){
             variant={"ghost"}
             onClick={()=>{
                 dispatch({type: PrefActions.SET_DEFAULT_LOCATION, value: state.location})
-            }}>Set as default location</Button>
+            }}>{t("ui.set_default_button")}</Button>
         else return <></>
     }
     useEffect(()=>{
@@ -40,8 +40,8 @@ export function CurrentWeatherWidget(){
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
         <div className="px-2 flex flex-col gap-3">
             <div className="hsm:self-start flex w-full gap-1">
-                <span>{`${state?.location.name}`}</span> &nbsp;
-                <span className="text-zinc-500">{`${new Date().toLocaleDateString()}`}</span>
+                <span className="select-none">{`${state?.location.name}`}</span> &nbsp;
+                <span className="text-zinc-500 select-none">{`${new Date().toLocaleDateString()}`}</span>
                 <div className="w-full"></div>
                 {renderLocationSwitcher()}
                 <LocationSearchDialog></LocationSearchDialog>
@@ -53,7 +53,7 @@ export function CurrentWeatherWidget(){
                 <span className="current-condition hsm:justify-self-start hsm:text-left inline-block text-center whitespace-pre-line text-ellipsis w-full overflow-hidden">{t(getWeatherTranslationKey(state?.weathercode ?? 1))}</span>
                 <span className="todays-min-max whitespace-nowrap hsm:justify-self-end">{r(state?.minTemperature)}º{temperatureUnit} / {r(state?.maxTemperature)}º{temperatureUnit}</span>
             </div>
-            <div className="inline-status-mobile">
+            <div className="inline-status-mobile select-none">
                 <span>
                     <i className="bi-droplet-fill"></i>
                     <span>{t("percentage",{percent: state?.humidity})}</span>
