@@ -38,6 +38,7 @@ export default function SettingsPopover(){
                     <SelectItem value="imp">{t("ui.imperial_units")}</SelectItem>
                 </SelectContent>
             </Select>
+            <a href="/weather-app/assets/THIRD_PARTY_LICENSES.txt" className="underline text-muted-foreground">{t("ui.third_party")}</a>
         </PopoverContent>
     </Popover>
 }

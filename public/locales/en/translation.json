@@ -49,7 +49,8 @@
         "hourly_title": "Hourly forecast",
         "wind_title": "Hourly wind",
         "precipitation_title": "Hourly precipitation",
-        "daily_title": "Daily forecast"
+        "daily_title": "Daily forecast",
+        "third_party": "Open source licenses"
     },
     "loading": "Loading"
 }

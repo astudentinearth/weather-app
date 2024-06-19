@@ -19,8 +19,8 @@
         "hourly_title": "Saatlik hava durumu",
         "wind_title": "Saatlik rüzgar",
         "precipitation_title": "Saatlik yağış",
-        "daily_title": "Günlük hava durumu"
-
+        "daily_title": "Günlük hava durumu",
+        "third_party": "Açık kaynak lisansları"
     },
     "weather": {
         "clear": "Açık",
