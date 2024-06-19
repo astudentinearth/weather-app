@@ -80,7 +80,13 @@
 body{
   height: 100vh;
   overflow: hidden;
-  background: radial-gradient(circle at center top, rgba(63, 74, 181, 0.5) 0%, rgba(32, 61, 181, 0) 75%), rgb(var(--background));
+  background: radial-gradient(circle at center top, rgba(63, 74, 181, 0.2) 0%, rgba(32, 61, 181, 0) 75%), rgb(var(--background));
+}
+
+@media(min-width: 640px){
+  body{
+    background: radial-gradient(circle at center top, rgba(63, 74, 181, 0.5) 0%, rgba(32, 61, 181, 0) 75%), rgb(var(--background));
+  }
 }
 
 .glow{
