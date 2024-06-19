@@ -1,11 +1,23 @@
-# Weather app built with React, Tailwind and Vite
+# ReactJS Weather App
+![](screenshot.png)
+[Try it here]("https://astudentinearth.github.io/weather-app")
+### Features
+- [X] Daily and hourly forecasts  
+- [X] Location search  
+- [X] Unit switching
 
-## Running locally
-`npm run dev` to run the development server. The app will be available at `localhost:5173`.  
-Any changes to source code will be reflected to the UI with hot reload.
+### Tech stack
+ - React 18
+ - TailwindCSS
+ - shadcn-ui
+ - Vite
+ - i18next
 
-## Testing
-`npm run test` to run the entire test suite with vitest.
+## Running locally and testing
+Use `npm run dev` to start the development server.  
+Use `npm run dev:network` to expose the ports to your network.  
+Navigate to `http://localhost:5173` to see the app in your browser.  
+Use `npm run test` to run the entire test suite with vitest.
 
 ## Localization
 Language files are stored as static assets in `public/locales/<language>`  
