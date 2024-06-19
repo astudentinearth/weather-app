@@ -21,7 +21,7 @@ export function CurrentWeatherWidget(){
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
     const renderLocationSwitcher = ()=>{                    
         if(state) return CompareLocation(state.location, options.defaultLocation) ? <></> : 
-            <Button size={"lg"} className="z-20 rounded-xl border-2 border-border hover:bg-accent hover:text-accent-foreground" 
+            <Button size={"lg"} className="z-20 rounded-xl hidden sm:block border-2 border-border hover:bg-accent hover:text-accent-foreground" 
             variant={"ghost"}
             onClick={()=>{
                 dispatch({type: PrefActions.SET_DEFAULT_LOCATION, value: state.location})

@@ -44,7 +44,7 @@ export default function LocationSearchDialog(){
         </DialogTrigger>
         <DialogContent className="sm:max-w-lg w-full p-0 fixed top-[200px] rounded-xl bg-background backdrop-blur-md">
             <Input onChange={(e)=>{setQuery(e.target.value)}} placeholder="Search location" className="rounded-lg border-none bg-transparent"></Input>
-            <div className="absolute flex backdrop-blur-md flex-col max-h-[512px] overflow-y-scroll top-[120%] bg-background w-full rounded-xl border-border border empty:border-none">
+            <div className="absolute flex backdrop-blur-md flex-col max-h-[512px] top-[120%] bg-background w-full rounded-xl border-border border empty:border-none">
                 {query.trim()=="" ? 
                 <></> :
                 renderItems()}
