@@ -24,7 +24,7 @@ export default function CurrentWeatherTabView(){
             setHourlyData(hourly);
             setDaliyData(daily);
         })();
-    }, [searchParams])
+    }, [searchParams, options])
     return <div>
         <Tabs defaultValue="hourly" className={cn("bg-background/50 border-2 border-border rounded-2xl hidden sm:block")}>
             <TabsList className={cn("bg-transparent p-0")}>

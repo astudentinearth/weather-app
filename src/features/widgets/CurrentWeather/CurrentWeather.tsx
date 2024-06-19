@@ -10,6 +10,7 @@ import CurrentWeatherTabView from "./CurrentweatherTabView";
 import { Button } from "@/components/ui/button";
 import LocationSearchDialog from "@/features/locations/LocationSearchDialog";
 import getLinkedLocation from "@/lib/getLinkedLocation";
+import SettingsPopover from "@/features/settings/SettingsPopover";
 
 export function CurrentWeatherWidget(){
     const {t} = useTranslation();
@@ -27,7 +28,7 @@ export function CurrentWeatherWidget(){
             setState(data);
         }
         load();
-    },[searchParams])
+    },[searchParams, options])
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
         <div className="px-2 flex flex-col gap-2">
             <div className="hsm:self-start flex w-full">
@@ -35,6 +36,7 @@ export function CurrentWeatherWidget(){
                 <span className="text-zinc-500">{`${new Date().toLocaleDateString()}`}</span>
                 <div className="w-full"></div>
                 <LocationSearchDialog></LocationSearchDialog>
+                <SettingsPopover></SettingsPopover>
             </div>
             <div className="current-weather-grid select-none">
                 <WeatherIcon className="hsm:justify-self-start" width={100} height={100} weathercode={state?.weathercode ?? 1}></WeatherIcon>
