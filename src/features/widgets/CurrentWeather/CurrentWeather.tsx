@@ -1,9 +1,9 @@
 import { WeatherIcon } from "@/components"
 import "./currentWeather.css"
 import { useContext, useEffect, useState } from "react"
-import { OptionsContext } from "@/context"
+import { OptionsContext, PrefActions } from "@/context"
 import { useTranslation } from "react-i18next";
-import { CurrentWeatherData, DirectionIcons, getWeatherTranslationKey } from "@/lib";
+import { CompareLocation, CurrentWeatherData, DirectionIcons, Location, getWeatherTranslationKey } from "@/lib";
 import { getCurrentWeather } from "@/lib/weatherAPI";
 import { useSearchParams } from "react-router-dom";
 import CurrentWeatherTabView from "./CurrentweatherTabView";
@@ -14,14 +14,22 @@ import SettingsPopover from "@/features/settings/SettingsPopover";
 
 export function CurrentWeatherWidget(){
     const {t} = useTranslation();
-    const {options} = useContext(OptionsContext);
+    const {options, dispatch} = useContext(OptionsContext);
     const {temperatureUnit, speedUnit} = options;
     const [state, setState] = useState<CurrentWeatherData | null>(null);
     const [searchParams,] = useSearchParams();
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
+    const renderLocationSwitcher = ()=>{                    
+        if(state) return CompareLocation(state.location, options.defaultLocation) ? <></> : 
+            <Button size={"lg"} className="z-20 rounded-xl border-2 border-border hover:bg-accent hover:text-accent-foreground" 
+            variant={"ghost"}
+            onClick={()=>{
+                dispatch({type: PrefActions.SET_DEFAULT_LOCATION, value: state.location})
+            }}>Set as default location</Button>
+        else return <></>
+    }
     useEffect(()=>{
         const load = async()=>{
-            // TODO: this part can be a hook
             const loc = getLinkedLocation(searchParams, options);
             const data = await getCurrentWeather(loc,options)
             if (data) data.location = loc;
@@ -30,11 +38,12 @@ export function CurrentWeatherWidget(){
         load();
     },[searchParams, options])
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
-        <div className="px-2 flex flex-col gap-2">
-            <div className="hsm:self-start flex w-full">
+        <div className="px-2 flex flex-col gap-3">
+            <div className="hsm:self-start flex w-full gap-1">
                 <span>{`${state?.location.name}`}</span> &nbsp;
                 <span className="text-zinc-500">{`${new Date().toLocaleDateString()}`}</span>
                 <div className="w-full"></div>
+                {renderLocationSwitcher()}
                 <LocationSearchDialog></LocationSearchDialog>
                 <SettingsPopover></SettingsPopover>
             </div>

@@ -8,6 +8,10 @@ export interface Location{
     longitude: number
 }
 
+export function CompareLocation(l1: Location, l2: Location){
+    return (l1.latitude == l2.latitude) && (l1.longitude == l2.longitude);
+}
+
 export type Direction = "N" | "NE" | "E" | "SE" | "S" | "SW" | "W" | "NW"
 
 export function degToDirection(deg: number) : Direction{
