@@ -7,6 +7,7 @@ import { getDailyWeather, getHourlyWeather } from "@/lib/weatherAPI";
 import { OptionsContext } from "@/context";
 import { useSearchParams } from "react-router-dom";
 import DailyWeatherView from "./DailyWeatherView";
+import getLinkedLocation from "@/lib/getLinkedLocation";
 
 export default function CurrentWeatherTabView(){
     const [hourlyData, setHourlyData] = useState<HourlyWeatherData | null>(null);
@@ -15,13 +16,7 @@ export default function CurrentWeatherTabView(){
     const [searchParams,] = useSearchParams();
     useEffect(()=>{
         (async ()=>{
-            // TODO: this part can be a hook
-            const latitude_str = searchParams.get("latitude");
-            const longitude_str = searchParams.get("longitude");
-            const latitude = Number(latitude_str);
-            const longitude = Number(longitude_str);
-            let loc = options.defaultLocation;
-            if(latitude_str != null && longitude_str != null && !isNaN(latitude) && !isNaN(longitude)) loc = {latitude, longitude};
+            const loc = getLinkedLocation(searchParams, options);
             const hourly = await getHourlyWeather(loc,options)
             const daily = await getDailyWeather(loc, options);
             if (hourly) hourly.location = loc;
@@ -29,7 +24,7 @@ export default function CurrentWeatherTabView(){
             setHourlyData(hourly);
             setDaliyData(daily);
         })();
-    }, [])
+    }, [searchParams])
     return <div>
         <Tabs defaultValue="hourly" className={cn("bg-background/50 border-2 border-border rounded-2xl hidden sm:block")}>
             <TabsList className={cn("bg-transparent p-0")}>

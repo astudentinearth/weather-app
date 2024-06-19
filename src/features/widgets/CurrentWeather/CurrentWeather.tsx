@@ -7,6 +7,9 @@ import { CurrentWeatherData, DirectionIcons, getWeatherTranslationKey } from "@/
 import { getCurrentWeather } from "@/lib/weatherAPI";
 import { useSearchParams } from "react-router-dom";
 import CurrentWeatherTabView from "./CurrentweatherTabView";
+import { Button } from "@/components/ui/button";
+import LocationSearchDialog from "@/features/locations/LocationSearchDialog";
+import getLinkedLocation from "@/lib/getLinkedLocation";
 
 export function CurrentWeatherWidget(){
     const {t} = useTranslation();
@@ -18,25 +21,22 @@ export function CurrentWeatherWidget(){
     useEffect(()=>{
         const load = async()=>{
             // TODO: this part can be a hook
-            const latitude_str = searchParams.get("latitude");
-            const longitude_str = searchParams.get("longitude");
-            const latitude = Number(latitude_str);
-            const longitude = Number(longitude_str);
-            let loc = options.defaultLocation;
-            if(latitude_str != null && longitude_str != null && !isNaN(latitude) && !isNaN(longitude)) loc = {latitude, longitude};
+            const loc = getLinkedLocation(searchParams, options);
             const data = await getCurrentWeather(loc,options)
             if (data) data.location = loc;
             setState(data);
         }
         load();
-    },[])
+    },[searchParams])
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
-        <div className="p-2">
-            <span className="text-center hsm:self-start">
+        <div className="px-2 flex flex-col gap-2">
+            <div className="hsm:self-start flex w-full">
                 <span>{`${state?.location.name}`}</span> &nbsp;
                 <span className="text-zinc-500">{`${new Date().toLocaleDateString()}`}</span>
-            </span>
-            <div className="current-weather-grid">
+                <div className="w-full"></div>
+                <LocationSearchDialog></LocationSearchDialog>
+            </div>
+            <div className="current-weather-grid select-none">
                 <WeatherIcon className="hsm:justify-self-start" width={100} height={100} weathercode={state?.weathercode ?? 1}></WeatherIcon>
                 <span className="current-temperature">{r(state?.currentTemperature)}º{temperatureUnit}</span>
                 <span className="current-condition hsm:justify-self-start hsm:text-left inline-block text-center whitespace-pre-line text-ellipsis w-full overflow-hidden">{t(getWeatherTranslationKey(state?.weathercode ?? 1))}</span>
