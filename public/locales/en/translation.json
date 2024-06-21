@@ -50,8 +50,10 @@
         "wind_title": "Hourly wind",
         "precipitation_title": "Hourly precipitation",
         "daily_title": "Daily forecast",
-        "third_party": "Open source licenses"
+        "third_party": "Open source licenses",
+        "language_selector_label": "Language",
+        "source_code_link": "Source code"
     },
     "loading": "Loading",
-        "page_title": "{{degrees}} {{city}} | Weather"
+    "page_title": "{{degrees}} {{city}} | Weather"
 }

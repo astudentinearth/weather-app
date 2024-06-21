@@ -20,7 +20,9 @@
         "wind_title": "Saatlik rüzgar",
         "precipitation_title": "Saatlik yağış",
         "daily_title": "Günlük hava durumu",
-        "third_party": "Açık kaynak lisansları"
+        "third_party": "Açık kaynak lisansları",
+        "language_selector_label": "Dil",
+        "source_code_link": "Kaynak kodu"
     },
     "weather": {
         "clear": "Açık",
