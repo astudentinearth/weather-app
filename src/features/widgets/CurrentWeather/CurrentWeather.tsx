@@ -33,6 +33,7 @@ export function CurrentWeatherWidget(){
             const loc = getLinkedLocation(searchParams, options);
             const data = await getCurrentWeather(loc,options)
             if (data) data.location = loc;
+            document.title = t("page_title", {degrees: `${r(data?.currentTemperature)}°${options.temperatureUnit}`, city: loc.name});
             setState(data);
         }
         load();

@@ -52,5 +52,6 @@
         "daily_title": "Daily forecast",
         "third_party": "Open source licenses"
     },
-    "loading": "Loading"
+    "loading": "Loading",
+        "page_title": "{{degrees}} {{city}} | Weather"
 }
