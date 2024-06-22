@@ -22,7 +22,8 @@
         "daily_title": "Günlük hava durumu",
         "third_party": "Açık kaynak lisansları",
         "language_selector_label": "Dil",
-        "source_code_link": "Kaynak kodu"
+        "source_code_link": "Kaynak kodu",
+        "auto_detect_language": "Tarayıcı dilini kullan"
     },
     "weather": {
         "clear": "Açık",

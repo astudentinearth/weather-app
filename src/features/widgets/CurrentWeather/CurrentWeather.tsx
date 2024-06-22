@@ -13,7 +13,7 @@ import getLinkedLocation from "@/lib/getLinkedLocation";
 import SettingsPopover from "@/features/settings/SettingsPopover";
 
 export function CurrentWeatherWidget(){
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     const {options, dispatch} = useContext(OptionsContext);
     const {temperatureUnit, speedUnit} = options;
     const [state, setState] = useState<CurrentWeatherData | null>(null);
@@ -38,6 +38,10 @@ export function CurrentWeatherWidget(){
         }
         load();
     },[searchParams, options])
+    useEffect(()=>{
+        if(!state) return;
+        document.title = t("page_title", {degrees: `${r(state?.currentTemperature)}°${options.temperatureUnit}`, city: state.location.name});
+    }, [i18n.language])
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
         <div className="px-2 flex flex-col gap-3">
             <div className="hsm:self-start flex w-full gap-1 items-center">

@@ -52,7 +52,8 @@
         "daily_title": "Daily forecast",
         "third_party": "Open source licenses",
         "language_selector_label": "Language",
-        "source_code_link": "Source code"
+        "source_code_link": "Source code",
+        "auto_detect_language": "Browser default"
     },
     "loading": "Loading",
     "page_title": "{{degrees}} {{city}} | Weather"

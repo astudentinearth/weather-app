@@ -11,7 +11,7 @@ export default function SettingsPopover(){
     const context = useContext(OptionsContext);
     const {options, dispatch} = context;
     const [searchParams] = useSearchParams();
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     return <Popover>
         <PopoverTrigger asChild>
             <Button className="flex-shrink-0 z-20 text-2xl" size={"icon"} variant={"ghost"}>
@@ -38,6 +38,19 @@ export default function SettingsPopover(){
                     <SelectItem value="imp">{t("ui.imperial_units")}</SelectItem>
                 </SelectContent>
             </Select>
+            <span>{t("ui.language_selector_label")}</span>
+            <Select value={i18n.language} onValueChange={(e)=>{
+                i18n.changeLanguage(e);
+            }}>
+                <SelectTrigger>
+                    <SelectValue placeholder={t("ui.language_selector_label")}></SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="tr">Türkçe</SelectItem>
+                </SelectContent>
+            </Select>
+            <a href="https://github.com/astudentinearth/weather-app" className="underline text-muted-foreground">{t("ui.source_code_link")}</a>
             <a href="/weather-app/assets/THIRD_PARTY_LICENSES.txt" className="underline text-muted-foreground">{t("ui.third_party")}</a>
         </PopoverContent>
     </Popover>

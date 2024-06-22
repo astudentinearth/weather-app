@@ -9,6 +9,9 @@ i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init<HttpBackendOp
     fallbackLng: "en", debug: true,
     backend:{
         loadPath: "/weather-app/locales/{{lng}}/{{ns}}.json"
+    },
+    detection:{
+        caches: ["localStorage"]
     }
 });
 export default i18n;
