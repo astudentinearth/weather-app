@@ -39,7 +39,7 @@ export default function SettingsPopover(){
                 </SelectContent>
             </Select>
             <span>{t("ui.language_selector_label")}</span>
-            <Select value={i18n.language} onValueChange={(e)=>{
+            <Select value={i18n.resolvedLanguage} onValueChange={(e)=>{
                 i18n.changeLanguage(e);
             }}>
                 <SelectTrigger>
