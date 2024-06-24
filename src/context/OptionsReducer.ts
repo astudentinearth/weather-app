@@ -18,7 +18,8 @@ export enum PrefActions{
     ADD_LOCATION="ADD_LOCATION",
     REMOVE_LOCATION="REMOVE_LOCATION",
     SET_PRECIPITATION_UNIT="SET_PRECIPITATION_UNIT",
-    SET_OPTIONS="SET_OPTIONS"
+    SET_OPTIONS="SET_OPTIONS",
+    SET_TIMEZONE="SET_TIMEZONE"
 }
 
 /** Change default temperature unit */
@@ -68,7 +69,12 @@ export type SetOptionsAction = {
     value: Options
 }
 
-export type OptActions = SetDefaultLocationAction | SetSpeedUnitAction | SetTemperatureUnitAction | SetTimeFormatAction | AddLocationAction | RemoveLocationAction | SetPrecipitationUnitAction | SetOptionsAction
+export type SetTimezoneAction = {
+    type: typeof PrefActions.SET_TIMEZONE,
+    value: "auto" | "local" | "utc"
+}
+
+export type OptActions = SetDefaultLocationAction | SetSpeedUnitAction | SetTemperatureUnitAction | SetTimeFormatAction | AddLocationAction | RemoveLocationAction | SetPrecipitationUnitAction | SetOptionsAction | SetTimezoneAction
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface OptionsContextType{
@@ -82,7 +88,8 @@ export interface Options{
     timeFormat: "24" | "12",
     precipitationUnit: "mm" | "inch"
     defaultLocation: Location,
-    locations: Location[]
+    locations: Location[],
+    timezone: "auto" | "local" | "utc"
 }
 
 export const defaultOptions: Options = {
@@ -91,7 +98,8 @@ export const defaultOptions: Options = {
     timeFormat: "24",
     defaultLocation: _ist,
     precipitationUnit: "mm",
-    locations: []
+    locations: [],
+    timezone: "auto"
 }
 
 export function optionsReducer(state: Options, action: OptActions){
@@ -128,7 +136,21 @@ export function optionsReducer(state: Options, action: OptActions){
         }
 
         case PrefActions.SET_OPTIONS:{
-            newState = action.value;
+            const val = action.value;
+            newState = {
+                temperatureUnit: val.temperatureUnit ?? "C",
+                speedUnit: val.speedUnit ?? "km",
+                timeFormat: val.timeFormat ?? "24",
+                defaultLocation: val.defaultLocation ?? _ist,
+                precipitationUnit: val.precipitationUnit ?? "mm",
+                locations: val.locations ?? [],
+                timezone: val.timezone ?? "auto"
+            } as Options;
+            break;
+        }
+
+        case PrefActions.SET_TIMEZONE:{
+            newState.timezone = action.value;
             break;
         }
     }
