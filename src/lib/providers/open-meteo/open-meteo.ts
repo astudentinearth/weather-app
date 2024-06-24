@@ -11,6 +11,9 @@ const axios = setupCache(instance, {
     ttl: 1000 * 60 * 10
 });
 
+/**
+ * Options for API calls
+ */
 export interface OpenMeteoUnitOpts{
     temperature: "celsius" | "fahrenheit",
     speed: "kmh" | "mph",
@@ -18,8 +21,9 @@ export interface OpenMeteoUnitOpts{
     timezone: "auto" | "local" | "utc"
 }
 
-const _fallbackUnits: OpenMeteoUnitOpts = {temperature: "celsius", speed: "kmh", precipitation: "mm", timezone: "auto"}
+const _fallbackUnits: OpenMeteoUnitOpts = {temperature: "celsius", speed: "kmh", precipitation: "mm", timezone: "auto"} // default options
 
+/** Makes an API call to retrieve current weather information and converts it to a CurrentWeatherData object.*/
 async function getCurrentWeather(location: Location, units?: OpenMeteoUnitOpts){
     try {
         if(units == null) units = _fallbackUnits;
@@ -46,12 +50,7 @@ async function getCurrentWeather(location: Location, units?: OpenMeteoUnitOpts){
     }
 }
 
-/**
- * 
- * @param location 
- * @param units 
- * @returns 
- */
+/** Makes an API call to retrieve weather forecasts for the next 24 hours and converts it to an HourlyWeatherData object. */
 async function getHourlyWeather(location: Location, units?: OpenMeteoUnitOpts) {
     try {
         if(units == null) units = _fallbackUnits;
@@ -76,6 +75,7 @@ async function getHourlyWeather(location: Location, units?: OpenMeteoUnitOpts) {
     }
 }
 
+/** Makes an API call to retrieve weather forecasts for the next 7 days and converts it to a DailyWeatherData object. */
 async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
     try {
         if(units == null) units = _fallbackUnits;
@@ -101,7 +101,7 @@ async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
     }
 }
 
-
+/** Makes an API call to search locations from given query */
 async function locationSearch(query: string){
     try {
         const q = query.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi,'');        

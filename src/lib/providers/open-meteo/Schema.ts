@@ -1,5 +1,6 @@
 import { CurrentWeatherData, DailyForecast, DailyWeatherData, degToDirection, HourlyForecast, HourlyWeatherData, Location } from "@/lib";
 
+/** Base parameters for open-meteo API responses */
 export interface OpenMeteoAPIResponse{
     latitude: number,
     longitude: number,
@@ -10,12 +11,14 @@ export interface OpenMeteoAPIResponse{
     elevation: number
 }
 
+/** Base fields present on all unit objects */
 interface BaseUnits{
     time: string,
 }
 
 // Current weather data
 
+/** Units for current weather responses */
 interface CurrentUnits extends BaseUnits{
     interval: string,
     temperature_2m: string,
@@ -25,6 +28,7 @@ interface CurrentUnits extends BaseUnits{
     relative_humidity_2m: string
 }
 
+/** Data in current weather responses */
 interface CurrentData{
     time: string,
     interval: number,
@@ -35,6 +39,7 @@ interface CurrentData{
     relative_humidity_2m: number
 }
 
+/** Combined current weather API response object */
 export interface OpenMeteoCurrentAPIResponse extends OpenMeteoAPIResponse{
     current_units: CurrentUnits,
     current: CurrentData,
@@ -44,6 +49,7 @@ export interface OpenMeteoCurrentAPIResponse extends OpenMeteoAPIResponse{
     hourly: {time: string[], precipitation_probability: number[]}
 }
 
+/** Converts a current weather response to `CurrentWeatherData` which can be rendered on the frontend */
 export function convertCurrentResponse(response: OpenMeteoCurrentAPIResponse){
     if(response.latitude==null || response.longitude==null || response.current==null) return null;
     const location: Location = {latitude: response.latitude, longitude: response.longitude};
@@ -63,6 +69,7 @@ export function convertCurrentResponse(response: OpenMeteoCurrentAPIResponse){
 
 // Hourly weather data
 
+/** Data in hourly weather responses */
 interface HourlyData{
     time: number[],
     temperature_2m: number[],
@@ -74,6 +81,7 @@ interface HourlyData{
     wind_direction_10m: number[]
 }
 
+/** Corresponding units for hourly weather data */
 interface HourlyUnits extends BaseUnits{
     temperature_2m: string,
     weather_code: string,
@@ -83,11 +91,13 @@ interface HourlyUnits extends BaseUnits{
     precipitation: string
 }
 
+/** Combined hourly weather response object */
 export interface OpenMeteoHourlyAPIResponse extends OpenMeteoAPIResponse{
     hourly_units: HourlyUnits,
     hourly: HourlyData
 }
 
+/** Converts hourly weather responses to `HourlyWeatherData` */
 export function convertHourlyResponse(response: OpenMeteoHourlyAPIResponse, utc_offset: number){
     if(response.latitude==null || response.longitude==null || response.hourly==null) return null;
     const location: Location = {latitude: response.latitude, longitude: response.longitude};
@@ -112,6 +122,7 @@ export function convertHourlyResponse(response: OpenMeteoHourlyAPIResponse, utc_
 
 // Daily weather data
 
+/** Data in 7-day weather responses */
 interface DailyData{
     time: number[],
     weather_code: number[],
@@ -121,6 +132,7 @@ interface DailyData{
     precipitation_probability_max: number[]
 }
 
+/** Units in 7-day weather responses */
 interface DailyUnits extends BaseUnits{
     weather_code: string,
     temperature_2m_max: string,
@@ -129,11 +141,13 @@ interface DailyUnits extends BaseUnits{
     precipitation_probability_max: string
 }
 
+/** Combined daily weather response object */
 export interface OpenMeteoDailyAPIResponse extends OpenMeteoAPIResponse{
     daily_units: DailyUnits,
     daily: DailyData
 }
 
+/** Converts daily weather responses to `DailyWeatherData` */
 export function convertDailyResponse(response: OpenMeteoDailyAPIResponse){
     if(response.latitude==null || response.longitude==null || response.daily==null) return null;
     const location: Location = {latitude: response.latitude, longitude: response.longitude};
@@ -154,10 +168,12 @@ export function convertDailyResponse(response: OpenMeteoDailyAPIResponse){
 }
 
 // Geocoding
+/** Response interface for geocoding API */
 export interface OpenMeteoGeocodingAPIResponse{
     results: OpenMeteoLocation[]
 }
 
+/** Location result object */
 interface OpenMeteoLocation{
     id: number,
     name: string,

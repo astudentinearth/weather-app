@@ -1,4 +1,4 @@
-import { getIconSourceFromWeatherCode } from "./weathercode";
+import { getIconSourceFromWeatherCode } from "./Weathercode";
 
 const prefix = "icons";
 /** Tests for the weather icons displayed at different times of day. Moon variants should be used between 6PM-6AM */
