@@ -88,14 +88,14 @@ export interface OpenMeteoHourlyAPIResponse extends OpenMeteoAPIResponse{
     hourly: HourlyData
 }
 
-export function convertHourlyResponse(response: OpenMeteoHourlyAPIResponse){
+export function convertHourlyResponse(response: OpenMeteoHourlyAPIResponse, utc_offset: number){
     if(response.latitude==null || response.longitude==null || response.hourly==null) return null;
     const location: Location = {latitude: response.latitude, longitude: response.longitude};
     const hours: HourlyForecast[] = [];
     for(let i=0;i<response.hourly.time.length;i++){
         console.log(response.hourly.time[i] * 1000);
         const forecast:HourlyForecast = {
-            date: new Date(response.hourly.time[i] * 1000),
+            date: new Date((response.hourly.time[i] + utc_offset) * 1000),
             temperature: response.hourly.temperature_2m[i],
             humidity: response.hourly.relative_humidity_2m[i],
             precipitationChance: response.hourly.precipitation_probability[i],

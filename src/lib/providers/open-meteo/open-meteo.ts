@@ -14,10 +14,11 @@ const axios = setupCache(instance, {
 export interface OpenMeteoUnitOpts{
     temperature: "celsius" | "fahrenheit",
     speed: "kmh" | "mph",
-    precipitation: "inch" | "mm"
+    precipitation: "inch" | "mm",
+    timezone: "auto" | "local" | "utc"
 }
 
-const _fallbackUnits: OpenMeteoUnitOpts = {temperature: "celsius", speed: "kmh", precipitation: "mm"}
+const _fallbackUnits: OpenMeteoUnitOpts = {temperature: "celsius", speed: "kmh", precipitation: "mm", timezone: "auto"}
 
 async function getCurrentWeather(location: Location, units?: OpenMeteoUnitOpts){
     try {
@@ -28,7 +29,8 @@ async function getCurrentWeather(location: Location, units?: OpenMeteoUnitOpts){
         +`&temperature_unit=${units.temperature}&wind_speed_unit=${units.speed}&precipitation_unit=${units.precipitation}`
         +`&forecast_days=2&forecast_hours=1`
         +`&daily=temperature_2m_max,temperature_2m_min`
-        +`&timeformat=unixtime`;
+        +`&timeformat=unixtime`
+        +"&timezone=auto";
         const response = axios.get(url);
         const result = (await response).data as OpenMeteoCurrentAPIResponse;
         const current = convertCurrentResponse(result)
@@ -57,10 +59,11 @@ async function getHourlyWeather(location: Location, units?: OpenMeteoUnitOpts) {
         +`&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_direction_10m`
         +`&forecast_hours=24`
         +`&temperature_unit=${units.temperature}&wind_speed_unit=${units.speed}&precipitation_unit=${units.precipitation}`
-        +`&timeformat=unixtime`;
+        +`&timeformat=unixtime`
+        +"&timezone=auto";
         const response = axios.get(url);
         const result = (await response).data as OpenMeteoHourlyAPIResponse;
-        const hourly = convertHourlyResponse(result);
+        const hourly = convertHourlyResponse(result, units.timezone === "auto" ? result.utc_offset_seconds : 0);
         if(hourly) return hourly;
         else throw new Error("Data wasn't received in correct format or no data was received.");
     }
@@ -79,7 +82,8 @@ async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}`
         +`&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max`
         +`&temperature_unit=${units.temperature}&wind_speed_unit=${units.speed}&precipitation_unit=${units.precipitation}`
-        +`&timeformat=unixtime`;
+        +`&timeformat=unixtime`
+        +"&timezone=auto";
         const response = await fetch(url,{headers: {
             "Content-Type":"application/json"
         }});
