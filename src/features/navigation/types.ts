@@ -1,3 +1,4 @@
+/** @deprecated no longer used */
 /** Default and fill variants of navigation icons */
 export enum IconClassnames{
     HOME_INACTIVE = "bi-house-door",

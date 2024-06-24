@@ -1,3 +1,4 @@
+/** @deprecated no longer used */
 import { Link } from "react-router-dom";
 import { IconClassnames } from "./types";
 import { useTranslation } from "react-i18next";

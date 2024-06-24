@@ -1,3 +1,4 @@
+/** @deprecated  */
 import Navigation from "@/features/navigation";
 import { Location } from "@/lib";
 import { geocode } from "@/lib/weatherAPI";
