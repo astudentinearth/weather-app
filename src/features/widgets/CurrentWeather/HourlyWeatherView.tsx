@@ -17,14 +17,18 @@ export default function HourlyWeatherView(props: {data: HourlyWeatherData, mode:
             <span className="text-[#87C1FF]">{t("percentage", {percent: e.precipitationChance})}</span>
             <WeatherIcon width={64} weathercode={e.weathercode}></WeatherIcon>
             <span>{r(e.temperature)}º{temperatureUnit}</span>
-            <span className="text-muted-foreground">{e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"})}</span>
+            <span className="text-muted-foreground">{(options.timezone === "local" ? 
+                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"}) : 
+                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
         </div>
 
     const renderWind = (e: HourlyForecast, i:number) =>
     <div className="text-2xl flex-shrink-0 w-18 flex flex-col items-center gap-2" key={i}>
             <i className={cn(DirectionIcons.get(e.windDirection ?? "NE"), "text-[48px]")}></i>
             <span>{r(e.windSpeed)} {speedUnit}</span>
-            <span className="text-muted-foreground">{e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"})}</span>
+            <span className="text-muted-foreground">{(options.timezone === "local" ? 
+                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"}) : 
+                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
     </div>
 
     const renderPrecipitation = (e: HourlyForecast, i:number) =>
@@ -32,7 +36,9 @@ export default function HourlyWeatherView(props: {data: HourlyWeatherData, mode:
             <span className="text-[#87C1FF]">{t("percentage", {percent: e.precipitationChance})}</span>
             <i className={cn(e.precipitation > 0 ? "bi-droplet-half" : "bi-droplet", "text-[48px]")}></i>
             <span>{r(e.precipitation)} {precipitationUnit}</span>
-            <span className="text-muted-foreground">{e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"})}</span>
+            <span className="text-muted-foreground">{(options.timezone === "local" ? 
+                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"}) : 
+                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
     </div>
 
     return <ScrollArea>

@@ -45,7 +45,7 @@ export function CurrentWeatherWidget(){
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
         <div className="px-2 flex flex-col gap-3">
             <div className="hsm:self-start flex w-full gap-1 items-center">
-                <span className="select-none">{`${state?.location.name}`}</span> &nbsp;
+                <span className="select-none flex-shrink-0">{`${state?.location.name}`}</span> &nbsp;
                 <span className="text-zinc-500 select-none">{`${new Date().toLocaleDateString()}`}</span>
                 <div className="w-full"></div>
                 {renderLocationSwitcher()}
