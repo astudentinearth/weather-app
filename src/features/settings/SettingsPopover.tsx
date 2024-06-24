@@ -38,6 +38,19 @@ export default function SettingsPopover(){
                     <SelectItem value="imp">{t("ui.imperial_units")}</SelectItem>
                 </SelectContent>
             </Select>
+            <span>{t("ui.timezone_label")}</span>
+            <Select value={options.timezone} onValueChange={(e: ("auto" | "utc" | "local"))=>{
+                dispatch({type: PrefActions.SET_TIMEZONE, value: e})
+            }}>
+                <SelectTrigger>
+                    <SelectValue placeholder={t("ui.timezone_label")}></SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="auto">{t("ui.timezone_auto")}</SelectItem>
+                    <SelectItem value="utc">{t("ui.timezone_utc")}</SelectItem>
+                    <SelectItem value="local">{t("ui.timezone_local")}</SelectItem>
+                </SelectContent>
+            </Select>
             <span>{t("ui.language_selector_label")}</span>
             <Select value={i18n.resolvedLanguage} onValueChange={(e)=>{
                 i18n.changeLanguage(e);

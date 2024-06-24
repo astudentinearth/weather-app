@@ -23,7 +23,11 @@
         "third_party": "Açık kaynak lisansları",
         "language_selector_label": "Dil",
         "source_code_link": "Kaynak kodu",
-        "auto_detect_language": "Tarayıcı dilini kullan"
+        "auto_detect_language": "Tarayıcı dilini kullan",
+        "timezone_label": "Zaman dilimi",
+        "timezone_auto": "Konumun zaman dilimini kullan",
+        "timezone_utc": "Sadece UTC kullan",
+        "timezone_local": "Sadece cihazın zaman dilimini kullan"
     },
     "weather": {
         "clear": "Açık",

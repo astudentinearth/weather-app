@@ -53,7 +53,11 @@
         "third_party": "Open source licenses",
         "language_selector_label": "Language",
         "source_code_link": "Source code",
-        "auto_detect_language": "Browser default"
+        "auto_detect_language": "Browser default",
+        "timezone_label": "Time zone",
+        "timezone_auto": "Detect time zone from location",
+        "timezone_utc": "Always use UTC",
+        "timezone_local": "Always use device time zone"
     },
     "loading": "Loading",
     "page_title": "{{degrees}} {{city}} | Weather"
