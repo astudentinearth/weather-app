@@ -18,7 +18,7 @@ export default function LocationSearchDialog(){
             const res = await geocode(query);
             if(res) setResults(res)
             else setResults([])
-        },500);
+        },200);
         return ()=>clearTimeout(search);
     },[query]);
     const renderItems = useCallback(()=>{
