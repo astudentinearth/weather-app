@@ -3,7 +3,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Select, SelectItem, SelectValue, SelectTrigger, SelectContent } from "@/components/ui/select";
 import { OptionsContext, PrefActions } from "@/context";
 import getLinkedLocation from "@/lib/getLinkedLocation";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 
