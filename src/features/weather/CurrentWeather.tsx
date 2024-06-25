@@ -75,5 +75,4 @@ export function CurrentWeatherWidget(){
         </div>
         <CurrentWeatherTabView></CurrentWeatherTabView>
     </div>
-    return <></>
 }

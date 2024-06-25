@@ -1,5 +1,5 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import { CurrentWeatherWidget } from "@/features/widgets";
+import { CurrentWeatherWidget } from "@/features/weather";
 import { useTranslation } from "react-i18next";
 
 const router = createHashRouter([{
