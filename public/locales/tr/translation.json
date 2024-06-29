@@ -27,7 +27,9 @@
         "timezone_label": "Zaman dilimi",
         "timezone_auto": "Konumun zaman dilimini kullan",
         "timezone_utc": "Sadece UTC kullan",
-        "timezone_local": "Sadece cihazın zaman dilimini kullan"
+        "timezone_local": "Sadece cihazın zaman dilimini kullan",
+        "auto_detected_location_name": "Konumunuz",
+        "auto_detect_location_action": "Konumumu otomatik tespit et"
     },
     "weather": {
         "clear": "Açık",

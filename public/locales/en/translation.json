@@ -57,7 +57,9 @@
         "timezone_label": "Time zone",
         "timezone_auto": "Detect time zone from location",
         "timezone_utc": "Always use UTC",
-        "timezone_local": "Always use device time zone"
+        "timezone_local": "Always use device time zone",
+        "auto_detected_location_name": "Your location",
+        "auto_detect_location_action": "Automatically detect my location"
     },
     "loading": "Loading",
     "page_title": "{{degrees}} {{city}} | Weather"

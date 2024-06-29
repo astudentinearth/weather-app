@@ -43,7 +43,7 @@ export default function LocationSearchDialog(){
         locate().then((pos)=>{
             navigate({
                 pathname: '/',
-                search: `?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}`
+                search: `?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&autoLocated=true`
             })
         })
     }
@@ -60,7 +60,7 @@ export default function LocationSearchDialog(){
                     <Button variant={"ghost"} className={cn("border-none text-start justify-start", results.length > 0 ? "hidden" : "block")} onClick={autoLocate}>
                             <div>
                                 <i className="bi-geo-alt"></i>&nbsp;&nbsp;
-                                <span className="font-bold">Automatically detect my location</span>
+                                <span className="font-bold">{t("ui.auto_detect_location_action")}</span>
                             </div>
                     </Button>
                 </DialogClose>
