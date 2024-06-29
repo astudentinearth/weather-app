@@ -6,7 +6,9 @@ export interface Location{
     country?: string,
     latitude: number,
     longitude: number,
-    isAutoDetected? : boolean
+    isAutoDetected? : boolean,
+    admins?: string,
+    countryCode?: string
 }
 
 export function CompareLocation(l1: Location, l2: Location){

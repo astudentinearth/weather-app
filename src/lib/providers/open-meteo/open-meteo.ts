@@ -102,16 +102,24 @@ async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
 }
 
 /** Makes an API call to search locations from given query */
-async function locationSearch(query: string){
+async function locationSearch(query: string, locale?: string){
+    const combineAdmins = (a1?: string, a2?:string, a3?: string, a4?: string, c?: string)=>{
+        return `${a4 ? a4 + ", " : ""}${a3 ? a3 + ", " : ""}${a2 ? a2  + ", " : ""}${a1 ? a1+ ", " : ""}${c}`;
+    }
     try {
         const q = query.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi,'');        
         if(q.length <= 1 || q.trim()=="") return [];
-        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${q}&count=10&language=en&format=json`;
+        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${q}&count=10&language=${locale ?? "en"}&format=json`;
         const response = await fetch(url);
         const result = await response.json() as OpenMeteoGeocodingAPIResponse;
-        if(result==null) throw new Error();
+        if(result==null || result.results == null) return []
         const data = [] as Location[]
-        result.results.map((n)=>{data.push({latitude: n.latitude, longitude: n.longitude, name: n.name, country: n.country} as Location)})
+        result.results.map((n)=>{data.push({latitude: n.latitude, 
+            longitude: n.longitude, 
+            name: n.name, 
+            country: n.country, 
+            countryCode: n.country_code,
+            admins: combineAdmins(n.admin1, n.admin2, n.admin3, n.admin4, n.country)} as Location)})
         return data
     } catch (error) {
         let msg = "Unknown error fetching locations."

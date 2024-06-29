@@ -13,10 +13,10 @@ export default function LocationSearchDialog(){
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<Location[]>([]);
     const navigate = useNavigate();
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     useEffect(()=>{
         const search = setTimeout(async ()=>{
-            const res = await geocode(query);
+            const res = await geocode(query, i18n.resolvedLanguage);
             if(res) setResults(res)
             else setResults([])
         },200);
@@ -25,15 +25,20 @@ export default function LocationSearchDialog(){
     const renderItems = useCallback(()=>{
         return results.map((l)=>{
             return <DialogClose asChild>
-                <Button variant={"ghost"} className={cn("border-none text-start justify-start")} onClick={()=>{
+                <Button variant={"ghost"} className={cn("border-none text-start justify-start h-auto")} onClick={()=>{
                     navigate({
                         pathname: '/',
                         search: `?latitude=${l.latitude}&longitude=${l.longitude}&name=${l.name}`
                     })
-                }}>
+                    }}>
                     <div>
-                        <span>{l.name}</span>&nbsp;&nbsp;&nbsp;
-                        <span className="text-muted-foreground">{l.country ?? ""}</span>
+                        <div className="flex items-center gap-2">
+                            <img width={24} height={8} alt={l.country} className=" float-left"
+                            src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${l.countryCode?.toUpperCase()}.svg`}/>
+                            <span>{l.name}</span>
+                            <span className="text-muted-foreground">{l.country ?? ""}</span>
+                        </div>
+                        <span className="text-muted-foreground">{l.admins}</span>
                     </div>
                 </Button>
             </DialogClose>
@@ -47,7 +52,9 @@ export default function LocationSearchDialog(){
             })
         })
     }
-    return <Dialog>
+    return <Dialog onOpenChange={(open)=>{
+        if(!open) setResults([]);
+    }}>
         <DialogTrigger asChild>
             <Button className="flex-shrink-0 z-20 text-2xl" size={"icon"} variant={"ghost"}>
                 <i className="bi-search"></i>
@@ -55,7 +62,7 @@ export default function LocationSearchDialog(){
         </DialogTrigger>
         <DialogContent className="sm:max-w-lg w-full p-0 fixed top-[200px] rounded-xl bg-background backdrop-blur-md">
             <Input onChange={(e)=>{setQuery(e.target.value)}} placeholder={t("ui.search_location_placeholder")} className="rounded-lg border-none bg-transparent"></Input>
-            <div className="absolute flex backdrop-blur-md flex-col max-h-[512px] top-[120%] bg-background w-full rounded-xl border-border border empty:border-none">
+            <div className="absolute flex backdrop-blur-md flex-col max-h-[512px] top-[120%] bg-background w-full rounded-xl border-border border empty:border-none overflow-y-scroll">
                 <DialogClose asChild>
                     <Button variant={"ghost"} className={cn("border-none text-start justify-start", results.length > 0 ? "hidden" : "block")} onClick={autoLocate}>
                             <div>

@@ -37,6 +37,6 @@ export async function getDailyWeather(location: Location, opts: Options){
 }
 
 /** Searches locations */
-export async function geocode(query: string){
-    return await OpenMeteoAPI.locationSearch(query);
+export async function geocode(query: string, locale?: string){
+    return await OpenMeteoAPI.locationSearch(query, locale);
 }

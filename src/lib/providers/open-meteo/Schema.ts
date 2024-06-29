@@ -178,7 +178,11 @@ interface OpenMeteoLocation{
     name: string,
     latitude: number,
     longitude: number,
-    country_code: number,
+    country_code: string,
     country: string,
-    timezone: string
+    timezone: string,
+    admin1: string,
+    admin2: string,
+    admin3: string,
+    admin4: string
 }
