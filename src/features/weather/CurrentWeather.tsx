@@ -23,14 +23,14 @@ export function CurrentWeatherWidget(){
             const loc = getLinkedLocation(searchParams, options);
             const data = await getCurrentWeather(loc,options)
             if (data) data.location = loc;
-            document.title = t("page_title", {degrees: `${r(data?.currentTemperature)}°${options.temperatureUnit}`, city: loc.name});
+            document.title = t("page_title", {degrees: `${r(data?.currentTemperature)}°${options.temperatureUnit}`, city: loc.name ?? `${loc.latitude.toFixed(4)} ${loc.longitude.toFixed(4)}`});
             setState(data);
         }
         load();
     },[searchParams, options])
     useEffect(()=>{
         if(!state) return;
-        document.title = t("page_title", {degrees: `${r(state?.currentTemperature)}°${options.temperatureUnit}`, city: state.location.name});
+        document.title = t("page_title", {degrees: `${r(state?.currentTemperature)}°${options.temperatureUnit}`, city: state.location.name ?? `${state.location.latitude.toFixed(4)} ${state.location.longitude.toFixed(4)}`});
     }, [i18n.language])
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
         <div className="px-2 flex flex-col gap-3">
