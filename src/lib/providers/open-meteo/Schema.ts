@@ -103,7 +103,6 @@ export function convertHourlyResponse(response: OpenMeteoHourlyAPIResponse, utc_
     const location: Location = {latitude: response.latitude, longitude: response.longitude};
     const hours: HourlyForecast[] = [];
     for(let i=0;i<response.hourly.time.length;i++){
-        console.log(response.hourly.time[i] * 1000);
         const forecast:HourlyForecast = {
             date: new Date((response.hourly.time[i] + utc_offset) * 1000),
             temperature: response.hourly.temperature_2m[i],

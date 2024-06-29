@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Location } from "@/lib";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import locate from "@/lib/geolocation";
 
 export default function LocationSearchDialog(){
     const [query, setQuery] = useState("");
@@ -38,6 +39,14 @@ export default function LocationSearchDialog(){
             </DialogClose>
         })
     },[results]);
+    const autoLocate = ()=>{
+        locate().then((pos)=>{
+            navigate({
+                pathname: '/',
+                search: `?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}`
+            })
+        })
+    }
     return <Dialog>
         <DialogTrigger asChild>
             <Button className="flex-shrink-0 z-20 text-2xl" size={"icon"} variant={"ghost"}>
@@ -47,6 +56,14 @@ export default function LocationSearchDialog(){
         <DialogContent className="sm:max-w-lg w-full p-0 fixed top-[200px] rounded-xl bg-background backdrop-blur-md">
             <Input onChange={(e)=>{setQuery(e.target.value)}} placeholder={t("ui.search_location_placeholder")} className="rounded-lg border-none bg-transparent"></Input>
             <div className="absolute flex backdrop-blur-md flex-col max-h-[512px] top-[120%] bg-background w-full rounded-xl border-border border empty:border-none">
+                <DialogClose asChild>
+                    <Button variant={"ghost"} className={cn("border-none text-start justify-start", results.length > 0 ? "hidden" : "block")} onClick={autoLocate}>
+                            <div>
+                                <i className="bi-geo-alt"></i>&nbsp;&nbsp;
+                                <span className="font-bold">Automatically detect my location</span>
+                            </div>
+                    </Button>
+                </DialogClose>
                 {query.trim()=="" ? 
                 <></> :
                 renderItems()}
