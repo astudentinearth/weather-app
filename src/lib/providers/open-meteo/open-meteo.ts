@@ -45,7 +45,6 @@ async function getCurrentWeather(location: Location, units?: OpenMeteoUnitOpts){
         let msg = "Unknown error fetching current weather data."
         if(error instanceof Error) msg = error.message;
         console.error(msg);
-        window.alert(msg);
         return null;
     }
 }
@@ -70,7 +69,6 @@ async function getHourlyWeather(location: Location, units?: OpenMeteoUnitOpts) {
         let msg = "Unknown error fetching hourly weather data."
         if(error instanceof Error) msg = error.message;
         console.error(msg);
-        window.alert(msg);
         return null;
     }
 }
@@ -96,7 +94,6 @@ async function getDailyWeather(location: Location, units?: OpenMeteoUnitOpts){
         let msg = "Unknown error fetching daily weather data."
         if(error instanceof Error) msg = error.message;
         console.error(msg);
-        window.alert(msg);
         return null;
     }
 }
@@ -125,7 +122,6 @@ async function locationSearch(query: string, locale?: string){
         let msg = "Unknown error fetching locations."
         if(error instanceof Error) msg = error.message;
         console.error(msg);
-        window.alert(msg);
         return null;
     }
 }

@@ -9,6 +9,7 @@ import { useSearchParams } from "react-router-dom";
 import DailyWeatherView from "./DailyWeatherView";
 import getLinkedLocation from "@/lib/getLinkedLocation";
 import { useTranslation } from "react-i18next";
+import { useErrorBoundary } from "react-error-boundary";
 
 export default function CurrentWeatherTabView(){
     const [hourlyData, setHourlyData] = useState<HourlyWeatherData | null>(null);
@@ -16,13 +17,14 @@ export default function CurrentWeatherTabView(){
     const {options} = useContext(OptionsContext);
     const [searchParams,] = useSearchParams();
     const {t} = useTranslation();
+    const {showBoundary} = useErrorBoundary();
     useEffect(()=>{
         (async ()=>{
             const loc = getLinkedLocation(searchParams, options);
             const hourly = await getHourlyWeather(loc,options)
             const daily = await getDailyWeather(loc, options);
-            if (hourly) hourly.location = loc;
-            if (daily) daily.location = loc;
+            if (hourly) hourly.location = loc; else showBoundary(new Error("Failed to load weather"))
+            if (daily) daily.location = loc; else showBoundary(new Error("Failed to load weather"))
             setHourlyData(hourly);
             setDaliyData(daily);
         })();

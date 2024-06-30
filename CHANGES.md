@@ -3,6 +3,7 @@
 - Added support for automatic location detection (if location permission is given)
 - Added abbreviated directions in wind tab
 - Location search now remembers recent searches, displays local administartions, shows country flags and is tab-navigable
+- Dropped browser prompts and added error components
 
 # v0.2.0
 - Support automatic timezone detection and UTC time

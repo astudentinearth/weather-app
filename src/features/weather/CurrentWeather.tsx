@@ -11,6 +11,19 @@ import getLinkedLocation from "@/lib/getLinkedLocation";
 import ViewHeader from "./ViewHeader";
 import CurrentStatus from "./CurrentStatus";
 import locate from "@/lib/geolocation";
+import { ErrorBoundary, FallbackProps } from "react-error-boundary";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
+function HourlyViewFallback({error, resetErrorBoundary}: FallbackProps){
+    const {t} = useTranslation();
+    return <div className={cn("sm:bg-background/50 border-2 border-none sm:border-solid p-2 sm:border-border rounded-2xl bg-transparent select-text flex gap-2 flex-col items-center justify-center")}>
+        <span className="text-2xl">{t("errors.something_went_wrong")}</span>
+        <Button variant={"outline"} className="rounded-xl" onClick={()=>{resetErrorBoundary()}}>
+            <i className="bi-arrow-clockwise "></i>
+            {t("errors.retry_button")}</Button>
+    </div>
+}
 
 export function CurrentWeatherWidget(){
     const {t, i18n} = useTranslation();
@@ -55,6 +68,8 @@ export function CurrentWeatherWidget(){
             </div>
             {state ? <CurrentStatus precipitation={state.precipitationChance} humidity={state.humidity} direction={state.windDirection} wind={state.wind}></CurrentStatus> : <></>}
         </div>
-        <CurrentWeatherTabView></CurrentWeatherTabView>
+        <ErrorBoundary FallbackComponent={HourlyViewFallback}>
+            <CurrentWeatherTabView></CurrentWeatherTabView>
+        </ErrorBoundary>
     </div>
 }

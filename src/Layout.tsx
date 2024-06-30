@@ -1,6 +1,8 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import { CurrentWeatherWidget } from "@/features/weather";
 import { useTranslation } from "react-i18next";
+import {ErrorBoundary} from "react-error-boundary"
+import CurrentWeatherFallback from "./features/weather/CurrentWeatherFallback";
 
 const router = createHashRouter([{
   path: '/',
@@ -11,7 +13,9 @@ export function WeatherPage(){
     const {t} = useTranslation();
     return <div className="page flex flex-col sm:p-2 sm:justify-center sm:items-center overflow-x-hidden">
         <div className="w-full max-w-[900px]">
-            <CurrentWeatherWidget></CurrentWeatherWidget>
+            <ErrorBoundary FallbackComponent={CurrentWeatherFallback}>
+                <CurrentWeatherWidget></CurrentWeatherWidget>
+            </ErrorBoundary>
         </div>
         <span className="text-sm text-muted-foreground text-center">
                 <a className="hover:text-muted-foreground-hover transition-colors" href="https://open-meteo.com/">{t("ui.attribution_text")}</a>

@@ -73,5 +73,11 @@
         "NW":"KB"
     },
     "loading": "Yükleniyor",
-    "page_title": "{{degrees}} {{city}} | Hava Durumu"
+    "page_title": "{{degrees}} {{city}} | Hava Durumu",
+    "errors":{
+        "something_went_wrong": "Bir şeyler ters gitti",
+        "refresh_page": "Sorunu çözmek için sayfayı yeniden yüklemeyi deneyebilirsiniz.",
+        "no_error_message": "Bir hata mesajı bulamadık :(",
+        "retry_button": "Yeniden dene"
+    }
 }
