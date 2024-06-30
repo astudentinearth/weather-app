@@ -1,0 +1,32 @@
+{
+    "name": "Weather",
+    "display": "standalone",
+    "scope":"/weather-app/",
+    "start_url": "/weather-app/",
+    "background_color":"#101215",
+    "theme_color":"#101215",
+    "description": "Weather for all your screens. Simple and beautiful.",
+    "short_name":"Weather",
+    "categories": ["weather"],
+    "icons": [
+        {
+            "src": "/weather-app/icons/tiny.webp",
+            "sizes": "48x48",
+            "type":"image/png"
+        },
+        {
+            "src": "/weather-app/icons/small.png",
+            "sizes": "72x72 96x96 128x128 192x192 256x256",
+            "type":"image/png"
+        },
+        {
+            "src": "/weather-app/icons/large.png",
+            "sizes": "512x512",
+            "type":"image/png"
+        },
+        {
+            "src": "/weather-app/icons/scalable.svg",
+            "sizes": "any"
+        }
+    ]
+}
