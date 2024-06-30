@@ -43,7 +43,7 @@ export default function HourlyWeatherView(props: {data: HourlyWeatherData, mode:
     </div>
 
     return <ScrollArea>
-        <div className="flex w-max gap-4 pl-2 sm:p-2 h-[200px] items-center">
+        <div className="flex w-max gap-4 pl-2 sm:p-2 h-[200px] items-center select-none">
             {props.data.hours.map((e, i)=>{
                 switch(props.mode){
                     case "default":
