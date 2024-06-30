@@ -62,6 +62,16 @@
         "thunderstorm_light_hail": "Fırtına ve hafif dolu yağışı",
         "violent_showers": "Şiddetli sağanak yağışlı"
     },
+    "directions":{
+        "N":"K",
+        "NE":"KD",
+        "E":"D",
+        "SE":"GD",
+        "S":"G",
+        "SW":"GB",
+        "W":"B",
+        "NW":"KB"
+    },
     "loading": "Yükleniyor",
     "page_title": "{{degrees}} {{city}} | Hava Durumu"
 }

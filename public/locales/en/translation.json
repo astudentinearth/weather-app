@@ -62,6 +62,16 @@
         "auto_detect_location_action": "Automatically detect my location",
         "recent_locations_title": "Recently searched"
     },
+    "directions":{
+        "N":"N",
+        "NE":"NE",
+        "E":"E",
+        "SE":"SE",
+        "S":"G",
+        "SW":"SW",
+        "W":"W",
+        "NW":"NW"
+    },
     "loading": "Loading",
     "page_title": "{{degrees}} {{city}} | Weather"
 }

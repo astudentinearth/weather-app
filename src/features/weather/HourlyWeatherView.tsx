@@ -24,6 +24,7 @@ export default function HourlyWeatherView(props: {data: HourlyWeatherData, mode:
 
     const renderWind = (e: HourlyForecast, i:number) =>
     <div className="text-2xl flex-shrink-0 w-18 flex flex-col items-center gap-2" key={i}>
+            <span className="">{t(`directions.${e.windDirection}`)}</span>
             <i className={cn(DirectionIcons.get(e.windDirection ?? "NE"), "text-[48px]")}></i>
             <span>{r(e.windSpeed)} {speedUnit}</span>
             <span className="text-muted-foreground">{(options.timezone === "local" ? 
