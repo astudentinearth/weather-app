@@ -1,3 +1,9 @@
+# v0.3.0
+- App can now be installed as a Progressive Web App
+- Added support for automatic location detection (if location permission is given)
+- Added abbreviated directions in wind tab
+- Location search now remembers recent searches, displays local administartions, shows country flags and is tab-navigable
+
 # v0.2.0
 - Support automatic timezone detection and UTC time
 
