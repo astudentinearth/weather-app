@@ -78,6 +78,6 @@
         "something_went_wrong": "Something went wrong",
         "refresh_page": "Try refreshing the page to see if the issue persists.",
         "no_error_message": "We couldn't find an error message for this :(",
-        "retry_button": "Retry",
+        "retry_button": "Retry"
     }
 }
