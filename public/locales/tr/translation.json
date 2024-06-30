@@ -29,7 +29,8 @@
         "timezone_utc": "Sadece UTC kullan",
         "timezone_local": "Sadece cihazın zaman dilimini kullan",
         "auto_detected_location_name": "Konumunuz",
-        "auto_detect_location_action": "Konumumu otomatik tespit et"
+        "auto_detect_location_action": "Konumumu otomatik tespit et",
+        "recent_locations_title": "Yakınlarda arananlar"
     },
     "weather": {
         "clear": "Açık",

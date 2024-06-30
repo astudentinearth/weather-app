@@ -1,4 +1,4 @@
-import { Location } from "@/lib"
+import { CompareLocation, Location } from "@/lib"
 import React from "react"
 
 /** Location of İstanbul */
@@ -126,12 +126,20 @@ export function optionsReducer(state: Options, action: OptActions){
             break;
             
         case PrefActions.ADD_LOCATION: {
-            if(!newState.locations.includes(action.value)) newState.locations.push(action.value);
-            break
+            const l = newState.locations;
+            let exists = false;
+            for(const i in l){
+                if(CompareLocation(l[i], action.value)) exists = true;
+            }
+            if(!exists) l.push(action.value);
+            newState.locations = l;
+            break;
         }
 
         case PrefActions.REMOVE_LOCATION: {
-            if(newState.locations.includes(action.value)) newState.locations.filter((val)=>val!==action.value);
+            console.log("removing")
+            const l = newState.locations;
+            newState.locations = l.filter((val)=>!CompareLocation(val, action.value));
             break;
         }
 
