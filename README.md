@@ -5,6 +5,8 @@
 - [X] Daily and hourly forecasts  
 - [X] Location search  
 - [X] Unit switching
+- [X] Geolocation support
+- [X] Installable as Progressive Web App
 
 ### Tech stack
  - React 18
