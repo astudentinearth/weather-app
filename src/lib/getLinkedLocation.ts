@@ -2,7 +2,7 @@ import { Options } from "@/context";
 import { Location } from "./WeatherData";
 
 /** Checks URL search parameters to get location information 
- * @returns the location in search parameters, or the default location if paramteres are incorrect
+ * @returns the location in search parameters, or the default location if parameters are incorrect
 */
 export default function getLinkedLocation(searchParams: URLSearchParams, options: Options){
     const latitude_str = searchParams.get("latitude");

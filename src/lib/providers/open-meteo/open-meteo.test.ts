@@ -44,6 +44,5 @@ describe.skipIf(!(await isAPIAccessible()))("open meteo",async ()=>{
     it("api: check if locations can be searched", async ()=>{
         const data = await locationSearch("istanbul");
         expect(data?.length).toBeGreaterThan(0);
-        console.log(data);
     })
 })
