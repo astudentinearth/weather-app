@@ -5,7 +5,7 @@ import { OptionsContext } from "@/context"
 import { useTranslation } from "react-i18next";
 import { CompareLocation, CurrentWeatherData, Location, getWeatherTranslationKey } from "@/lib";
 import { getCurrentWeather } from "@/lib/weatherAPI";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import CurrentWeatherTabView from "./CurrentweatherTabView";
 import getLinkedLocation from "@/lib/getLinkedLocation";
 import ViewHeader from "./ViewHeader";
@@ -31,6 +31,7 @@ export function CurrentWeatherWidget(){
     const {temperatureUnit} = options;
     const [state, setState] = useState<CurrentWeatherData | null>(null);
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
     useEffect(()=>{
         const load = async()=>{
@@ -38,7 +39,11 @@ export function CurrentWeatherWidget(){
             if(!searchParams.has("latitude") || !searchParams.has("longitude")){ // no location provided, ask to use geolocation API
                 try{
                     const pos = await locate();
-                    loc = {latitude: pos.coords.latitude, longitude: pos.coords.longitude, isAutoDetected: true} as Location
+                    loc = {latitude: pos.coords.latitude, longitude: pos.coords.longitude, isAutoDetected: true} as Location;
+                    navigate({
+                        pathname: '/',
+                        search: `?latitude=${loc.latitude}&longitude=${loc.longitude}&autoLocated=true`
+                    });
                 } catch{ /* empty */ }
             }
             const data = await getCurrentWeather(loc, options)
