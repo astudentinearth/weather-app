@@ -10,7 +10,8 @@ export default defineConfig({
   plugins: [react(),
     VitePWA({
       manifest: false,
-      includeAssets: ['apple-touch-icon.png', 'icon.svg']
+      includeAssets: ['apple-touch-icon.png', 'icon.svg'],
+      registerType: "autoUpdate"
     })
   ],
   test: {
