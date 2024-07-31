@@ -10,7 +10,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
