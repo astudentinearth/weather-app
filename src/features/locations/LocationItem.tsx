@@ -1,18 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
+import { useOptionsStore } from "@/context/use-options-store";
 import { Location } from "@/lib";
 import { cn } from "@/lib/utils";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { OptionsContext, PrefActions } from "@/context";
 
 export function LocationItem(props: { location: Location; recent?: boolean; }) {
     const l = props.location;
     const navigate = useNavigate();
-    const { dispatch } = useContext(OptionsContext);
+    const addLocation = useOptionsStore((state)=>state.addLocation);
+    const removeLocation = useOptionsStore((state)=>state.removeLocation);
     return <DialogClose asChild>
         <div tabIndex={0} className={cn("border-none text-start justify-center h-auto px-4 hover:bg-primary/50 focus:bg-primary outline-none cursor-pointer inline-flex items-center transition-colors py-2")} onClick={() => {
-            dispatch({ type: PrefActions.ADD_LOCATION, value: l });
+            addLocation(l);
             navigate({
                 pathname: '/',
                 search: `?latitude=${l.latitude}&longitude=${l.longitude}&name=${l.name}`
@@ -30,7 +30,7 @@ export function LocationItem(props: { location: Location; recent?: boolean; }) {
                 </div>
                 <Button className={cn("flex-shrink-0 w-8 h-8 bg-transparent", !props.recent && "hidden")} onClick={(e) => {
                     e.stopPropagation();
-                    dispatch({ type: PrefActions.REMOVE_LOCATION, value: l });
+                    removeLocation(l);
                 } }>
                     <i className="bi-x-lg"></i>
                 </Button>

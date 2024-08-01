@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { geocode } from "@/lib/weatherAPI";
-import { useCallback, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useOptionsStore } from "@/context/use-options-store";
 import { Location } from "@/lib";
-import { cn } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
 import locate from "@/lib/geolocation";
-import { OptionsContext } from "@/context";
+import { cn } from "@/lib/utils";
+import { geocode } from "@/lib/weatherAPI";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { LocationItem } from "./LocationItem";
 
 export default function LocationSearchDialog(){
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<Location[]>([]);
     const navigate = useNavigate();
-    const {options} = useContext(OptionsContext);
+    const locations = useOptionsStore((state)=>state.locations)
     const {t, i18n} = useTranslation();
     useEffect(()=>{
         const search = setTimeout(async ()=>{
@@ -24,19 +24,19 @@ export default function LocationSearchDialog(){
             else setResults([])
         },200);
         return ()=>clearTimeout(search);
-    },[query]);
-    const renderResults = useCallback((items: Location[])=>{
-        return items.map((l, i)=>{
+    },[query, i18n.resolvedLanguage]);
+    const renderResults = useCallback(()=>{
+        return results.map((l, i)=>{
             return <LocationItem location={l} key={i}></LocationItem>
         })
     },[results]);
-    const renderRecents = useCallback((items: Location[])=>{
-        return items.map((l, i)=>{
+    const renderRecents = useCallback(()=>{
+        return locations.map((l, i)=>{
             return <DialogClose key={i} asChild>
                 <LocationItem location={l} recent key={i}></LocationItem>
             </DialogClose>
         })
-    },[options.locations]);
+    },[locations]);
     const autoLocate = ()=>{
         locate().then((pos)=>{
             navigate({
@@ -69,11 +69,11 @@ export default function LocationSearchDialog(){
                 </DialogClose>
                 {query.trim()=="" ? 
                 <>
-                    <hr className={cn(options.locations.length == 0 ? "hidden" : "")}></hr>
-                    <span className={cn("px-4 pt-2 pb-1 select-none", options.locations.length == 0 ? "hidden" : "inline")}>{t("ui.recent_locations_title")}</span>
-                    {renderRecents(options.locations)}
+                    <hr className={cn(locations.length == 0 ? "hidden" : "")}></hr>
+                    <span className={cn("px-4 pt-2 pb-1 select-none", locations.length == 0 ? "hidden" : "inline")}>{t("ui.recent_locations_title")}</span>
+                    {renderRecents()}
                 </> :
-                renderResults(results)}
+                renderResults()}
             </div>
         </DialogContent>
     </Dialog>

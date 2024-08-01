@@ -1,14 +1,13 @@
-import { OptionsContext, PrefActions } from "@/context";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { useOptionsStore } from "@/context/use-options-store";
 
 export default function TimezoneSelect(){
-    const context = useContext(OptionsContext);
-    const {options, dispatch} = context;
+    const setTimezone = useOptionsStore((state)=>state.setTimezone);
+    const timezone = useOptionsStore((state)=>state.timezone);
     const {t} = useTranslation();
-    return <Select value={options.timezone} onValueChange={(e: ("auto" | "utc" | "local"))=>{
-        dispatch({type: PrefActions.SET_TIMEZONE, value: e})
+    return <Select value={timezone} onValueChange={(e: ("auto" | "utc" | "local"))=>{
+        setTimezone(e);
     }}>
         <SelectTrigger>
             <SelectValue placeholder={t("ui.timezone_label")}></SelectValue>

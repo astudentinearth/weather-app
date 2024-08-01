@@ -1,12 +1,10 @@
-import { OptionsContext } from "@/context";
+import { useOptionsStore } from "@/context/use-options-store";
 import { Direction, DirectionIcons } from "@/lib";
-import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 
 export default function CurrentStatus(props: {humidity: number, precipitation: number, wind: number, direction: Direction}){
-    const {options} = useContext(OptionsContext);
-    const {speedUnit} = options;
+    const speedUnit = useOptionsStore((state)=>state.speedUnit);
     const {t} = useTranslation();
     return <div className="inline-status-mobile select-none">
     <span>

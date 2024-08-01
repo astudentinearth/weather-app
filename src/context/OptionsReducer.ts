@@ -1,3 +1,4 @@
+/**@deprecated */
 import { CompareLocation, Location } from "@/lib"
 import React from "react"
 
@@ -8,7 +9,6 @@ const _ist: Location = {
     latitude: 41.01384,
     longitude: 28.94966
 };
-
 
 export enum PrefActions{
     SET_TEMP_UNIT="SET_TEMP_UNIT",

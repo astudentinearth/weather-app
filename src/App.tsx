@@ -1,22 +1,24 @@
-import { useLayoutEffect, useReducer } from "react"
-import { Options, OptionsContext, PrefActions, defaultOptions, optionsReducer } from "@/context"
+import { Options } from "@/context";
+import { useLayoutEffect } from "react";
 import Layout from "./Layout";
+import { useOptionsStore } from "./context/use-options-store";
 
 function App() {
-  const [options, dispatch] = useReducer(optionsReducer, defaultOptions);
+  const overwrite = useOptionsStore((state)=>state.overwrite);
   useLayoutEffect(()=>{
     const opts_str = localStorage.getItem("options");
-    if(opts_str==null) localStorage.setItem("options",JSON.stringify(defaultOptions));
-    else{
-      const opts:Options = JSON.parse(opts_str);
-      dispatch({type: PrefActions.SET_OPTIONS, value: opts});
+    if(opts_str){
+        const obj = JSON.parse(opts_str)
+        if("state" in obj) return; // we are using zustand
+        const opts:Options = obj as Options;
+        overwrite({...opts});
+        localStorage.removeItem("options"); // remove old key
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (
-    <OptionsContext.Provider value={{dispatch, options}}>
-      <Layout></Layout>
-    </OptionsContext.Provider>
+    <Layout></Layout>
   )
 }
 

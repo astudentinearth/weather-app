@@ -1,20 +1,20 @@
-import { WeatherIcon } from "@/components"
-import "./currentWeather.css"
-import { useContext, useEffect } from "react"
-import { OptionsContext } from "@/context"
-import { useTranslation } from "react-i18next";
-import { CompareLocation, Location, getWeatherTranslationKey } from "@/lib";
-import { getCurrentWeather, getDailyWeather, getHourlyWeather } from "@/lib/weatherAPI";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import CurrentWeatherTabView from "./CurrentweatherTabView";
-import getLinkedLocation from "@/lib/getLinkedLocation";
-import ViewHeader from "./ViewHeader";
-import CurrentStatus from "./CurrentStatus";
-import locate from "@/lib/geolocation";
-import { ErrorBoundary, FallbackProps, useErrorBoundary } from "react-error-boundary";
-import { cn } from "@/lib/utils";
+import { WeatherIcon } from "@/components";
 import { Button } from "@/components/ui/button";
+import { useOptionsStore } from "@/context/use-options-store";
 import { useWeatherStore } from "@/context/use-weather-store";
+import { CompareLocation, Location, getWeatherTranslationKey } from "@/lib";
+import locate from "@/lib/geolocation";
+import getLinkedLocation from "@/lib/getLinkedLocation";
+import { cn } from "@/lib/utils";
+import { getCurrentWeather, getDailyWeather, getHourlyWeather } from "@/lib/weatherAPI";
+import { useEffect } from "react";
+import { ErrorBoundary, FallbackProps, useErrorBoundary } from "react-error-boundary";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import CurrentStatus from "./CurrentStatus";
+import "./currentWeather.css";
+import CurrentWeatherTabView from "./CurrentweatherTabView";
+import ViewHeader from "./ViewHeader";
 
 function HourlyViewFallback({error, resetErrorBoundary}: FallbackProps){
     const {t} = useTranslation();
@@ -28,7 +28,7 @@ function HourlyViewFallback({error, resetErrorBoundary}: FallbackProps){
 
 export function CurrentWeatherWidget(){
     const {t, i18n} = useTranslation();
-    const {options} = useContext(OptionsContext);
+    const options = useOptionsStore();
     const {temperatureUnit} = options;
     const state = useWeatherStore((store)=>store.current);
     const setCurrent = useWeatherStore((store)=>store.setCurrent);
