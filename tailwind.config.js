@@ -52,6 +52,10 @@ module.exports = {
           DEFAULT: "rgb(var(--card))",
           foreground: "rgb(var(--card-foreground))",
         },
+        tertiary: {
+          DEFAULT: "hsl(var(--tertiary))",
+          foreground: "hsl(var(--tertiary-foreground))"
+        }
       },
       borderRadius: {
         lg: "var(--radius)",

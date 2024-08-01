@@ -30,7 +30,7 @@ export default function CurrentWeatherTabView(){
         })();
     }, [searchParams, options])
     return <div>
-        <Tabs defaultValue="hourly" className={cn("bg-background/50 border-2 border-border rounded-2xl hidden sm:block select-none")}>
+        <Tabs defaultValue="hourly" className={cn("bg-secondary/25 border border-border rounded-2xl hidden sm:block select-none")}>
             <TabsList className={cn("bg-transparent p-0")}>
                 <TabsTrigger value="hourly">{t("ui.hourly_tab")}</TabsTrigger>
                 <TabsTrigger value="daily">{t("ui.daily_tab")}</TabsTrigger>
