@@ -1,19 +1,20 @@
 import { WeatherIcon } from "@/components"
 import "./currentWeather.css"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { OptionsContext } from "@/context"
 import { useTranslation } from "react-i18next";
-import { CompareLocation, CurrentWeatherData, Location, getWeatherTranslationKey } from "@/lib";
-import { getCurrentWeather } from "@/lib/weatherAPI";
+import { CompareLocation, Location, getWeatherTranslationKey } from "@/lib";
+import { getCurrentWeather, getDailyWeather, getHourlyWeather } from "@/lib/weatherAPI";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import CurrentWeatherTabView from "./CurrentweatherTabView";
 import getLinkedLocation from "@/lib/getLinkedLocation";
 import ViewHeader from "./ViewHeader";
 import CurrentStatus from "./CurrentStatus";
 import locate from "@/lib/geolocation";
-import { ErrorBoundary, FallbackProps } from "react-error-boundary";
+import { ErrorBoundary, FallbackProps, useErrorBoundary } from "react-error-boundary";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useWeatherStore } from "@/context/use-weather-store";
 
 function HourlyViewFallback({error, resetErrorBoundary}: FallbackProps){
     const {t} = useTranslation();
@@ -29,7 +30,11 @@ export function CurrentWeatherWidget(){
     const {t, i18n} = useTranslation();
     const {options} = useContext(OptionsContext);
     const {temperatureUnit} = options;
-    const [state, setState] = useState<CurrentWeatherData | null>(null);
+    const state = useWeatherStore((store)=>store.current);
+    const setCurrent = useWeatherStore((store)=>store.setCurrent);
+    const setHourly = useWeatherStore((store)=>store.setHourly);
+    const setDaily = useWeatherStore((store)=>store.setDaily);
+    const {showBoundary} = useErrorBoundary();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
@@ -46,11 +51,16 @@ export function CurrentWeatherWidget(){
                     });
                 } catch{ /* empty */ }
             }
-            const data = await getCurrentWeather(loc, options)
-            if (data) data.location = loc;
-            document.title = t("page_title", {degrees: `${r(data?.currentTemperature)}°${options.temperatureUnit}`, city: loc.name ?? `${loc.latitude.toFixed(4)} ${loc.longitude.toFixed(4)}`});
-            setState(data);
-            
+            const current = await getCurrentWeather(loc, options)
+            const hourly = await getHourlyWeather(loc,options)
+            const daily = await getDailyWeather(loc, options);
+            if (hourly) hourly.location = loc; else showBoundary(new Error("Failed to load weather"))
+            if (daily) daily.location = loc; else showBoundary(new Error("Failed to load weather"))
+            if (current) current.location = loc;
+            document.title = t("page_title", {degrees: `${r(current?.currentTemperature)}°${options.temperatureUnit}`, city: loc.name ?? `${loc.latitude.toFixed(4)} ${loc.longitude.toFixed(4)}`});
+            setCurrent(current);
+            setHourly(hourly);
+            setDaily(daily);
         }
         load();
     },[searchParams, options])
