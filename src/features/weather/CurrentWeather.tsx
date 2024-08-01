@@ -34,6 +34,7 @@ export function CurrentWeatherWidget(){
     const setCurrent = useWeatherStore((store)=>store.setCurrent);
     const setHourly = useWeatherStore((store)=>store.setHourly);
     const setDaily = useWeatherStore((store)=>store.setDaily);
+    const showLoc = useOptionsStore((state)=>state.displayLocationOnTitle);
     const {showBoundary} = useErrorBoundary();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -57,17 +58,24 @@ export function CurrentWeatherWidget(){
             if (hourly) hourly.location = loc; else showBoundary(new Error("Failed to load weather"))
             if (daily) daily.location = loc; else showBoundary(new Error("Failed to load weather"))
             if (current) current.location = loc;
-            document.title = t("page_title", {degrees: `${r(current?.currentTemperature)}°${options.temperatureUnit}`, city: loc.name ?? `${loc.latitude.toFixed(4)} ${loc.longitude.toFixed(4)}`});
+            if(showLoc){
+                document.title = t("page_title", {degrees: `${r(current?.currentTemperature)}°${options.temperatureUnit}`, city: loc.name ?? `${loc.latitude.toFixed(4)} ${loc.longitude.toFixed(4)}`});
+            }
+            else document.title = t("private_title");
             setCurrent(current);
             setHourly(hourly);
             setDaily(daily);
         }
         load();
     },[searchParams, options])
+
     useEffect(()=>{
-        if(!state) return;
-        document.title = t("page_title", {degrees: `${r(state?.currentTemperature)}°${options.temperatureUnit}`, city: state.location.name ?? `${state.location.latitude.toFixed(4)} ${state.location.longitude.toFixed(4)}`});
-    }, [i18n.language])
+        if(showLoc){
+            document.title = t("page_title", {degrees: `${r(state?.currentTemperature)}°${options.temperatureUnit}`, city: state?.location.name ?? `${state?.location.latitude.toFixed(4)} ${state?.location.longitude.toFixed(4)}`});
+        }
+        else document.title = t("private_title");
+    }, [state?.location, showLoc, options.temperatureUnit, state?.currentTemperature, t])
+
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
         <div className="px-2 flex flex-col gap-3">
             {state ? <div className="flex flex-col">

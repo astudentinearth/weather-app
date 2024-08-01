@@ -30,7 +30,9 @@
         "timezone_local": "Sadece cihazın zaman dilimini kullan",
         "auto_detected_location_name": "Konumunuz",
         "auto_detect_location_action": "Konumumu otomatik tespit et",
-        "recent_locations_title": "Yakınlarda arananlar"
+        "recent_locations_title": "Yakınlarda arananlar",
+        "tab_title_privacy": "Sekme başlığında konum göster",
+        "privacy_settings_label": "Gizlilik"
     },
     "weather": {
         "clear": "Açık",
@@ -74,6 +76,7 @@
     },
     "loading": "Yükleniyor",
     "page_title": "{{degrees}} {{city}} | Hava Durumu",
+    "private_title": "Hava durumu",
     "errors":{
         "something_went_wrong": "Bir şeyler ters gitti",
         "refresh_page": "Sorunu çözmek için sayfayı yeniden yüklemeyi deneyebilirsiniz.",

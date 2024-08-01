@@ -17,7 +17,8 @@ export interface Options{
     precipitationUnit: "mm" | "inch"
     defaultLocation: Location,
     locations: Location[],
-    timezone: "auto" | "local" | "utc"
+    timezone: "auto" | "local" | "utc",
+    displayLocationOnTitle: boolean
 }
 
 type OptionsStoreActions = {
@@ -28,7 +29,8 @@ type OptionsStoreActions = {
     setDefaultLocation: (val: Location)=>void,
     addLocation: (val: Location)=>void,
     removeLocation: (val: Location)=>void,
-    setTimezone: (val: "auto" | "local" | "utc")=>void
+    setTimezone: (val: "auto" | "local" | "utc")=>void,
+    setDisplayLocationOnTitle: (val: boolean)=>void,
     overwrite: (val: Options)=>void,
 }
 
@@ -41,6 +43,7 @@ export const useOptionsStore = create(
         precipitationUnit: "mm",
         locations: [],
         timezone: "auto",
+        displayLocationOnTitle: false,
         setTemperatureUnit(val) {
             return set({...get(), temperatureUnit: val})
         },
@@ -75,6 +78,9 @@ export const useOptionsStore = create(
         },
         overwrite(val) {
             return set({...val})
+        },
+        setDisplayLocationOnTitle(val) {
+            return set({displayLocationOnTitle: val})
         },
     }), {name: "prefs", version: 1})
 )
