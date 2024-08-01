@@ -1,5 +1,4 @@
 import { CompareLocation, Location } from "@/lib";
-import { type Options } from "./OptionsReducer";
 import {create} from "zustand"
 import {persist} from "zustand/middleware"
 
@@ -10,6 +9,17 @@ const _ist: Location = {
     latitude: 41.01384,
     longitude: 28.94966
 };
+
+export interface Options{
+    temperatureUnit: "C" | "F",
+    speedUnit: "km" | "mph",
+    timeFormat: "24" | "12",
+    precipitationUnit: "mm" | "inch"
+    defaultLocation: Location,
+    locations: Location[],
+    timezone: "auto" | "local" | "utc"
+}
+
 type OptionsStoreActions = {
     setTemperatureUnit: (val: "C" | "F")=>void,
     setSpeedUnit: (val: "km" | "mph")=>void,
