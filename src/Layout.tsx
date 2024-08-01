@@ -1,8 +1,10 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import { CurrentWeatherWidget } from "@/features/weather";
+import { CurrentWeatherMobile, CurrentWeatherWidget } from "@/features/weather";
 import { useTranslation } from "react-i18next";
 import {ErrorBoundary} from "react-error-boundary"
 import CurrentWeatherFallback from "./features/weather/CurrentWeatherFallback";
+import { MobileSearchBar } from "./features/locations/mobile-search-bar";
+import { MobileStatus } from "./features/weather/status-mobile";
 
 const router = createHashRouter([{
   path: '/',
@@ -14,6 +16,9 @@ export function WeatherPage(){
     return <div className="page flex flex-col sm:p-2 sm:justify-center sm:items-center overflow-x-hidden">
         <div className="w-full max-w-[900px]">
             <ErrorBoundary FallbackComponent={CurrentWeatherFallback}>
+                <MobileSearchBar></MobileSearchBar>
+                <CurrentWeatherMobile></CurrentWeatherMobile>
+                <MobileStatus></MobileStatus>
                 <CurrentWeatherWidget></CurrentWeatherWidget>
             </ErrorBoundary>
         </div>

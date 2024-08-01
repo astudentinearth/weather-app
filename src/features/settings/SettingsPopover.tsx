@@ -14,7 +14,7 @@ export default function SettingsPopover(){
     const setTitlePrivacy = useOptionsStore((state)=>state.setDisplayLocationOnTitle);
     return <Popover>
         <PopoverTrigger asChild>
-            <Button className="flex-shrink-0 z-20 text-2xl" size={"icon"} variant={"ghost"}>
+            <Button className="flex-shrink-0 z-20 text-2xl h-8 w-8 sm:h-12 sm:w-12 sm:rounded-xl rounded-lg" variant={"ghost"}>
                 <i className="bi-list"></i>
             </Button>
         </PopoverTrigger>
