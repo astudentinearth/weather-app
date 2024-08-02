@@ -1,6 +1,6 @@
 # ReactJS Weather App
-![](assets/cover.png)
-[Try it live]("https://astudentinearth.github.io/weather-app")
+![](assets/cover.png) 
+[Try it live](https://astudentinearth.github.io/weather-app)
 
 ### Features
 - [X] Hourly forecasts with wind and precipitation details
