@@ -80,7 +80,7 @@ export function CurrentWeatherWidget(){
         <div className="px-2 flex flex-col gap-3">
             {state ? <div className="sm:flex flex-col hidden">
                 <ViewHeader location={state?.location} isDefaultLocation={CompareLocation(state.location, options.defaultLocation)}></ViewHeader>
-                <span className="text-zinc-500 select-none sm:hidden">{`${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"})}`}</span>
+                <span className="text-zinc-500 select-none sm:hidden">{`${new Date().toLocaleDateString([i18n.resolvedLanguage ?? ""])}, ${new Date().toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", minute: "2-digit"})}`}</span>
             </div> : <></>}
             
             <div className="current-weather-grid select-none">

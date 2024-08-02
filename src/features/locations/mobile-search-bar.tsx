@@ -67,7 +67,10 @@ export function MobileSearchBar(){
     return <Popover open={searchOpen} onOpenChange={handleOpenChange} modal>
         <div className={cn("bg-background border border-border m-2 h-12 rounded-xl flex items-center sm:hidden transition-colors", searchOpen && "bg-secondary")}>
             <PopoverTrigger className="w-full">
-                    <span onClick={()=>{setSearchOpen(true)}} className={cn("text-foreground/75 pl-3 text-lg h-full flex items-center", searchOpen && "hidden")}>{name ?? ""}</span>
+                    <span onClick={()=>{setSearchOpen(true)}} className={cn("text-foreground/75 pl-3 text-lg h-full flex gap-2 items-center", searchOpen && "hidden")}>
+                        <span className="bi-geo-alt"></span>
+                        {name ?? ""}
+                    </span>
                     <div onClick={()=>{setSearchOpen(true)}} className={cn("flex-grow h-full", searchOpen && "hidden")}></div>
                     <Input placeholder={t("ui.search_location_placeholder")} onChange={(e)=>{setQuery(e.target.value)}} ref={inputRef} onClick={(e)=>{e.stopPropagation()}} className={cn("hidden text-lg pl-3 w-full bg-transparent border-none", searchOpen && "block")}></Input>
             </PopoverTrigger>

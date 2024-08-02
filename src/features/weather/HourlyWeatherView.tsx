@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 
 export default function HourlyWeatherView(props: {mode: "default" | "wind" | "precipitation"}){
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
     const temperatureUnit = useOptionsStore((state)=>state.temperatureUnit);
     const speedUnit = useOptionsStore((state)=>state.speedUnit);
@@ -16,13 +16,13 @@ export default function HourlyWeatherView(props: {mode: "default" | "wind" | "pr
     const data = useWeatherStore((state)=>state.hourly);
 
     const renderHourly = (e: HourlyForecast, i:number) => 
-        <div className="text-2xl flex-shrink-0 w-16 flex flex-col items-center gap-2" key={i}>
+        <div className="text-2xl flex-shrink-0 w-18 flex flex-col items-center gap-2" key={i}>
             <span className="text-[#87C1FF]">{t("percentage", {percent: e.precipitationChance})}</span>
             <WeatherIcon width={64} weathercode={e.weathercode}></WeatherIcon>
             <span>{r(e.temperature)}º{temperatureUnit}</span>
-            <span className="text-muted-foreground">{(timezone === "local" ? 
-                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"}) : 
-                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
+            <span className="text-muted-foreground text-base">{(timezone === "local" ? 
+                e.date.toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", "minute": "2-digit"}) : 
+                e.date.toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
         </div>
 
     const renderWind = (e: HourlyForecast, i:number) =>
@@ -30,19 +30,19 @@ export default function HourlyWeatherView(props: {mode: "default" | "wind" | "pr
             <span className="">{t(`directions.${e.windDirection}`)}</span>
             <i className={cn(DirectionIcons.get(e.windDirection ?? "NE"), "text-[48px]")}></i>
             <span>{r(e.windSpeed)} {speedUnit}</span>
-            <span className="text-muted-foreground">{(timezone === "local" ? 
-                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"}) : 
-                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
+            <span className="text-muted-foreground text-base">{(timezone === "local" ? 
+                e.date.toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", "minute": "2-digit"}) : 
+                e.date.toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
     </div>
 
     const renderPrecipitation = (e: HourlyForecast, i:number) =>
     <div className="text-2xl flex-shrink-0 w-18 flex flex-col items-center gap-2" key={i}>
             <span className="text-[#87C1FF]">{t("percentage", {percent: e.precipitationChance})}</span>
             <i className={cn(e.precipitation > 0 ? "bi-droplet-half" : "bi-droplet", "text-[48px]")}></i>
-            <span>{r(e.precipitation)} {precipitationUnit}</span>
-            <span className="text-muted-foreground">{(timezone === "local" ? 
-                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit"}) : 
-                e.date.toLocaleTimeString([], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
+            <span>{(e.precipitation)} {precipitationUnit}</span>
+            <span className="text-muted-foreground text-base">{(timezone === "local" ? 
+                e.date.toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", "minute": "2-digit"}) : 
+                e.date.toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", "minute": "2-digit", timeZone: "UTC"}))}</span>
     </div>
 
     return <ScrollArea>

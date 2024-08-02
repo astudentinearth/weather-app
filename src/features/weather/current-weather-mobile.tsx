@@ -4,12 +4,12 @@ import { getWeatherTranslationKey } from "@/lib";
 import { useTranslation } from "react-i18next";
 
 export function CurrentWeatherMobile(){
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     const state = useWeatherStore((store)=>store.current);
     const temperatureUnit = useOptionsStore((store)=>store.temperatureUnit)
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
     return <div className="flex sm:hidden flex-col m-2 p-3">
-        <span className="text-foreground/50 text-sm">{`${new Date().toLocaleDateString()}`}</span>
+        <span className="text-foreground/50 text-sm">{`${new Date().toLocaleDateString([i18n.resolvedLanguage ?? ""], {month: "long", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit"})}`}</span>
         <div className="flex">
             <span className="text-6xl flex-shrink-0">{r(state?.currentTemperature)}º{temperatureUnit}</span>
             <div className="flex-grow"></div>
