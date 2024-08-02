@@ -27,7 +27,9 @@ export default function LocationSearchDialog(){
     },[query, i18n.resolvedLanguage]);
     const renderResults = useCallback(()=>{
         return results.map((l, i)=>{
-            return <LocationItem location={l} key={i}></LocationItem>
+            return<DialogClose key={i} className="w-full">
+                <LocationItem location={l} key={i}></LocationItem>
+            </DialogClose>
         })
     },[results]);
     const renderRecents = useCallback(()=>{
