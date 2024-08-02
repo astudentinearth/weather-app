@@ -82,7 +82,6 @@
 @layer utilities{
   .popover-match-trigger-width {
     width: var(--radix-popover-trigger-width);
-    max-height: var(--radix-popover-content-available-height);
   }
 }
 
@@ -90,7 +89,10 @@
 body{
   height: 100vh;
   overflow: hidden;
-  background: radial-gradient(circle at center top, rgba(63, 74, 181, 0.2) 0%, rgba(32, 61, 181, 0) 75%), rgb(var(--background));
+}
+
+.page{
+  background: linear-gradient(rgba(18, 27, 60, 1), rgba(17, 18, 22, 1));
 }
 
 @media(min-width: 640px){
@@ -105,4 +107,8 @@ body{
 
 #root{
   overflow-x: hidden;
+}
+
+.mobile-search-shadow{
+  box-shadow:  0 4px 20px 2px rgba(0,0,0,0.5);
 }
