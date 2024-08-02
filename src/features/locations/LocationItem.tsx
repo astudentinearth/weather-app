@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { DialogClose } from "@/components/ui/dialog";
 import { useOptionsStore } from "@/context/use-options-store";
 import { Location } from "@/lib";
 import { cn } from "@/lib/utils";
@@ -10,8 +9,7 @@ export function LocationItem(props: { location: Location; recent?: boolean; }) {
     const navigate = useNavigate();
     const addLocation = useOptionsStore((state)=>state.addLocation);
     const removeLocation = useOptionsStore((state)=>state.removeLocation);
-    return <DialogClose asChild>
-        <div tabIndex={0} className={cn("border-none text-start justify-center h-auto px-4 hover:bg-primary/50 focus:bg-primary outline-none cursor-pointer inline-flex items-center transition-colors py-2")} onClick={() => {
+    return <div tabIndex={0} className={cn("border-none w-full text-start justify-center h-auto px-4 hover:bg-primary/50 focus:bg-primary outline-none cursor-pointer inline-flex items-center transition-colors py-2")} onClick={() => {
             addLocation(l);
             navigate({
                 pathname: '/',
@@ -36,5 +34,5 @@ export function LocationItem(props: { location: Location; recent?: boolean; }) {
                 </Button>
             </div>
         </div>
-    </DialogClose>;
+    ;
 }

@@ -32,8 +32,8 @@ export default function LocationSearchDialog(){
     },[results]);
     const renderRecents = useCallback(()=>{
         return locations.map((l, i)=>{
-            return <DialogClose key={i} asChild>
-                <LocationItem location={l} recent key={i}></LocationItem>
+            return <DialogClose key={i} className="w-full">
+                <LocationItem location={l} recent></LocationItem>
             </DialogClose>
         })
     },[locations]);

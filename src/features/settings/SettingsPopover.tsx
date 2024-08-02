@@ -13,12 +13,12 @@ export default function SettingsPopover(){
     const titlePrivacy = useOptionsStore((state)=>state.displayLocationOnTitle);
     const setTitlePrivacy = useOptionsStore((state)=>state.setDisplayLocationOnTitle);
     return <Popover>
-        <PopoverTrigger asChild>
-            <Button className="flex-shrink-0 z-20 text-2xl h-8 w-8 sm:h-12 sm:w-12 sm:rounded-xl rounded-lg" variant={"ghost"}>
+        <PopoverTrigger asChild onClick={(e)=>{e.stopPropagation()}}>
+            <Button className="flex-shrink-0 z-20 text-2xl h-8 w-8 sm:h-12 sm:w-12 sm:rounded-xl rounded-lg opacity-50 sm:opacity-100" variant={"ghost"}>
                 <i className="bi-list"></i>
             </Button>
         </PopoverTrigger>
-        <PopoverContent className="flex flex-col gap-2">
+        <PopoverContent onClick={(e)=>{e.preventDefault()}} className="flex flex-col gap-2">
             <span>{t("ui.units_label")}</span>
             <UnitSelect></UnitSelect>
             <span>{t("ui.timezone_label")}</span>
@@ -32,7 +32,6 @@ export default function SettingsPopover(){
             </div>
             <a href="https://github.com/astudentinearth/weather-app" className="underline text-muted-foreground">{t("ui.source_code_link")}</a>
             <a href="/weather-app/assets/THIRD_PARTY_LICENSES.txt" className="underline text-muted-foreground">{t("ui.third_party")}</a>
-            
         </PopoverContent>
     </Popover>
 }

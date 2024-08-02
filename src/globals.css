@@ -79,6 +79,13 @@
 
 }
 
+@layer utilities{
+  .popover-match-trigger-width {
+    width: var(--radix-popover-trigger-width);
+    max-height: var(--radix-popover-content-available-height);
+  }
+}
+
 /*rgba(56, 63, 75, 1)  rgba(0,0,0,0.8) 0%, rgba(23,23,23,0.4) 100% */
 body{
   height: 100vh;
