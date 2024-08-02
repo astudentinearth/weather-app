@@ -8,7 +8,7 @@ export function CurrentWeatherMobile(){
     const state = useWeatherStore((store)=>store.current);
     const temperatureUnit = useOptionsStore((store)=>store.temperatureUnit)
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
-    return <div className="flex flex-col m-2 p-3">
+    return <div className="flex sm:hidden flex-col m-2 p-3">
         <span className="text-foreground/50 text-sm">{`${new Date().toLocaleDateString()}`}</span>
         <div className="flex">
             <span className="text-6xl flex-shrink-0">{r(state?.currentTemperature)}º{temperatureUnit}</span>

@@ -1,17 +1,20 @@
 import { WeatherIcon } from "@/components";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { useWeatherStore } from "@/context";
 import { useOptionsStore } from "@/context/use-options-store";
-import { DirectionIcons, HourlyForecast, HourlyWeatherData } from "@/lib";
+import { DirectionIcons, HourlyForecast } from "@/lib";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 
-export default function HourlyWeatherView(props: {data: HourlyWeatherData, mode: "default" | "wind" | "precipitation"}){
+export default function HourlyWeatherView(props: {mode: "default" | "wind" | "precipitation"}){
     const {t} = useTranslation();
     const r = (n?: number) => Math.round(n ?? 0); // shorthand for rounding
     const temperatureUnit = useOptionsStore((state)=>state.temperatureUnit);
     const speedUnit = useOptionsStore((state)=>state.speedUnit);
     const precipitationUnit = useOptionsStore((state)=>state.precipitationUnit);
     const timezone = useOptionsStore((state)=>state.timezone);
+    const data = useWeatherStore((state)=>state.hourly);
+
     const renderHourly = (e: HourlyForecast, i:number) => 
         <div className="text-2xl flex-shrink-0 w-16 flex flex-col items-center gap-2" key={i}>
             <span className="text-[#87C1FF]">{t("percentage", {percent: e.precipitationChance})}</span>
@@ -44,7 +47,7 @@ export default function HourlyWeatherView(props: {data: HourlyWeatherData, mode:
 
     return <ScrollArea>
         <div className="flex w-max gap-4 pl-2 sm:p-2 h-[200px] items-center select-none">
-            {props.data.hours.map((e, i)=>{
+            {data?.hours.map((e, i)=>{
                 switch(props.mode){
                     case "default":
                         return renderHourly(e, i);

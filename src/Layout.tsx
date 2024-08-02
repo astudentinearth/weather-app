@@ -5,6 +5,9 @@ import {ErrorBoundary} from "react-error-boundary"
 import CurrentWeatherFallback from "./features/weather/CurrentWeatherFallback";
 import { MobileSearchBar } from "./features/locations/mobile-search-bar";
 import { MobileStatus } from "./features/weather/status-mobile";
+import { MobileHourlyWeather } from "./features/weather/hourly-mobile";
+import { MobileDailyWeather } from "./features/weather/daily-mobile";
+import { MobileHourlyParameters } from "./features/weather/hourly-parameters-mobile";
 
 const router = createHashRouter([{
   path: '/',
@@ -19,6 +22,9 @@ export function WeatherPage(){
                 <MobileSearchBar></MobileSearchBar>
                 <CurrentWeatherMobile></CurrentWeatherMobile>
                 <MobileStatus></MobileStatus>
+                <MobileHourlyWeather></MobileHourlyWeather>
+                <MobileDailyWeather></MobileDailyWeather>
+                <MobileHourlyParameters></MobileHourlyParameters>
                 <CurrentWeatherWidget></CurrentWeatherWidget>
             </ErrorBoundary>
         </div>

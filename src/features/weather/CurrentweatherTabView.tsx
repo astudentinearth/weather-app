@@ -18,31 +18,31 @@ export default function CurrentWeatherTabView(){
                 <TabsTrigger value="precipitation">{t("ui.precipitation_tab")}</TabsTrigger>
             </TabsList>
             <TabsContent value="hourly">
-                {hourly ? <HourlyWeatherView data={hourly} mode="default"></HourlyWeatherView> : t("loading")}
+                {hourly ? <HourlyWeatherView mode="default"></HourlyWeatherView> : t("loading")}
             </TabsContent>
             <TabsContent value="daily">
                 {daily ? <DailyWeatherView data={daily}></DailyWeatherView> : t("loading")}
             </TabsContent>
             <TabsContent value="wind">
-                {hourly ? <HourlyWeatherView data={hourly} mode="wind"></HourlyWeatherView> : t("loading")}
+                {hourly ? <HourlyWeatherView mode="wind"></HourlyWeatherView> : t("loading")}
             </TabsContent>
             <TabsContent value="precipitation">
-                {hourly ? <HourlyWeatherView data={hourly} mode="precipitation"></HourlyWeatherView> : t("loading")}
+                {hourly ? <HourlyWeatherView mode="precipitation"></HourlyWeatherView> : t("loading")}
             </TabsContent>
         </Tabs>
         <div className="sm:hidden flex flex-col gap-2">
             <hr className="bg-muted-foreground border-0 h-[2px] mx-2"></hr>
             <h2 className="text-muted-foreground-hover p-2">{t("ui.hourly_title")}</h2>
-            {hourly ? <HourlyWeatherView mode="default" data={hourly}></HourlyWeatherView> : t("loading")}
+            {hourly ? <HourlyWeatherView mode="default"></HourlyWeatherView> : t("loading")}
             <hr className="bg-muted-foreground border-0 h-[2px] mx-2"></hr>
             <h2 className="text-muted-foreground-hover p-2">{t("ui.daily_title")}</h2>
             {daily ? <DailyWeatherView data={daily}></DailyWeatherView> : t("loading")}
             <hr className="bg-muted-foreground border-0 h-[2px] mx-2"></hr>
             <h2 className="text-muted-foreground-hover p-2">{t("ui.precipitation_title")}</h2>
-            {hourly ? <HourlyWeatherView mode="precipitation" data={hourly}></HourlyWeatherView> : t("loading")}
+            {hourly ? <HourlyWeatherView mode="precipitation" ></HourlyWeatherView> : t("loading")}
             <hr className="bg-muted-foreground border-0 h-[2px] mx-2"></hr>
             <h2 className="text-muted-foreground-hover p-2">{t("ui.wind_title")}</h2>
-            {hourly ? <HourlyWeatherView mode="wind" data={hourly}></HourlyWeatherView> : t("loading")}
+            {hourly ? <HourlyWeatherView mode="wind"></HourlyWeatherView> : t("loading")}
         </div>
     </div>
 }
