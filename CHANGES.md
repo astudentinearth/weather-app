@@ -1,3 +1,15 @@
+# v1.0
+- Revamped mobile UI
+- Visual improvements throughout the app
+- Added a toggle to hide location information from tab title for improved privacy
+- Enabled auto-update for PWA
+
+### Technical changes
+- The reducer and context for user preferences has been dropped entirely.
+- All shared state is now managed in Zustand stores.
+- Weather state is now shared across components and not passed by prop drilling.
+- User preferences are now persisted in a key named `prefs` in `localStorage`. The old `options` key will be automatically migrated and removed if it's present.
+
 # v0.3.0
 - App can now be installed as a Progressive Web App
 - Added support for automatic location detection (if location permission is given)
