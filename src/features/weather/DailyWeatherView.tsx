@@ -14,7 +14,7 @@ export default function DailyWeatherView(props: {data: DailyWeatherData}){
                 <span className="text-[#87C1FF]">{t("percentage", {percent: e.precipitationChance})}</span>
                 <WeatherIcon width={64} weathercode={e.weathercode}></WeatherIcon>
                 <span>{r(e.minTemperature)}º{temperatureUnit} / {r(e.maxTemperature)}º{temperatureUnit}</span>
-                <span className="text-muted-foreground">{e.date.toLocaleDateString([], {day: "numeric", weekday: 'short', month: "short"})}</span>
+                <span className="text-muted-foreground text-base">{e.date.toLocaleDateString([], {day: "numeric", weekday: 'short', month: "short"})}</span>
             </div>)}
         </div>
         <ScrollBar orientation="horizontal"></ScrollBar>

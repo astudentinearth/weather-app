@@ -11,11 +11,11 @@ export default function CurrentWeatherTabView(){
     const {t} = useTranslation();
     return <div>
         <Tabs defaultValue="hourly" className={cn("bg-secondary/25 border border-border rounded-2xl hidden sm:block select-none")}>
-            <TabsList className={cn("bg-transparent p-0")}>
-                <TabsTrigger value="hourly">{t("ui.hourly_tab")}</TabsTrigger>
-                <TabsTrigger value="daily">{t("ui.daily_tab")}</TabsTrigger>
-                <TabsTrigger value="wind">{t("ui.wind_tab")}</TabsTrigger>
-                <TabsTrigger value="precipitation">{t("ui.precipitation_tab")}</TabsTrigger>
+            <TabsList className={cn("bg-transparent pl-1 pt-1 overflow-clip flex gap-1 justify-start")}>
+                <TabsTrigger className="data-[state=active]:bg-secondary hover:bg-secondary/50 rounded-xl px-4" value="hourly">{t("ui.hourly_tab")}</TabsTrigger>
+                <TabsTrigger className="data-[state=active]:bg-secondary hover:bg-secondary/50 rounded-xl px-4" value="daily">{t("ui.daily_tab")}</TabsTrigger>
+                <TabsTrigger className="data-[state=active]:bg-secondary hover:bg-secondary/50 rounded-xl px-4" value="wind">{t("ui.wind_tab")}</TabsTrigger>
+                <TabsTrigger className="data-[state=active]:bg-secondary hover:bg-secondary/50 rounded-xl px-4" value="precipitation">{t("ui.precipitation_tab")}</TabsTrigger>
             </TabsList>
             <TabsContent value="hourly">
                 {hourly ? <HourlyWeatherView mode="default"></HourlyWeatherView> : t("loading")}

@@ -87,7 +87,7 @@ export function CurrentWeatherWidget(){
                 <WeatherIcon className="hsm:justify-self-start" width={100} height={100} weathercode={state?.weathercode ?? 1}></WeatherIcon>
                 <span className="current-temperature">{r(state?.currentTemperature)}º{temperatureUnit}</span>
                 <span className="current-condition hsm:justify-self-start hsm:text-left inline-block text-center whitespace-pre-line text-ellipsis w-full overflow-hidden">{t(getWeatherTranslationKey(state?.weathercode ?? 1))}</span>
-                <span className="todays-min-max whitespace-nowrap hsm:justify-self-end">{r(state?.minTemperature)}º{temperatureUnit} / {r(state?.maxTemperature)}º{temperatureUnit}</span>
+                <span className="todays-min-max whitespace-nowrap hsm:justify-self-end text-foreground/50">{r(state?.minTemperature)}º{temperatureUnit} / {r(state?.maxTemperature)}º{temperatureUnit}</span>
             </div>
             {state ? <CurrentStatus precipitation={state.precipitationChance} humidity={state.humidity} direction={state.windDirection} wind={state.wind}></CurrentStatus> : <></>}
         </div>
