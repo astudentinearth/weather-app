@@ -77,7 +77,7 @@ export function CurrentWeatherWidget(){
     }, [state?.location, showLoc, options.temperatureUnit, state?.currentTemperature, t])
 
     return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
-        <div className="px-2 flex flex-col gap-3">
+        <div className="pl-2 flex flex-col gap-3">
             {state ? <div className="sm:flex flex-col hidden">
                 <ViewHeader location={state?.location} isDefaultLocation={CompareLocation(state.location, options.defaultLocation)}></ViewHeader>
                 <span className="text-zinc-500 select-none sm:hidden">{`${new Date().toLocaleDateString([i18n.resolvedLanguage ?? ""])}, ${new Date().toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", minute: "2-digit"})}`}</span>
