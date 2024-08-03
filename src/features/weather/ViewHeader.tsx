@@ -13,6 +13,6 @@ export default function ViewHeader(props: {location?: Location, isDefaultLocatio
         <span className="text-zinc-500 select-none hidden sm:inline">{`${new Date().toLocaleDateString([i18n.resolvedLanguage ?? ""])}`}</span>
         <div className="w-full"></div>
         <LocationSearchDialog></LocationSearchDialog>
-        <SettingsPopover></SettingsPopover>
+        <SettingsPopover triggerTestID="desktop-settings-popover-trigger"></SettingsPopover>
     </div>
 }

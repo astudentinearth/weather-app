@@ -8,13 +8,13 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useOptionsStore } from "@/context";
 
-export default function SettingsPopover(){
+export default function SettingsPopover(props: {triggerTestID: string}){
     const {t} = useTranslation();
     const titlePrivacy = useOptionsStore((state)=>state.displayLocationOnTitle);
     const setTitlePrivacy = useOptionsStore((state)=>state.setDisplayLocationOnTitle);
     return <Popover>
         <PopoverTrigger asChild onClick={(e)=>{e.stopPropagation()}}>
-            <Button className="flex-shrink-0 z-20 text-2xl h-8 w-8 sm:h-12 sm:w-12 sm:rounded-xl rounded-lg opacity-75 sm:opacity-100 mr-2 sm:mr-0" variant={"ghost"}>
+            <Button data-testid={props.triggerTestID} className="flex-shrink-0 z-20 text-2xl h-8 w-8 sm:h-12 sm:w-12 sm:rounded-xl rounded-lg opacity-75 sm:opacity-100 mr-2 sm:mr-0" variant={"ghost"}>
                 <i className="bi-list"></i>
             </Button>
         </PopoverTrigger>
@@ -27,7 +27,7 @@ export default function SettingsPopover(){
             <LanguageSelect></LanguageSelect>
             <span>{t("ui.privacy_settings_label")}</span>
             <div className="flex items-center gap-1">
-                <Switch onCheckedChange={(val)=>setTitlePrivacy(val)} checked={titlePrivacy} id="title-privacy-switch"></Switch>
+                <Switch data-testid="title-privacy-switch" onCheckedChange={(val)=>setTitlePrivacy(val)} checked={titlePrivacy} id="title-privacy-switch"></Switch>
                 <Label htmlFor="title-privacy-switch">{t("ui.tab_title_privacy")}</Label>
             </div>
             <a href="https://github.com/astudentinearth/weather-app" className="underline text-muted-foreground">{t("ui.source_code_link")}</a>
