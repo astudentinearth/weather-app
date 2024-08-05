@@ -7,6 +7,7 @@ import LanguageSelect from "./LanguageSelect";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useOptionsStore } from "@/context";
+import { Menu } from "lucide-react";
 
 export default function SettingsPopover(props: {triggerTestID: string}){
     const {t} = useTranslation();
@@ -14,8 +15,8 @@ export default function SettingsPopover(props: {triggerTestID: string}){
     const setTitlePrivacy = useOptionsStore((state)=>state.setDisplayLocationOnTitle);
     return <Popover>
         <PopoverTrigger asChild onClick={(e)=>{e.stopPropagation()}}>
-            <Button data-testid={props.triggerTestID} className="flex-shrink-0 z-20 text-2xl h-8 w-8 sm:h-12 sm:w-12 sm:rounded-xl rounded-lg opacity-75 sm:opacity-100 mr-2 sm:mr-0" variant={"ghost"}>
-                <i className="bi-list"></i>
+            <Button data-testid={props.triggerTestID} className="flex-shrink-0 z-50 h-8 w-8 sm:h-12 sm:w-12 sm:rounded-xl rounded-lg opacity-75 p-0 sm:opacity-100 mr-2 sm:mr-0" variant={"ghost"}>
+                <Menu className="text-white" size={24}></Menu>
             </Button>
         </PopoverTrigger>
         <PopoverContent onClick={(e)=>{e.preventDefault()}} className="flex flex-col gap-2">

@@ -1,3 +1,5 @@
+import { MoveDown, MoveDownLeft, MoveDownRight, MoveLeft, MoveRight, MoveUp, MoveUpLeft, MoveUpRight } from "lucide-react";
+
 /**
  * An object which holds a name, country and a mathematical location. Latitude and longitude are used to request weather data.
  */
@@ -25,15 +27,18 @@ export function degToDirection(deg: number) : Direction{
     return directions[i] as Direction;
 }
 
-export const DirectionIcons = new Map<string, string>([
-    ["N","bi-arrow-up"],
-    ["NE","bi-arrow-up-left"],
-    ["E","bi-arrow-right"],
-    ["SE","bi-arrow-down-right"],
-    ["S","bi-arrow-down"],
-    ["SW","bi-arrow-down-left"],
-    ["W","bi-arrow-left"],
-    ["NW","bi-arrow-up-left"],
+/**
+ * Maps wind directions to icon components using an anonymous function that takes icon size as parameter.
+ */
+export const DirectionIcons = new Map<string, ((size: number) => JSX.Element)>([
+    ["N", (size: number) => <MoveUp size={size}/>],
+    ["NE", (size: number) => <MoveUpRight size={size}/>],
+    ["E", (size: number) => <MoveRight size={size}/>],
+    ["SE", (size: number) => <MoveDownRight size={size}/>],
+    ["S", (size: number) => <MoveDown size={size}/>],
+    ["SW", (size: number) => <MoveDownLeft size={size}/>],
+    ["W", (size: number) => <MoveLeft size={size}/>],
+    ["NW", (size: number) => <MoveUpLeft size={size}/>],
 ]);
 
 

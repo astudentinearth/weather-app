@@ -7,7 +7,7 @@ export function MobileDailyWeather(){
     const daily = useWeatherStore((state)=>state.daily);
 
     return <div>
-        {daily?.days.map((day)=><MobileDailyWeatherCard data={day}></MobileDailyWeatherCard>)}
+        {daily?.days.map((day, i)=><MobileDailyWeatherCard key={i} data={day}></MobileDailyWeatherCard>)}
     </div>
 }
 

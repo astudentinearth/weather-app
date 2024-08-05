@@ -15,13 +15,14 @@ import CurrentStatus from "./CurrentStatus";
 import "./currentWeather.css";
 import CurrentWeatherTabView from "./CurrentweatherTabView";
 import ViewHeader from "./ViewHeader";
+import { RotateCw } from "lucide-react";
 
 function HourlyViewFallback({error, resetErrorBoundary}: FallbackProps){
     const {t} = useTranslation();
     return <div className={cn("sm:bg-background/50 border-2 border-none sm:border-solid p-2 sm:border-border rounded-2xl bg-transparent select-text flex gap-2 flex-col items-center justify-center")}>
         <span className="text-2xl">{t("errors.something_went_wrong")}</span>
-        <Button variant={"outline"} className="rounded-xl" onClick={()=>{resetErrorBoundary()}}>
-            <i className="bi-arrow-clockwise "></i>
+        <Button variant={"outline"} className="rounded-lg gap-2" onClick={()=>{resetErrorBoundary()}}>
+            <RotateCw size={20}></RotateCw>
             {t("errors.retry_button")}</Button>
     </div>
 }

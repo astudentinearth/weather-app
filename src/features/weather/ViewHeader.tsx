@@ -1,3 +1,4 @@
+import { MapPin } from "lucide-react";
 import LocationSearchDialog from "../locations/LocationSearchDialog";
 import SettingsPopover from "../settings/SettingsPopover";
 import { Location } from "@/lib";
@@ -7,7 +8,7 @@ export default function ViewHeader(props: {location?: Location, isDefaultLocatio
     const {t, i18n} = useTranslation();
     return  <div className="hsm:self-start flex w-full gap-1 items-center">
         <span className="select-none flex-shrink-0">{props.location?.isAutoDetected ?
-                     <span><i className="bi-geo-alt"></i>  {t("ui.auto_detected_location_name")}</span>
+                     <div className="flex items-center gap-2"><MapPin className="inline" size={36}/>  {t("ui.auto_detected_location_name")}</div>
                     : (props.location?.name ?? `${props.location?.latitude.toFixed(4)} ${props.location?.longitude.toFixed(4)}`)}
         </span> &nbsp;
         <span className="text-zinc-500 select-none hidden sm:inline">{`${new Date().toLocaleDateString([i18n.resolvedLanguage ?? ""])}`}</span>

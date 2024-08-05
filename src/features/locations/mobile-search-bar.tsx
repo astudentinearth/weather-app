@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import locate from "@/lib/geolocation";
 import { LocationItem } from "./LocationItem";
 import { Button } from "@/components/ui/button";
+import { MapPin, Navigation } from "lucide-react";
 
 export function MobileSearchBar(){
     const [searchOpen, setSearchOpen] = useState(false);
@@ -68,7 +69,7 @@ export function MobileSearchBar(){
         <div className={cn("bg-background border border-border m-2 h-12 rounded-xl flex items-center sm:hidden transition-colors", searchOpen && "bg-secondary")}>
             <PopoverTrigger className="w-full">
                     <span onClick={()=>{setSearchOpen(true)}} className={cn("text-foreground/75 pl-3 text-lg h-full flex gap-2 items-center", searchOpen && "hidden")}>
-                        <span className="bi-geo-alt"></span>
+                        <MapPin className="inline" size={24}></MapPin>
                         {name ?? ""}
                     </span>
                     <div onClick={()=>{setSearchOpen(true)}} className={cn("flex-grow h-full", searchOpen && "hidden")}></div>
@@ -79,7 +80,7 @@ export function MobileSearchBar(){
         <PopoverContent onOpenAutoFocus={(e)=>{e.preventDefault(); inputRef.current?.focus()}} className="popover-match-trigger-width p-0 mt-1 max-h-[50vh] overflow-x-clip overflow-y-auto">
             <Button variant={"ghost"} className={cn("border-none text-start justify-start w-full", results.length > 0 ? "hidden" : "block")} onClick={autoLocate}>
                 <div>
-                    <i className="bi-geo-alt"></i>&nbsp;&nbsp;
+                    <Navigation size={16} className="inline translate-y-[-10%]"></Navigation>&nbsp;&nbsp;
                     <span className="font-bold">{t("ui.auto_detect_location_action")}</span>
                 </div>
             </Button>

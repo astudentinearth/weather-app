@@ -4,6 +4,7 @@ import { useWeatherStore } from "@/context";
 import { useOptionsStore } from "@/context/use-options-store";
 import { DirectionIcons, HourlyForecast } from "@/lib";
 import { cn } from "@/lib/utils";
+import { Droplet } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function HourlyWeatherView(props: {mode: "default" | "wind" | "precipitation"}){
@@ -28,7 +29,12 @@ export default function HourlyWeatherView(props: {mode: "default" | "wind" | "pr
     const renderWind = (e: HourlyForecast, i:number) =>
     <div className="text-2xl flex-shrink-0 w-18 flex flex-col items-center gap-2" key={i}>
             <span className="">{t(`directions.${e.windDirection}`)}</span>
-            <i className={cn(DirectionIcons.get(e.windDirection ?? "NE"), "text-[48px]")}></i>
+            {(()=>{
+                const icon = DirectionIcons.get(e.windDirection);
+                if(icon != undefined){
+                    return icon(48);
+                } else return <></>
+            })()}
             <span>{r(e.windSpeed)} {speedUnit}</span>
             <span className="text-muted-foreground text-base">{(timezone === "local" ? 
                 e.date.toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", "minute": "2-digit"}) : 
@@ -38,7 +44,7 @@ export default function HourlyWeatherView(props: {mode: "default" | "wind" | "pr
     const renderPrecipitation = (e: HourlyForecast, i:number) =>
     <div className="text-2xl flex-shrink-0 w-18 flex flex-col items-center gap-2" key={i}>
             <span className="text-[#87C1FF]">{t("percentage", {percent: e.precipitationChance})}</span>
-            <i className={cn(e.precipitation > 0 ? "bi-droplet-half" : "bi-droplet", "text-[48px]")}></i>
+            {e.precipitation > 0 ? <Droplet size={48} fill="white"/> : <Droplet size={48}/>}
             <span>{(e.precipitation)} {precipitationUnit}</span>
             <span className="text-muted-foreground text-base">{(timezone === "local" ? 
                 e.date.toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", "minute": "2-digit"}) : 

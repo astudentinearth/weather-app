@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { useOptionsStore } from "@/context/use-options-store";
 import { Location } from "@/lib";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import {X} from "lucide-react"
 
 export function LocationItem(props: { location: Location; recent?: boolean; }) {
     const l = props.location;
@@ -26,12 +26,12 @@ export function LocationItem(props: { location: Location; recent?: boolean; }) {
                     </div>
                     <span className="text-muted-foreground">{l.admins}</span>
                 </div>
-                <Button className={cn("flex-shrink-0 w-8 h-8 bg-transparent", !props.recent && "hidden")} onClick={(e) => {
+                <div className={cn("flex-shrink-0 w-8 h-8 bg-transparent hover:bg-secondary/50 flex items-center justify-center rounded-lg", !props.recent && "hidden")} onClick={(e) => {
                     e.stopPropagation();
                     removeLocation(l);
                 } }>
-                    <i className="bi-x-lg"></i>
-                </Button>
+                    <X className="text-white/50"></X>
+                </div>
             </div>
         </div>
     ;
