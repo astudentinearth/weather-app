@@ -3,7 +3,6 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useWeatherStore } from "@/context";
 import { useOptionsStore } from "@/context/use-options-store";
 import { DirectionIcons, HourlyForecast } from "@/lib";
-import { cn } from "@/lib/utils";
 import { Droplet } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
