@@ -3,6 +3,7 @@
 - Visual improvements throughout the app
 - Added a toggle to hide location information from tab title for improved privacy
 - Enabled auto-update for PWA
+- Search can be triggered with ⌘K or ^K
 
 ### Technical changes
 - The reducer and context for user preferences has been dropped entirely.

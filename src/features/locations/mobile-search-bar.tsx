@@ -10,6 +10,7 @@ import locate from "@/lib/geolocation";
 import { LocationItem } from "./LocationItem";
 import { Button } from "@/components/ui/button";
 import { MapPin, Navigation } from "lucide-react";
+import { useHotkeys } from "react-hotkeys-hook";
 
 export function MobileSearchBar(){
     const [searchOpen, setSearchOpen] = useState(false);
@@ -27,7 +28,12 @@ export function MobileSearchBar(){
             inputRef.current?.focus();
         }
     }
-
+    useHotkeys("ctrl+k", ()=>{
+        const w = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        if(w < 640){
+            setSearchOpen(!searchOpen);
+        }
+    }, {preventDefault: true})
     useEffect(()=>{
         if(!searchOpen) {
             setResults([]);

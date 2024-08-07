@@ -11,13 +11,22 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { LocationItem } from "./LocationItem";
 import { Navigation, Search } from "lucide-react";
+import {useHotkeys} from "react-hotkeys-hook"
 
 export default function LocationSearchDialog(){
     const [query, setQuery] = useState("");
+    const [isOpen, setOpen] = useState(false);
     const [results, setResults] = useState<Location[]>([]);
     const navigate = useNavigate();
     const locations = useOptionsStore((state)=>state.locations)
     const {t, i18n} = useTranslation();
+    
+    useHotkeys("ctrl+k", ()=>{
+        const w = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        if(w >= 640){
+            setOpen(!isOpen);
+        }
+    }, {preventDefault: true})
     useEffect(()=>{
         const search = setTimeout(async ()=>{
             const res = await geocode(query, i18n.resolvedLanguage);
@@ -48,7 +57,8 @@ export default function LocationSearchDialog(){
             })
         })
     }
-    return <Dialog onOpenChange={(open)=>{
+    return <Dialog open={isOpen} onOpenChange={(open)=>{
+        setOpen(open);
         if(!open) {
             setResults([]);
             setQuery("");
