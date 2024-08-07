@@ -16,6 +16,7 @@ import "./currentWeather.css";
 import CurrentWeatherTabView from "./CurrentweatherTabView";
 import ViewHeader from "./ViewHeader";
 import { RotateCw } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function HourlyViewFallback({resetErrorBoundary}: FallbackProps){
     const {t} = useTranslation();
@@ -77,17 +78,20 @@ export function CurrentWeatherWidget(){
         else document.title = t("private_title");
     }, [state?.location, showLoc, options.temperatureUnit, state?.currentTemperature, t])
 
-    return <div className="current-weather-widget transition-[font-size,transform] duration-100 text-2xl sm:text-4xl z-20">
+    return <div className="current-weather-widget transition-[font-size,transform,height] duration-100 text-2xl sm:text-4xl z-20">
         <div className="pl-2 flex flex-col gap-3">
             <div className="sm:flex flex-col hidden">
                 <ViewHeader location={state?.location} isDefaultLocation={CompareLocation(state?.location ?? {latitude: 999, longitude: 999}, options.defaultLocation)}></ViewHeader>
                 <span className="text-zinc-500 select-none sm:hidden">{`${new Date().toLocaleDateString([i18n.resolvedLanguage ?? ""])}, ${new Date().toLocaleTimeString([i18n.resolvedLanguage ?? ""], {hour: "2-digit", minute: "2-digit"})}`}</span>
             </div>
             <div className="current-weather-grid select-none">
-                <WeatherIcon className="hsm:justify-self-start" width={100} height={100} weathercode={state?.weathercode ?? 1}></WeatherIcon>
-                <span className="current-temperature">{r(state?.currentTemperature)}º{temperatureUnit}</span>
-                <span className="current-condition hsm:justify-self-start hsm:text-left inline-block text-center whitespace-pre-line text-ellipsis w-full overflow-hidden">{t(getWeatherTranslationKey(state?.weathercode ?? 1))}</span>
-                <span className="todays-min-max whitespace-nowrap hsm:justify-self-end text-foreground/50">{r(state?.minTemperature)}º{temperatureUnit} / {r(state?.maxTemperature)}º{temperatureUnit}</span>
+                {state ? <WeatherIcon className="hsm:justify-self-start" width={100} height={100} weathercode={state?.weathercode ?? 1}></WeatherIcon> : <WeatherIconSkeleton/>}
+                {state ? <span className="current-temperature">{r(state?.currentTemperature)}º{temperatureUnit}</span> : <Skeleton className="current-temperature"><div className="w-48 h-12"></div></Skeleton>}
+                {state ? <span className="current-condition hsm:justify-self-start hsm:text-left inline-block text-center whitespace-pre-line text-ellipsis w-full overflow-hidden">{t(getWeatherTranslationKey(state?.weathercode ?? 1))}</span>
+                : <Skeleton className="current-condition justify-self-start"><div className="w-48 h-8"></div></Skeleton>}
+                {state ? <span className="todays-min-max whitespace-nowrap hsm:justify-self-end text-foreground/50">{r(state?.minTemperature)}º{temperatureUnit} / {r(state?.maxTemperature)}º{temperatureUnit}</span>:
+                <Skeleton className="todays-min-max justify-self-end"><div className="w-24 h-8"></div></Skeleton>}
+                
             </div>
             {state ? <CurrentStatus precipitation={state.precipitationChance} humidity={state.humidity} direction={state.windDirection} wind={state.wind}></CurrentStatus> : <></>}
         </div>
@@ -95,4 +99,10 @@ export function CurrentWeatherWidget(){
             <CurrentWeatherTabView></CurrentWeatherTabView>
         </ErrorBoundary>
     </div>
+}
+
+function WeatherIconSkeleton(){
+    return <Skeleton className="hsm:justify-self-start">
+        <div className="w-[100px] h-[100px]"></div>
+    </Skeleton>
 }

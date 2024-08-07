@@ -1,10 +1,12 @@
 import { WeatherIcon } from "@/components";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useWeatherStore } from "@/context";
 import { useOptionsStore } from "@/context/use-options-store";
 import { DirectionIcons, HourlyForecast } from "@/lib";
 import { Droplet } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { HourlySkeleton } from "./hourly-skeleton";
 
 export default function HourlyWeatherView(props: {mode: "default" | "wind" | "precipitation"}){
     const {t, i18n} = useTranslation();
@@ -51,8 +53,8 @@ export default function HourlyWeatherView(props: {mode: "default" | "wind" | "pr
     </div>
 
     return <ScrollArea>
-        <div className="flex w-max gap-4 pl-2 sm:p-2 h-[200px] items-center select-none">
-            {data?.hours.map((e, i)=>{
+        <div className="flex w-max gap-4 pl-2 sm:p-2 h-[200px] items-center select-none transition-transform">
+            {data ? data?.hours.map((e, i)=>{
                 switch(props.mode){
                     case "default":
                         return renderHourly(e, i);
@@ -66,7 +68,7 @@ export default function HourlyWeatherView(props: {mode: "default" | "wind" | "pr
                     default:
                         return renderHourly(e, i);
                 }
-            })}
+            }) : <HourlySkeleton/>}
         </div>
         <ScrollBar orientation="horizontal"></ScrollBar>
     </ScrollArea>

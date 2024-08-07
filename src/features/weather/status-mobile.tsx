@@ -1,3 +1,4 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { useOptionsStore, useWeatherStore } from "@/context";
 import { DirectionIcons } from "@/lib";
 import { Droplet, Umbrella } from "lucide-react";
@@ -10,11 +11,11 @@ export function MobileStatus(){
     return <div className="flex sm:hidden items-center justify-evenly m-2 gap-2">
         <div className="w-full  border border-border bg-background p-3 py-1 h-12 flex justify-center items-center rounded-xl gap-2">
             <Droplet size={20} className="inline translate-y-[-5%]"/>
-            <span className="text-lg">{t("percentage",{percent: state?.humidity})}</span>
+            {state ? <span className="text-lg">{t("percentage",{percent: state?.humidity})}</span> : <Skeleton className="w-12 h-4"/>}
         </div>
         <div className="w-full  border border-border bg-background p-3 h-12 flex justify-center items-center rounded-xl gap-2">
             <Umbrella size={20} className="inline"/>
-            <span className="text-lg">{t("percentage", {percent: state?.precipitationChance})}</span>
+            {state ? <span className="text-lg">{t("percentage", {percent: state?.precipitationChance})}</span> : <Skeleton className="w-12 h-4"/>}
         </div>
         <div className="w-full  border border-border bg-background p-3 h-12 flex justify-center items-center rounded-xl gap-2">
             {(()=>{
@@ -23,7 +24,7 @@ export function MobileStatus(){
                     return icon(20);
                 } else return <></>
             })()}
-            <span className="text-lg">{`${state?.wind}${speedUnit}`}</span>
+            {state ? <span className="text-lg">{`${state?.wind}${speedUnit}`}</span> : <Skeleton className="w-12 h-4"/>}
         </div>
     </div>
 }
