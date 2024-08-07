@@ -1,0 +1,43 @@
+{
+    "latitude": 41.01384,
+    "longitude": 28.94966,
+    "generationtime_ms": 0.1,
+    "utc_offset_seconds": 10800,
+    "timezone": "Europe/Istanbul",
+    "timezone_abbreviation": "+03",
+    "elevation": 1,
+    "daily_units": {
+        "time": "unixtime",
+        "weather_code": "wmo code",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "precipitation_sum": "mm",
+        "precipitation_probability_max": "%"
+    },
+    "daily": {
+        "precipitation_probability_max": [
+            0,10,20,30,40,50,60
+        ],
+        "precipitation_sum": [
+            0, 0.5, 1, 1.5, 2, 2.5, 3
+        ],
+        "temperature_2m_max": [
+            15,16,17,18,19,20,21
+        ],
+        "temperature_2m_min": [
+            12,13,14,15,16,17,18
+        ],
+        "time": [
+            1723064400,
+            1723150800,
+            1723237200,
+            1723323600,
+            1723410000,
+            1723496400,
+            1723582800
+        ],
+        "weather_code": [
+            1,1,1,1,1,1,1
+        ]
+    }
+}

@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import fs from "fs/promises"
 
 test.use({
   locale: "en-US", 
@@ -6,6 +7,25 @@ test.use({
   geolocation: {latitude: 41.01384, longitude: 28.94966}
 });
 
+
+test.beforeEach(async ({context})=>{
+  context.route(/forecast.*daily/, async route=>{
+    const str = (await fs.readFile("./tests/data/mock-daily.json")).toString();
+    const json = JSON.parse(str);
+    console.log(json);
+    route.fulfill({json});
+  });
+  context.route(/forecast.*hourly/, async route=>{
+    const str = (await fs.readFile("./tests/data/mock-hourly.json")).toString();
+    const json = JSON.parse(str);
+    route.fulfill({json});
+  });
+  context.route(/forecast.*current/, async route=>{
+    const str = (await fs.readFile("./tests/data/mock-current.json")).toString();
+    const json = JSON.parse(str);
+    route.fulfill({json});
+  });
+})
 
 test('has title', async ({ page}) => {
   await page.goto('http://localhost:5173/weather-app');

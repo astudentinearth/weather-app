@@ -1,0 +1,27 @@
+{
+    "latitude": 41.01384,
+    "longitude": 28.94966,
+    "generationtime_ms": 0.1,
+    "utc_offset_seconds": 10800,
+    "timezone": "Europe/Istanbul",
+    "timezone_abbreviation": "+03",
+    "elevation": 1,
+    "current_units": {
+        "time": "unixtime",
+        "interval": "seconds",
+        "temperature_2m": "°C",
+        "weather_code": "wmo code",
+        "wind_speed_10m": "km/h",
+        "wind_direction_10m": "°",
+        "relative_humidity_2m": "%"
+    },
+    "current": {
+        "time": 1723071814,
+        "interval": 900,
+        "relative_humidity_2m": 27,
+        "temperature_2m": 25,
+        "weather_code": 1,
+        "wind_direction_10m": 240,
+        "wind_speed_10m": 10
+    }
+}

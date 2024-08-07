@@ -21,7 +21,7 @@ export default function LocationSearchDialog(){
     const locations = useOptionsStore((state)=>state.locations)
     const {t, i18n} = useTranslation();
     
-    useHotkeys("ctrl+k", ()=>{
+    useHotkeys(["ctrl+k", "meta+k"], ()=>{
         const w = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
         if(w >= 640){
             setOpen(!isOpen);
@@ -63,14 +63,14 @@ export default function LocationSearchDialog(){
             setResults([]);
             setQuery("");
         }
-    }}>
+        }}>
         <DialogTrigger asChild>
-            <Button className="flex-shrink-0 z-20 text-2xl" size={"icon"} variant={"ghost"}>
+            <Button data-testid="desktop-search-trigger" className="flex-shrink-0 z-20 text-2xl" size={"icon"} variant={"ghost"}>
                 <Search></Search>
             </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-lg w-full p-0 fixed top-[200px] rounded-xl bg-background backdrop-blur-md">
-            <Input tabIndex={0} onChange={(e)=>{setQuery(e.target.value)}} placeholder={t("ui.search_location_placeholder")} className="rounded-xl border-none bg-transparent"></Input>
+        <DialogContent data-testid="location-search-dialog" className="sm:max-w-lg w-full p-0 fixed top-[200px] rounded-xl bg-background backdrop-blur-md">
+            <Input data-testid="desktop-search-input" tabIndex={0} onChange={(e)=>{setQuery(e.target.value)}} placeholder={t("ui.search_location_placeholder")} className="rounded-xl border-none bg-transparent"></Input>
             <div className="absolute flex backdrop-blur-md flex-col max-h-[512px] top-[120%] bg-background w-full rounded-xl border-border border empty:border-none overflow-y-auto">
                 <DialogClose asChild>
                     <Button variant={"ghost"} className={cn("border-none text-start justify-start", results.length > 0 ? "hidden" : "block")} onClick={autoLocate}>

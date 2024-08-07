@@ -79,11 +79,11 @@ export function MobileSearchBar(){
                         {name ?? ""}
                     </span>
                     <div onClick={()=>{setSearchOpen(true)}} className={cn("flex-grow h-full", searchOpen && "hidden")}></div>
-                    <Input placeholder={t("ui.search_location_placeholder")} onChange={(e)=>{setQuery(e.target.value)}} ref={inputRef} onClick={(e)=>{e.stopPropagation()}} className={cn("hidden text-lg pl-3 w-full bg-transparent border-none", searchOpen && "block")}></Input>
+                    <Input data-testid="mobile-search-input" placeholder={t("ui.search_location_placeholder")} onChange={(e)=>{setQuery(e.target.value)}} ref={inputRef} onClick={(e)=>{e.stopPropagation()}} className={cn("hidden text-lg pl-3 w-full bg-transparent border-none", searchOpen && "block")}></Input>
             </PopoverTrigger>
             {searchOpen ? <></> : <SettingsPopover triggerTestID="mobile-settings-popover-trigger"></SettingsPopover>}
         </div>
-        <PopoverContent onOpenAutoFocus={(e)=>{e.preventDefault(); inputRef.current?.focus()}} className="popover-match-trigger-width p-0 mt-1 max-h-[50vh] overflow-x-clip overflow-y-auto">
+        <PopoverContent data-testid="mobile-search-popover" onOpenAutoFocus={(e)=>{e.preventDefault(); inputRef.current?.focus()}} className="popover-match-trigger-width p-0 mt-1 max-h-[50vh] overflow-x-clip overflow-y-auto">
             <Button variant={"ghost"} className={cn("border-none text-start justify-start w-full", results.length > 0 ? "hidden" : "block")} onClick={autoLocate}>
                 <div>
                     <Navigation size={16} className="inline translate-y-[-10%]"></Navigation>&nbsp;&nbsp;
