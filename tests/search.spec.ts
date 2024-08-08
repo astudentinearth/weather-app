@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import fs from "fs/promises"
 
+// THESE TESTS ARE FLAKY
+
 test.use({
   locale: "en-US", 
   permissions: ["geolocation"], 
@@ -11,7 +13,6 @@ test.beforeEach(async ({context})=>{
     context.route(/forecast.*daily/, async route=>{
       const str = (await fs.readFile("./tests/data/mock-daily.json")).toString();
       const json = JSON.parse(str);
-      console.log(json);
       route.fulfill({json});
     });
     context.route(/forecast.*hourly/, async route=>{

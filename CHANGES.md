@@ -1,4 +1,4 @@
-# v1.0
+# v0.4.0
 - Revamped mobile UI
 - Visual improvements throughout the app
 - Added a toggle to hide location information from tab title for improved privacy

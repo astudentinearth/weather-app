@@ -12,7 +12,6 @@ test.beforeEach(async ({context})=>{
   context.route(/forecast.*daily/, async route=>{
     const str = (await fs.readFile("./tests/data/mock-daily.json")).toString();
     const json = JSON.parse(str);
-    console.log(json);
     route.fulfill({json});
   });
   context.route(/forecast.*hourly/, async route=>{
@@ -39,7 +38,7 @@ test('title is private', async ({ page }) => {
   await expect(page).not.toHaveTitle(/\|/); // a non-private title would look like "temp location | Weather"
 });
 
-
+// possibly flaky
 test('title privacy can be toggled', async ({page})=>{
   await page.goto('http://localhost:5173/weather-app');
   await page.getByTestId('desktop-settings-popover-trigger').click();

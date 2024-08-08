@@ -27,7 +27,13 @@
         },
         {
             "src": "/weather-app/icons/scalable.svg",
-            "sizes": "any"
+            "sizes": "any",
+            "purpose": "any"
+        },
+        {
+            "src": "/weather-app/icons/maskable196.png",
+            "sizes": "196x196",
+            "purpose": "maskable"
         }
     ]
 }
