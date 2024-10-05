@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile/widgets/app_bar.dart';
+import 'package:mobile/widgets/current_weather.dart';
 import 'package:mobile/widgets/location_search.dart';
 
 void main() {
@@ -49,7 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               margin: const EdgeInsets.all(8),
               child: const Column(
-                children: [WeatherAppBar(),],
+                children: [
+                  WeatherAppBar(),
+                  CurrentWeatherWidget()
+                ],
               )
             )
           ],
