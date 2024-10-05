@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile/services/weather_service.dart';
+import 'package:mobile/view_models/weather_view_model.dart';
 import 'package:mobile/widgets/app_bar.dart';
 import 'package:mobile/widgets/current_status.dart';
 import 'package:mobile/widgets/current_weather.dart';
 import 'package:mobile/widgets/location_search.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => WeatherViewModel(),
+    child: const MyApp(),
+    )
+  );
+
 }
 
 class MyApp extends StatelessWidget {

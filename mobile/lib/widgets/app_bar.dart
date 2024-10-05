@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile/styles/text.dart';
 
+import '../services/weather_service.dart';
+
 class WeatherAppBar extends StatelessWidget{
   const WeatherAppBar({super.key});
 
@@ -30,7 +32,9 @@ class WeatherAppBar extends StatelessWidget{
         ),
       ),
       actions: [
-        IconButton(onPressed: ()=>{}, icon: const Icon(Icons.menu, color: Color(0x80ffffff)), padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),)
+        IconButton(onPressed: ()=>{
+          WeatherModel.fetchCurrentWeather(Location(latitude: 41.01384, longitude: 28.94966, name: "Istanbul"), Units(Temperature.celsius, Speed.kmh, Precipitation.mm, Timezone.local))
+        }, icon: const Icon(Icons.menu, color: Color(0x80ffffff)), padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),)
       ],
     );
   }
