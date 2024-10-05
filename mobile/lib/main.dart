@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile/widgets/app_bar.dart';
+import 'package:mobile/widgets/current_status.dart';
 import 'package:mobile/widgets/current_weather.dart';
 import 'package:mobile/widgets/location_search.dart';
 
@@ -52,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Column(
                 children: [
                   WeatherAppBar(),
-                  CurrentWeatherWidget()
+                  CurrentWeatherWidget(),
+                  CurrentStatusWidget()
                 ],
               )
             )
