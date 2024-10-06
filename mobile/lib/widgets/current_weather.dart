@@ -4,6 +4,7 @@ import 'package:mobile/main.dart';
 import 'package:mobile/services/weather_service.dart';
 import 'package:mobile/styles/text.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile/util/weather_code.dart';
 import 'package:mobile/view_models/weather_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -52,8 +53,8 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Align(alignment: Alignment.centerRight, child: SvgPicture.asset("assets/drizzle_3.svg", width: 64, height: 64),),
-                          Align(alignment: Alignment.centerRight, child: Text("Partly cloudy", style: defaultText.withSize(24)))
+                          Align(alignment: Alignment.centerRight, child: SvgPicture.asset(WeatherUtil.getIconAssetName(weather.current.weatherCode), width: 64, height: 64),),
+                          Align(alignment: Alignment.centerRight, child: Text(WeatherUtil.getDescription(weather.current.weatherCode), style: defaultText.withSize(24)))
                         ],
                       )
                   )

@@ -3,6 +3,8 @@ import "dart:convert";
 import "package:http/http.dart" as http;
 import "dart:developer";
 
+import "package:mobile/services/cache.dart";
+import "package:mobile/util/misc.dart";
 enum Direction { N, NE, E, SE, S, SW, W, NW }
 enum Temperature {celsius, fahrenheit}
 enum Precipitation {mm, inch}
@@ -68,18 +70,17 @@ class CurrentWeatherData {
     required this.windDirection,
     required this.windSpeed});
 
-  static CurrentWeatherData fromAPIResponse(String response, Location? provided){
-    var data = jsonDecode(response);
+  static CurrentWeatherData fromAPIResponse(dynamic data, Location? provided){
     return CurrentWeatherData(
-      location: provided ?? Location(latitude: data.latitude, longitude: data.longitude),
-      currentTemperature: data.current.temperature_2m,
-      humidity: data.current.relative_humidity_2m,
-      maxTemperature: data.daily.temperature_2m_max[0],
-      minTemperature: data.daily.temperature_2m_min[0],
-      weatherCode: data.current.weather_code,
-      windSpeed: data.current.wind_speed_10m,
-      windDirection: fromDegrees(data.current.wind_direction_10m),
-      precipitationChance: data.hourly.precipitation_probability[0]
+      location: provided ?? Location(latitude: data["latitude"], longitude: data["longitude"]),
+      currentTemperature: ensureDouble(data["current"]["temperature_2m"]),
+      humidity: ensureDouble(data["current"]["relative_humidity_2m"]),
+      maxTemperature: ensureDouble(data["daily"]["temperature_2m_max"][0]),
+      minTemperature: ensureDouble(data["daily"]["temperature_2m_min"][0]),
+      weatherCode: (data["current"]["weather_code"]),
+      windSpeed: ensureDouble(data["current"]["wind_speed_10m"]),
+      windDirection: fromDegrees(ensureDouble(data["current"]["wind_direction_10m"])),
+      precipitationChance: ensureDouble(data["hourly"]["precipitation_probability"][0])
     );
   }
 }
@@ -95,8 +96,10 @@ class WeatherModel{
     "&daily=temperature_2m_max,temperature_2m_min"
     "&timeformat=unixtime"
     "&timezone=auto";
-    var response = await http.get(Uri.parse(url));
-    var data = CurrentWeatherData.fromAPIResponse(response.body, location);
+    var response = await Cache().httpGet(url);
+    //log((response.data is Map).toString());
+    //log(response.data.toString());
+    var data = CurrentWeatherData.fromAPIResponse(response.data, location);
     return data;
   }
 }
