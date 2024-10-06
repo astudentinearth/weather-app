@@ -39,10 +39,10 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
                     child: Column(
                       children: [
                         Text(
-                          "${weather.current.currentTemperature}°${weather.units.temperature.getSymbol()}",
+                          "${weather.current.currentTemperature.round()}°${weather.units.temperature.getSymbol()}",
                           style: defaultText.withSize(64).copyWith(height: 1),
                         ),
-                        Text("${weather.current.minTemperature}${weather.units.temperature.withSign()} / ${weather.current.maxTemperature}${weather.units.temperature.withSign()}",
+                        Text("${weather.current.minTemperature.round()}${weather.units.temperature.withSign()} / ${weather.current.maxTemperature.round()}${weather.units.temperature.withSign()}",
                             style: defaultText.withSize(24).halfOpaque())
                       ],
                     ),
