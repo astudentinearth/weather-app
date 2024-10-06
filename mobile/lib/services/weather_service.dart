@@ -38,6 +38,10 @@ class Location {
   String? admins;
   String? countryCode;
   Location({required this.latitude, required this.longitude, this.name, this.country, this.autoLocated, this.admins, this.countryCode});
+  @override
+  String toString() {
+    return "$latitude $longitude $name, $admins, $country";
+  }
 }
 
 

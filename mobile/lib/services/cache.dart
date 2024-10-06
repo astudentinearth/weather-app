@@ -9,6 +9,10 @@ import "package:dio/dio.dart";
 import "package:dio_cache_interceptor/dio_cache_interceptor.dart";
 import "package:crypto/crypto.dart";
 
+abstract class CachedHTTPClient{
+  Future<Response> httpGet(String uri);
+}
+
 Future<Directory> getTempDirectory() async {
   final tempDir = await getTemporaryDirectory();
   return await Directory("${tempDir.path}/cache").create(recursive: true);
@@ -30,7 +34,7 @@ Future<CacheOptions> getCacheOpts() async {
   return cacheOpts;
 }
 
-class Cache{
+class Cache implements CachedHTTPClient{
   static final Cache _cache = Cache._internal();
   static final Dio _dio = Dio();
   factory Cache(){
@@ -41,6 +45,8 @@ class Cache{
     final opts = await getCacheOpts();
     _dio.interceptors.add(DioCacheInterceptor(options: opts));
   }
+
+  @override
   Future<Response> httpGet(String uri){
     var response = _dio.get(uri);
     return response;
