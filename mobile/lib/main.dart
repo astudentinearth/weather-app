@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile/services/cache.dart';
 import 'package:mobile/services/weather_service.dart';
+import 'package:mobile/view_models/search_view_model.dart';
 import 'package:mobile/view_models/weather_view_model.dart';
 import 'package:mobile/widgets/app_bar.dart';
 import 'package:mobile/widgets/current_status.dart';
@@ -12,10 +13,10 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Cache().init();
-  runApp(ChangeNotifierProvider(
-    create: (context) => WeatherViewModel(),
-    child: const MyApp(),
-    )
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<WeatherViewModel>(create: (_)=>WeatherViewModel()),
+    ChangeNotifierProvider<SearchViewModel>(create: (_)=>SearchViewModel())
+  ], child: const MyApp(),)
   );
 
 }
