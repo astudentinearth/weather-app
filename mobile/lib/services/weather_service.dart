@@ -4,6 +4,7 @@ import "package:http/http.dart" as http;
 import "dart:developer";
 
 import "package:mobile/services/cache.dart";
+import "package:mobile/services/prefs_service.dart";
 import "package:mobile/util/misc.dart";
 enum Direction { N, NE, E, SE, S, SW, W, NW }
 enum Temperature {celsius, fahrenheit}
@@ -29,6 +30,7 @@ Direction fromDegrees(double deg){
   return Direction.values[i];
 }
 
+
 class Location {
   String? name;
   String? country;
@@ -42,6 +44,23 @@ class Location {
   String toString() {
     return "$latitude $longitude $name, $admins, $country";
   }
+  Map<String, dynamic> toJSON() => {
+    "name": name,
+    "country": country,
+    "countryCode": countryCode,
+    "latitude": latitude,
+    "longitude": longitude,
+    "autoLocated": autoLocated,
+    "admins": admins
+  };
+  Location.fromJSON(Map<String, dynamic> json)
+    : name = nullableCast<String>(json['name']),
+      country = nullableCast<String>(json['country']),
+      latitude = json['latitude'] as double,
+      longitude = json['longitude'] as double,
+      autoLocated = nullableCast<bool>(json['autoLocated']),
+      admins = nullableCast<String>(json["admins"]),
+      countryCode = nullableCast<String>(json["countryCode"]);
 }
 
 
