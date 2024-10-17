@@ -13,4 +13,10 @@ void main() {
     expect(case1 == 1243, isTrue);
     expect(case2 == 5, isTrue);
   });
+
+  test("should convert a list to json", () {
+    List<int> list = [1,2,3];
+    String json = serializeList(list, "numbers");
+    expect(json==r'{"numbers":[1,2,3]}', isTrue);
+  });
 }
