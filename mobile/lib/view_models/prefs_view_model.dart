@@ -10,6 +10,7 @@ abstract class UserPrefsViewModelBase {
   void setTimezone(Timezone zone);
   void addLocation(Location location);
   void removeLocation(Location location);
+  Future<void> init();
   Units getUnits();
 }
 
@@ -27,27 +28,84 @@ class UserPrefsViewModel extends ChangeNotifier
   Timezone _timezone = Timezone.local;
   Timezone get timezone => _timezone;
 
+  List<Location> _locations = [];
+  List<Location> get locations => _locations;
+
   @override
-  void setTemperatureUnit(Temperature unit) {}
+  void setTemperatureUnit(Temperature unit) {
+    _temperatureUnit = unit;
+    notifyListeners();
+    PrefsModel().savePrefs(_toUserPrefs());
+  }
+
   @override
-  void setSpeedUnit(Speed unit) {}
+  void setSpeedUnit(Speed unit) {
+    _speedUnit = unit;
+    notifyListeners();
+    PrefsModel().savePrefs(_toUserPrefs());
+  }
+
   @override
-  void setPrecipitationUnit(Precipitation unit) {}
+  void setPrecipitationUnit(Precipitation unit) {
+    _precipitationUnit = unit;
+    notifyListeners();
+    PrefsModel().savePrefs(_toUserPrefs());
+  }
+
   @override
-  void setTimezone(Timezone unit) {}
+  void setTimezone(Timezone unit) {
+    _timezone = unit;
+    notifyListeners();
+    PrefsModel().savePrefs(_toUserPrefs());
+  }
 
   @override
   Units getUnits() {
     return Units(_temperatureUnit, _speedUnit, _precipitationUnit, _timezone);
   }
 
+  UserPrefs _toUserPrefs() {
+    return UserPrefs()
+      ..locations
+      ..precipitationUnit
+      ..speedUnit
+      ..temperatureUnit
+      ..timezone;
+  }
+
   @override
   void addLocation(Location location) {
-    // TODO: implement addLocation
+    for (int i = 0; i < _locations.length; i++) {
+      if (_locations[i].latitude == location.latitude &&
+          _locations[i].longitude == location.longitude) {
+        _locations[i] = location;
+        PrefsModel().savePrefs(_toUserPrefs());
+        notifyListeners();
+        return;
+      }
+    }
+    _locations.add(location);
   }
 
   @override
   void removeLocation(Location location) {
-    // TODO: implement removeLocation
+    for (var loc in _locations) {
+      if (loc == location) {
+        _locations.remove(location);
+        PrefsModel().savePrefs(_toUserPrefs());
+        notifyListeners();
+      }
+    }
+  }
+
+  @override
+  Future<void> init() async {
+    final prefs = await PrefsModel().loadSaved();
+    _locations = prefs.locations;
+    _temperatureUnit = prefs.temperatureUnit;
+    _speedUnit = prefs.speedUnit;
+    _precipitationUnit = prefs.precipitationUnit;
+    _timezone = prefs.timezone;
+    notifyListeners();
   }
 }
