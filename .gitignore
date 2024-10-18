@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 coverage/
 /test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/hars/
+web/playwright-report/
+web/blob-report/
+web/playwright/.cache/
+web/hars/
