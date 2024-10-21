@@ -31,6 +31,10 @@ class UserPrefsViewModel extends ChangeNotifier
   List<Location> _locations = [];
   List<Location> get locations => _locations;
 
+  UserPrefsViewModel() {
+    init();
+  }
+
   @override
   void setTemperatureUnit(Temperature unit) {
     _temperatureUnit = unit;
