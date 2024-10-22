@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile/services/weather_service.dart';
 import 'package:mobile/styles/text.dart';
 import 'package:mobile/util/weather_code.dart';
 import 'package:mobile/view_models/weather_view_model.dart';
@@ -48,7 +49,7 @@ class _DailyWeatherWidgetState extends State<DailyWeatherWidget> {
                           Text(DateFormat('EEEE, MMM d').format(element.date),
                               style: defaultText.withSize(20)),
                           Text(
-                              "${element.maxTemperature.round()}°/${element.minTemperature.round()}°",
+                              "${element.maxTemperature.round()}/${element.minTemperature.round()}${weather.units.temperature.withSign()}",
                               style: defaultText.withSize(20).halfOpaque()),
                         ],
                       ),
