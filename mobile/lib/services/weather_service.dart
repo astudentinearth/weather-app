@@ -144,6 +144,47 @@ class CurrentWeatherData {
   }
 }
 
+class HourlyForecast {
+  DateTime time = DateTime.now();
+  double precpitationChance = 0;
+  double precipitation = 0;
+  double temperature = 0;
+  double windSpeed = 0;
+  double humidity = 0;
+  int weatherCode = 0;
+  Direction windDirection = Direction.N;
+  HourlyForecast(
+      {required this.time,
+      required this.precipitation,
+      required this.precpitationChance,
+      required this.temperature,
+      required this.windSpeed,
+      required this.humidity,
+      required this.weatherCode,
+      required this.windDirection});
+}
+
+class HourlyWeatherData {
+  List<HourlyForecast> hours = [];
+  HourlyWeatherData fromAPIResponse(dynamic data) {
+    var hourly = data["hourly"];
+    for (var i = 0; i < (hourly["time"] as List<dynamic>).length; i++) {
+      hours.add(HourlyForecast(
+          time: DateTime.fromMillisecondsSinceEpoch(hourly["time"][i] * 1000),
+          precipitation: ensureDouble(hourly["precipitation"][i]),
+          precpitationChance:
+              ensureDouble(hourly["precipitation_probability"][i]),
+          temperature: ensureDouble(hourly["temperature_2m"][i]),
+          windSpeed: ensureDouble(hourly["wind_speed_10m"][i]),
+          humidity: ensureDouble(hourly["relative_humidity_2m"][i]),
+          weatherCode: hourly["weather_code"][i],
+          windDirection:
+              fromDegrees(ensureDouble(hourly["wind_direction_10m"][i]))));
+    }
+    return this;
+  }
+}
+
 class WeatherModel {
   static Future<CurrentWeatherData> fetchCurrentWeather(
       Location location, Units units) async {
@@ -160,6 +201,21 @@ class WeatherModel {
     //log((response.data is Map).toString());
     //log(response.data.toString());
     var data = CurrentWeatherData.fromAPIResponse(response.data, location);
+    return data;
+  }
+
+  static Future<HourlyWeatherData> fetchHourlyWeather(
+      Location location, Units units) async {
+    var url =
+        "https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}"
+        "&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_direction_10m"
+        "&temperature_unit=${units.temperature.name}&wind_speed_unit=${units.speed.name}&precipitation_unit=${units.precipitation.name}"
+        "&forecast_days=2&forecast_hours=24"
+        "&daily=temperature_2m_max,temperature_2m_min"
+        "&timeformat=unixtime"
+        "&timezone=auto";
+    var response = await Cache().httpGet(url);
+    var data = HourlyWeatherData().fromAPIResponse(response.data);
     return data;
   }
 }
