@@ -24,7 +24,7 @@ class _HourlyWeatherWidgetState extends State<HourlyWeatherWidget> {
             decoration: BoxDecoration(
                 color: const Color(0xff1F2D40),
                 borderRadius: BorderRadius.circular(12)),
-            height: 190,
+            height: 200,
             child: Column(
               children: [
                 Align(
@@ -61,7 +61,7 @@ class _HourlyWeatherWidgetState extends State<HourlyWeatherWidget> {
                             const SizedBox(height: 8),
                             Text(
                               "${hour.temperature.round()}${weather.units.temperature.withSign()}",
-                              style: defaultText.withSize(16),
+                              style: defaultText.withSize(24),
                             ),
                             Text(
                               DateFormat.Hm().format(hour.time),
