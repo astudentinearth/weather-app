@@ -25,8 +25,7 @@ class WeatherAppBar extends StatelessWidget {
         onTap: () async {
           await showSearch(context: context, delegate: LocationSearchScreen());
         },
-        child: Expanded(
-            child: Container(
+        child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
           color: Colors.transparent,
           child: Row(
@@ -45,7 +44,7 @@ class WeatherAppBar extends StatelessWidget {
               })
             ],
           ),
-        )),
+        ),
       ),
       actions: [
         Container(
