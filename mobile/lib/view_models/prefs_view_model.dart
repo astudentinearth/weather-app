@@ -3,11 +3,14 @@ import 'package:mobile/services/prefs_service.dart';
 
 import '../services/weather_service.dart';
 
+enum UnitPreference { metric, imperial }
+
 abstract class UserPrefsViewModelBase {
   void setTemperatureUnit(Temperature unit);
   void setSpeedUnit(Speed unit);
   void setPrecipitationUnit(Precipitation unit);
   void setTimezone(Timezone zone);
+  void setUnitPreference(UnitPreference unit);
   void addLocation(Location location);
   void removeLocation(Location location);
   Future<void> init();
@@ -30,6 +33,10 @@ class UserPrefsViewModel extends ChangeNotifier
 
   List<Location> _locations = [];
   List<Location> get locations => _locations;
+
+  UnitPreference get unitPreference => _temperatureUnit == Temperature.celsius
+      ? UnitPreference.metric
+      : UnitPreference.imperial;
 
   UserPrefsViewModel() {
     init();
@@ -111,5 +118,20 @@ class UserPrefsViewModel extends ChangeNotifier
     _precipitationUnit = prefs.precipitationUnit;
     _timezone = prefs.timezone;
     notifyListeners();
+  }
+
+  @override
+  void setUnitPreference(UnitPreference unit) {
+    if (unit == UnitPreference.metric) {
+      _temperatureUnit = Temperature.celsius;
+      _speedUnit = Speed.kmh;
+      _precipitationUnit = Precipitation.mm;
+    } else {
+      _temperatureUnit = Temperature.fahrenheit;
+      _speedUnit = Speed.mph;
+      _precipitationUnit = Precipitation.inch;
+    }
+    notifyListeners();
+    PrefsModel().savePrefs(_toUserPrefs());
   }
 }
