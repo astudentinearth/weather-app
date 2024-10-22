@@ -1,8 +1,7 @@
-import "dart:convert";
-
 import "package:mobile/services/cache.dart";
 import "package:mobile/util/misc.dart";
 
+// ignore: constant_identifier_names
 enum Direction { N, NE, E, SE, S, SW, W, NW }
 
 enum Temperature { celsius, fahrenheit }

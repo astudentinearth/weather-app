@@ -35,7 +35,7 @@ class PrefsModel implements PrefsModelBase {
         Timezone.values.byName(prefs.getString("timezone") ?? "local");
     final locationData = prefs.getString("locations");
     final locationObj = jsonDecode(locationData ?? '{"locations": []}');
-    print(locationObj["locations"]);
+    //print(locationObj["locations"]);
     List<Map<String, dynamic>> locationsList =
         (locationObj["locations"] as List<dynamic>)
             .map((e) => e as Map<String, dynamic>)

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile/styles/text.dart';
 import 'package:mobile/view_models/weather_view_model.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +31,6 @@ class LocationSearchScreen extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final ColorScheme colorScheme = theme.colorScheme;
     return theme.copyWith(
       appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -40,11 +38,10 @@ class LocationSearchScreen extends SearchDelegate {
           iconTheme:
               theme.primaryIconTheme.copyWith(color: const Color(0x80FFFFFF))),
       inputDecorationTheme: InputDecorationTheme(
-          hintStyle: defaultText.halfOpaque(), border: InputBorder.none,
+        hintStyle: defaultText.halfOpaque(),
+        border: InputBorder.none,
       ),
-      textTheme: TextTheme(
-        titleLarge: defaultText.withSize(18)
-      ),
+      textTheme: TextTheme(titleLarge: defaultText.withSize(18)),
       scaffoldBackgroundColor: const Color(0xff121937),
     );
   }
@@ -74,11 +71,14 @@ class LocationSearchScreen extends SearchDelegate {
       return ListView.builder(
           itemCount: search.results.length,
           itemBuilder: (context, index) {
-            return LocationButton(location: search.results[index],
-            pressCallback: (){
-              Provider.of<WeatherViewModel>(context, listen: false).changeLocation(search.results[index]);
-              close(context, query);
-            },);
+            return LocationButton(
+              location: search.results[index],
+              pressCallback: () {
+                Provider.of<WeatherViewModel>(context, listen: false)
+                    .changeLocation(search.results[index]);
+                close(context, query);
+              },
+            );
           });
     });
   }
@@ -98,6 +98,8 @@ class LocationSearchScreen extends SearchDelegate {
                 Text("Automatically detect my location", style: defaultText)
               ],
             ));
+          } else {
+            return const SizedBox(height: 0);
           }
         });
   }
@@ -126,7 +128,8 @@ class ListButton extends StatelessWidget {
 class LocationButton extends StatelessWidget {
   final Location location;
   final Function() pressCallback;
-  const LocationButton({super.key, required this.location, required this.pressCallback});
+  const LocationButton(
+      {super.key, required this.location, required this.pressCallback});
 
   @override
   Widget build(BuildContext context) {

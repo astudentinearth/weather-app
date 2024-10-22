@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/services/weather_service.dart';
-import 'package:provider/provider.dart';
 
 class WeatherViewModel extends ChangeNotifier {
   CurrentWeatherData _current = CurrentWeatherData(

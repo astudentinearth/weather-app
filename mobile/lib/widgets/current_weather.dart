@@ -20,7 +20,7 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print("didChangeDependencies");
+    //print("didChangeDependencies");
     if (!didFetch) {
       var units =
           Provider.of<UserPrefsViewModel>(context, listen: false).getUnits();
