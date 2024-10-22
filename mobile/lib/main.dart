@@ -6,6 +6,7 @@ import 'package:mobile/view_models/weather_view_model.dart';
 import 'package:mobile/widgets/app_bar.dart';
 import 'package:mobile/widgets/current_status.dart';
 import 'package:mobile/widgets/current_weather.dart';
+import 'package:mobile/widgets/daily_weather.dart';
 import 'package:mobile/widgets/hourly_weather.dart';
 import 'package:provider/provider.dart';
 
@@ -69,15 +70,19 @@ class _MyHomePageState extends State<MyHomePage> {
       child: SafeArea(
           child: Container(
               margin: const EdgeInsets.all(8),
-              child: const Column(
-                children: [
+              child: ListView(
+                children: const [
                   WeatherAppBar(),
                   CurrentWeatherWidget(),
                   CurrentStatusWidget(),
                   SizedBox(
                     height: 8,
                   ),
-                  Flexible(child: HourlyWeatherWidget())
+                  HourlyWeatherWidget(),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  DailyWeatherWidget()
                 ],
               ))),
     ));

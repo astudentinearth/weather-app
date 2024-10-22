@@ -18,6 +18,9 @@ class WeatherViewModel extends ChangeNotifier {
   HourlyWeatherData _hourly = HourlyWeatherData();
   HourlyWeatherData get hourly => _hourly;
 
+  DailyWeatherData _daily = DailyWeatherData();
+  DailyWeatherData get daily => _daily;
+
   Location _location =
       Location(latitude: 41.01384, longitude: 28.94966, name: "Istanbul");
   Location get location => _location;
@@ -41,6 +44,7 @@ class WeatherViewModel extends ChangeNotifier {
   void fetch() async {
     _current = await WeatherModel.fetchCurrentWeather(_location, _units);
     _hourly = await WeatherModel.fetchHourlyWeather(_location, _units);
+    _daily = await WeatherModel.fetchDailyWeather(_location, _units);
     notifyListeners();
   }
 }

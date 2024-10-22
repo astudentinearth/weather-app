@@ -184,6 +184,40 @@ class HourlyWeatherData {
   }
 }
 
+class DailyForecast {
+  DateTime date = DateTime.now();
+  double minTemperature = 0;
+  double maxTemperature = 0;
+  double precipitation = 0;
+  double precipitationChance = 0;
+  int weatherCode = 0;
+  DailyForecast(
+      {required this.date,
+      required this.minTemperature,
+      required this.maxTemperature,
+      required this.precipitation,
+      required this.precipitationChance,
+      required this.weatherCode});
+}
+
+class DailyWeatherData {
+  List<DailyForecast> days = [];
+  DailyWeatherData fromAPIResponse(dynamic data) {
+    var daily = data["daily"];
+    for (var i = 0; i < (daily["time"] as List<dynamic>).length; i++) {
+      days.add(DailyForecast(
+          date: DateTime.fromMillisecondsSinceEpoch(daily["time"][i] * 1000),
+          precipitation: ensureDouble(daily["precipitation_sum"][i]),
+          precipitationChance:
+              ensureDouble(daily["precipitation_probability_max"][i]),
+          minTemperature: ensureDouble(daily["temperature_2m_min"][i]),
+          maxTemperature: ensureDouble(daily["temperature_2m_max"][i]),
+          weatherCode: daily["weather_code"][i]));
+    }
+    return this;
+  }
+}
+
 class WeatherModel {
   static Future<CurrentWeatherData> fetchCurrentWeather(
       Location location, Units units) async {
@@ -215,6 +249,20 @@ class WeatherModel {
         "&timezone=auto";
     var response = await Cache().httpGet(url);
     var data = HourlyWeatherData().fromAPIResponse(response.data);
+    return data;
+  }
+
+  static Future<DailyWeatherData> fetchDailyWeather(
+      Location location, Units units) async {
+    var url =
+        "https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}"
+        "&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,weather_code"
+        "&temperature_unit=${units.temperature.name}&wind_speed_unit=${units.speed.name}&precipitation_unit=${units.precipitation.name}"
+        "&forecast_days=5&forecast_hours=0"
+        "&timeformat=unixtime"
+        "&timezone=auto";
+    var response = await Cache().httpGet(url);
+    var data = DailyWeatherData().fromAPIResponse(response.data);
     return data;
   }
 }
